@@ -62,4 +62,7 @@ module.exports = {
       components: "src/components/**/*.jsx",
     },
   ],
+  context: {
+    GOOGLE_MAP_URL: path.resolve(__dirname, "./src/docs/constants.js"),
+  },
 }

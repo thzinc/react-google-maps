@@ -137,6 +137,7 @@
     "glob": "^7.1.2",
     "husky": "^0.14.3",
     "isomorphic-fetch": "^2.2.1",
+    "jest-cli": "^20.0.3",
     "jscodeshift": "^0.3.32",
     "lint-staged": "^6.0.0",
     "make-fetch-happen": "^2.6.0",

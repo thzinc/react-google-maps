@@ -1,5 +1,5 @@
 {
-  "name": "react-google-maps",
+  "name": "@syncromatics/react-google-maps",
   "version": "9.4.5",
   "description": "React.js Google Maps integration component",
   "license": "MIT",
@@ -149,6 +149,7 @@
     "react-styleguidist": "^6.0.33",
     "rimraf": "^2.6.2",
     "standard-version": "^4.2.0",
-    "to-markdown": "^3.1.0"
+    "to-markdown": "^3.1.0",
+    "typescript": "^3.2.2"
   }
 }

@@ -69,7 +69,8 @@
     "prerelease":
       "npm run commit:src && npm run commit:lib && npm run commit:docs",
     "release":
-      "standard-version -m 'chore(release): %s \n\n* CHANGELOG: https://github.com/syncromatics/react-google-maps/blob/v%s/CHANGELOG.md'"
+      "standard-version -m 'chore(release): %s \n\n* CHANGELOG: https://github.com/syncromatics/react-google-maps/blob/v%s/CHANGELOG.md'",
+    "semantic-release": "release && semantic-release"
   },
   "lint-staged": {
     "*.{js,jsx,json,css}": ["prettier --write", "git add"]
@@ -149,6 +150,8 @@
     "react-scripts": "^1.0.17",
     "react-styleguidist": "^6.0.33",
     "rimraf": "^2.6.2",
+    "semantic-release": "^15.13.1",
+    "semantic-release-cli": "^4.1.0",
     "standard-version": "^4.2.0",
     "to-markdown": "^3.1.0",
     "typescript": "^3.2.2"

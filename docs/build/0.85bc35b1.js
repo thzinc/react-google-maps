@@ -1,5 +1,6 @@
 webpackJsonp([0], {
   "./node_modules/codemirror/lib/codemirror.js": function(e, t, r) {
+    var n
     ;(n = function() {
       "use strict"
       var e = navigator.userAgent,
@@ -23,22 +24,23 @@ webpackJsonp([0], {
           g || m || /webOS|BlackBerry|Opera Mini|Opera Mobi|IEMobile/i.test(e),
         y = g || /Mac/.test(t),
         b = /\bCrOS\b/.test(e),
-        C = /win/i.test(t),
-        x = d && e.match(/Version\/(\d*\.\d*)/)
-      x && (x = Number(x[1])), x && x >= 15 && ((d = !1), (l = !0))
-      var w = y && (c || (d && (null == x || x < 12.11))),
+        x = /win/i.test(t),
+        C = d && e.match(/Version\/(\d*\.\d*)/)
+      C && (C = Number(C[1])), C && C >= 15 && ((d = !1), (l = !0))
+      var w = y && (c || (d && (null == C || C < 12.11))),
         S = r || (s && a >= 9)
       function classTest(e) {
         return new RegExp("(^|\\s)" + e + "(?:$|\\s)\\s*")
       }
-      var k = function(e, t) {
-        var r = e.className,
-          n = classTest(t).exec(r)
-        if (n) {
-          var o = r.slice(n.index + n[0].length)
-          e.className = r.slice(0, n.index) + (o ? n[1] + o : "")
+      var k,
+        L = function(e, t) {
+          var r = e.className,
+            n = classTest(t).exec(r)
+          if (n) {
+            var o = r.slice(n.index + n[0].length)
+            e.className = r.slice(0, n.index) + (o ? n[1] + o : "")
+          }
         }
-      }
       function removeChildren(e) {
         for (var t = e.childNodes.length; t > 0; --t)
           e.removeChild(e.firstChild)
@@ -62,26 +64,6 @@ webpackJsonp([0], {
         var o = elt(e, t, r, n)
         return o.setAttribute("role", "presentation"), o
       }
-      var L
-      L = document.createRange
-        ? function(e, t, r, n) {
-            var o = document.createRange()
-            return o.setEnd(n || e, r), o.setStart(e, t), o
-          }
-        : function(e, t, r) {
-            var n = document.body.createTextRange()
-            try {
-              n.moveToElementText(e.parentNode)
-            } catch (e) {
-              return n
-            }
-            return (
-              n.collapse(!0),
-              n.moveEnd("character", r),
-              n.moveStart("character", t),
-              n
-            )
-          }
       function contains(e, t) {
         if ((3 == t.nodeType && (t = t.parentNode), e.contains))
           return e.contains(t)
@@ -109,19 +91,28 @@ webpackJsonp([0], {
           r[n] && !classTest(r[n]).test(t) && (t += " " + r[n])
         return t
       }
+      k = document.createRange
+        ? function(e, t, r, n) {
+            var o = document.createRange()
+            return o.setEnd(n || e, r), o.setStart(e, t), o
+          }
+        : function(e, t, r) {
+            var n = document.body.createTextRange()
+            try {
+              n.moveToElementText(e.parentNode)
+            } catch (e) {
+              return n
+            }
+            return (
+              n.collapse(!0),
+              n.moveEnd("character", r),
+              n.moveStart("character", t),
+              n
+            )
+          }
       var M = function(e) {
         e.select()
       }
-      g
-        ? (M = function(e) {
-            ;(e.selectionStart = 0), (e.selectionEnd = e.value.length)
-          })
-        : s &&
-          (M = function(e) {
-            try {
-              e.select()
-            } catch (e) {}
-          })
       function bind(e) {
         var t = Array.prototype.slice.call(arguments, 1)
         return function() {
@@ -129,8 +120,7 @@ webpackJsonp([0], {
         }
       }
       function copyObj(e, t, r) {
-        t || (t = {})
-        for (var n in e)
+        for (var n in (t || (t = {}), e))
           !e.hasOwnProperty(n) ||
             (!1 === r && t.hasOwnProperty(n)) ||
             (t[n] = e[n])
@@ -144,15 +134,25 @@ webpackJsonp([0], {
           ;(s += a - i), (s += r - s % r), (i = a + 1)
         }
       }
+      g
+        ? (M = function(e) {
+            ;(e.selectionStart = 0), (e.selectionEnd = e.value.length)
+          })
+        : s &&
+          (M = function(e) {
+            try {
+              e.select()
+            } catch (e) {}
+          })
       var T = function() {
         this.id = null
-      }
-      T.prototype.set = function(e, t) {
-        clearTimeout(this.id), (this.id = setTimeout(t, e))
       }
       function indexOf(e, t) {
         for (var r = 0; r < e.length; ++r) if (e[r] == t) return r
         return -1
+      }
+      T.prototype.set = function(e, t) {
+        clearTimeout(this.id), (this.id = setTimeout(t, e))
       }
       var O = 30,
         P = {
@@ -437,10 +437,10 @@ webpackJsonp([0], {
         if (l)
           for (var f = 0; f < l.length; ++f) {
             var g = l[f]
-            if ((null != g.to && (g.to += u), null == g.from)) {
+            if ((null != g.to && (g.to += u), null == g.from))
               getMarkedSpanFor(a, g.marker) ||
                 ((g.from = u), c && (a || (a = [])).push(g))
-            } else (g.from += u), c && (a || (a = [])).push(g)
+            else (g.from += u), c && (a || (a = [])).push(g)
           }
         a && (a = clearEmptySpans(a)), l && l != a && (l = clearEmptySpans(l))
         var m = [a]
@@ -451,7 +451,7 @@ webpackJsonp([0], {
             for (var b = 0; b < a.length; ++b)
               null == a[b].to &&
                 (v || (v = [])).push(new MarkedSpan(a[b].marker, null, null))
-          for (var C = 0; C < y; ++C) m.push(v)
+          for (var x = 0; x < y; ++x) m.push(v)
           m.push(l)
         }
         return m
@@ -511,6 +511,20 @@ webpackJsonp([0], {
       }
       function collapsedSpanAtEnd(e) {
         return collapsedSpanAtSide(e, !1)
+      }
+      function collapsedSpanAround(e, t) {
+        var r,
+          n = F && e.markedSpans
+        if (n)
+          for (var o = 0; o < n.length; ++o) {
+            var i = n[o]
+            i.marker.collapsed &&
+              (null == i.from || i.from < t) &&
+              (null == i.to || i.to > t) &&
+              (!r || compareCollapsedMarkers(r, i.marker) < 0) &&
+              (r = i.marker)
+          }
+        return r
       }
       function conflictingCollapsedRange(e, t, r, n, o) {
         var i = getLine(e, t),
@@ -600,7 +614,7 @@ webpackJsonp([0], {
           if (o == e) break
           t += o.height
         }
-        for (var i = r.parent; i; r = i, i = r.parent)
+        for (var i = r.parent; i; i = (r = i).parent)
           for (var s = 0; s < i.children.length; ++s) {
             var a = i.children[s]
             if (a == r) break
@@ -660,89 +674,89 @@ webpackJsonp([0], {
         return function(a, l) {
           var c = "ltr" == l ? "L" : "R"
           if (0 == a.length || ("ltr" == l && !r.test(a))) return !1
-          for (var u = a.length, d = [], p = 0; p < u; ++p)
-            d.push(
-              (h = a.charCodeAt(p)) <= 247
-                ? e.charAt(h)
-                : 1424 <= h && h <= 1524
+          for (var u, d = a.length, p = [], h = 0; h < d; ++h)
+            p.push(
+              (u = a.charCodeAt(h)) <= 247
+                ? e.charAt(u)
+                : 1424 <= u && u <= 1524
                   ? "R"
-                  : 1536 <= h && h <= 1785
-                    ? t.charAt(h - 1536)
-                    : 1774 <= h && h <= 2220
+                  : 1536 <= u && u <= 1785
+                    ? t.charAt(u - 1536)
+                    : 1774 <= u && u <= 2220
                       ? "r"
-                      : 8192 <= h && h <= 8203 ? "w" : 8204 == h ? "b" : "L"
+                      : 8192 <= u && u <= 8203 ? "w" : 8204 == u ? "b" : "L"
             )
-          for (var h, f = 0, g = c; f < u; ++f) {
-            var m = d[f]
-            "m" == m ? (d[f] = g) : (g = m)
+          for (var f = 0, g = c; f < d; ++f) {
+            var m = p[f]
+            "m" == m ? (p[f] = g) : (g = m)
           }
-          for (var v = 0, y = c; v < u; ++v) {
-            var b = d[v]
+          for (var v = 0, y = c; v < d; ++v) {
+            var b = p[v]
             "1" == b && "r" == y
-              ? (d[v] = "n")
-              : o.test(b) && ((y = b), "r" == b && (d[v] = "R"))
+              ? (p[v] = "n")
+              : o.test(b) && ((y = b), "r" == b && (p[v] = "R"))
           }
-          for (var C = 1, x = d[0]; C < u - 1; ++C) {
-            var w = d[C]
-            "+" == w && "1" == x && "1" == d[C + 1]
-              ? (d[C] = "1")
+          for (var x = 1, C = p[0]; x < d - 1; ++x) {
+            var w = p[x]
+            "+" == w && "1" == C && "1" == p[x + 1]
+              ? (p[x] = "1")
               : "," != w ||
-                x != d[C + 1] ||
-                ("1" != x && "n" != x) ||
-                (d[C] = x),
-              (x = w)
+                C != p[x + 1] ||
+                ("1" != C && "n" != C) ||
+                (p[x] = C),
+              (C = w)
           }
-          for (var S = 0; S < u; ++S) {
-            var k = d[S]
-            if ("," == k) d[S] = "N"
+          for (var S = 0; S < d; ++S) {
+            var k = p[S]
+            if ("," == k) p[S] = "N"
             else if ("%" == k) {
               var L = void 0
-              for (L = S + 1; L < u && "%" == d[L]; ++L);
+              for (L = S + 1; L < d && "%" == p[L]; ++L);
               for (
                 var M =
-                    (S && "!" == d[S - 1]) || (L < u && "1" == d[L])
+                    (S && "!" == p[S - 1]) || (L < d && "1" == p[L])
                       ? "1"
                       : "N",
                   T = S;
                 T < L;
                 ++T
               )
-                d[T] = M
+                p[T] = M
               S = L - 1
             }
           }
-          for (var O = 0, P = c; O < u; ++O) {
-            var A = d[O]
-            "L" == P && "1" == A ? (d[O] = "L") : o.test(A) && (P = A)
+          for (var O = 0, P = c; O < d; ++O) {
+            var A = p[O]
+            "L" == P && "1" == A ? (p[O] = "L") : o.test(A) && (P = A)
           }
-          for (var N = 0; N < u; ++N)
-            if (n.test(d[N])) {
+          for (var N = 0; N < d; ++N)
+            if (n.test(p[N])) {
               var D = void 0
-              for (D = N + 1; D < u && n.test(d[D]); ++D);
+              for (D = N + 1; D < d && n.test(p[D]); ++D);
               for (
-                var H = "L" == (N ? d[N - 1] : c),
-                  W = H == ("L" == (D < u ? d[D] : c)) ? (H ? "L" : "R") : c,
+                var H = "L" == (N ? p[N - 1] : c),
+                  W = H == ("L" == (D < d ? p[D] : c)) ? (H ? "L" : "R") : c,
                   E = N;
                 E < D;
                 ++E
               )
-                d[E] = W
+                p[E] = W
               N = D - 1
             }
-          for (var I, F = [], B = 0; B < u; )
-            if (i.test(d[B])) {
+          for (var I, F = [], B = 0; B < d; )
+            if (i.test(p[B])) {
               var z = B
-              for (++B; B < u && i.test(d[B]); ++B);
+              for (++B; B < d && i.test(p[B]); ++B);
               F.push(new BidiSpan(0, z, B))
             } else {
               var R = B,
                 j = F.length
-              for (++B; B < u && "L" != d[B]; ++B);
+              for (++B; B < d && "L" != p[B]; ++B);
               for (var V = R; V < B; )
-                if (s.test(d[V])) {
+                if (s.test(p[V])) {
                   R < V && F.splice(j, 0, new BidiSpan(1, R, V))
                   var _ = V
-                  for (++V; V < B && s.test(d[V]); ++V);
+                  for (++V; V < B && s.test(p[V]); ++V);
                   F.splice(j, 0, new BidiSpan(2, _, V)), (R = V)
                 } else ++V
               R < B && F.splice(j, 0, new BidiSpan(1, R, B))
@@ -756,7 +770,7 @@ webpackJsonp([0], {
               1 == lst(F).level &&
                 (I = a.match(/\s+$/)) &&
                 ((lst(F).to -= I[0].length),
-                F.push(new BidiSpan(0, u - I[0].length, u)))),
+                F.push(new BidiSpan(0, d - I[0].length, d)))),
             "rtl" == l ? F.reverse() : F
           )
         }
@@ -865,7 +879,8 @@ webpackJsonp([0], {
         )
       }
       var V,
-        _ = (function() {
+        _,
+        U = (function() {
           if (s && a < 9) return !1
           var e = elt("div")
           return "draggable" in e || "dragDrop" in e
@@ -890,18 +905,18 @@ webpackJsonp([0], {
             )
         return r.setAttribute("cm-text", ""), r
       }
-      var U
       function hasBadBidiRects(e) {
-        if (null != U) return U
+        if (null != _) return _
         var t = removeChildrenAndAdd(e, document.createTextNode("AخA")),
-          r = L(t, 0, 1).getBoundingClientRect(),
-          n = L(t, 1, 2).getBoundingClientRect()
+          r = k(t, 0, 1).getBoundingClientRect(),
+          n = k(t, 1, 2).getBoundingClientRect()
         return (
           removeChildren(e),
-          !(!r || r.left == r.right) && (U = n.right - r.right < 3)
+          !(!r || r.left == r.right) && (_ = n.right - r.right < 3)
         )
       }
-      var G =
+      var G,
+        K =
           3 != "\n\nb".split(/\n/).length
             ? function(e) {
                 for (var t = 0, r = [], n = e.length; t <= n; ) {
@@ -918,7 +933,7 @@ webpackJsonp([0], {
             : function(e) {
                 return e.split(/\r\n?|\n/)
               },
-        K = window.getSelection
+        q = window.getSelection
           ? function(e) {
               try {
                 return e.selectionStart != e.selectionEnd
@@ -936,20 +951,16 @@ webpackJsonp([0], {
                 0 != t.compareEndPoints("StartToEnd", t)
               )
             },
-        $ = (function() {
-          var e = elt("div")
-          return (
-            "oncopy" in e ||
-            (e.setAttribute("oncopy", "return;"), "function" == typeof e.oncopy)
-          )
-        })(),
-        q = null
-      var X = {},
-        Y = {}
+        X =
+          "oncopy" in (G = elt("div")) ||
+          (G.setAttribute("oncopy", "return;"), "function" == typeof G.oncopy),
+        $ = null
+      var Y = {},
+        Z = {}
       function resolveMode(e) {
-        if ("string" == typeof e && Y.hasOwnProperty(e)) e = Y[e]
-        else if (e && "string" == typeof e.name && Y.hasOwnProperty(e.name)) {
-          var t = Y[e.name]
+        if ("string" == typeof e && Z.hasOwnProperty(e)) e = Z[e]
+        else if (e && "string" == typeof e.name && Z.hasOwnProperty(e.name)) {
+          var t = Z[e.name]
           "string" == typeof t && (t = { name: t }),
             ((e = createObj(t, e)).name = t.name)
         } else {
@@ -962,11 +973,11 @@ webpackJsonp([0], {
       }
       function getMode(e, t) {
         t = resolveMode(t)
-        var r = X[t.name]
+        var r = Y[t.name]
         if (!r) return getMode(e, "text/plain")
         var n = r(e, t)
-        if (Z.hasOwnProperty(t.name)) {
-          var o = Z[t.name]
+        if (Q.hasOwnProperty(t.name)) {
+          var o = Q[t.name]
           for (var i in o)
             o.hasOwnProperty(i) &&
               (n.hasOwnProperty(i) && (n["_" + i] = n[i]), (n[i] = o[i]))
@@ -979,9 +990,9 @@ webpackJsonp([0], {
           for (var s in t.modeProps) n[s] = t.modeProps[s]
         return n
       }
-      var Z = {}
+      var Q = {}
       function extendMode(e, t) {
-        copyObj(t, Z.hasOwnProperty(e) ? Z[e] : (Z[e] = {}))
+        copyObj(t, Q.hasOwnProperty(e) ? Q[e] : (Q[e] = {}))
       }
       function copyState(e, t) {
         if (!0 === t) return t
@@ -1001,7 +1012,7 @@ webpackJsonp([0], {
       function startState(e, t, r) {
         return !e.startState || e.startState(t, r)
       }
-      var Q = function(e, t, r) {
+      var J = function(e, t, r) {
         ;(this.pos = this.start = 0),
           (this.string = e),
           (this.tabSize = t || 8),
@@ -1009,29 +1020,29 @@ webpackJsonp([0], {
           (this.lineStart = 0),
           (this.lineOracle = r)
       }
-      ;(Q.prototype.eol = function() {
+      ;(J.prototype.eol = function() {
         return this.pos >= this.string.length
       }),
-        (Q.prototype.sol = function() {
+        (J.prototype.sol = function() {
           return this.pos == this.lineStart
         }),
-        (Q.prototype.peek = function() {
+        (J.prototype.peek = function() {
           return this.string.charAt(this.pos) || void 0
         }),
-        (Q.prototype.next = function() {
+        (J.prototype.next = function() {
           if (this.pos < this.string.length)
             return this.string.charAt(this.pos++)
         }),
-        (Q.prototype.eat = function(e) {
+        (J.prototype.eat = function(e) {
           var t = this.string.charAt(this.pos)
           if ("string" == typeof e ? t == e : t && (e.test ? e.test(t) : e(t)))
             return ++this.pos, t
         }),
-        (Q.prototype.eatWhile = function(e) {
+        (J.prototype.eatWhile = function(e) {
           for (var t = this.pos; this.eat(e); );
           return this.pos > t
         }),
-        (Q.prototype.eatSpace = function() {
+        (J.prototype.eatSpace = function() {
           for (
             var e = this.pos;
             /[\s\u00a0]/.test(this.string.charAt(this.pos));
@@ -1040,17 +1051,17 @@ webpackJsonp([0], {
             ++this.pos
           return this.pos > e
         }),
-        (Q.prototype.skipToEnd = function() {
+        (J.prototype.skipToEnd = function() {
           this.pos = this.string.length
         }),
-        (Q.prototype.skipTo = function(e) {
+        (J.prototype.skipTo = function(e) {
           var t = this.string.indexOf(e, this.pos)
           if (t > -1) return (this.pos = t), !0
         }),
-        (Q.prototype.backUp = function(e) {
+        (J.prototype.backUp = function(e) {
           this.pos -= e
         }),
-        (Q.prototype.column = function() {
+        (J.prototype.column = function() {
           return (
             this.lastColumnPos < this.start &&
               ((this.lastColumnValue = countColumn(
@@ -1067,7 +1078,7 @@ webpackJsonp([0], {
                 : 0)
           )
         }),
-        (Q.prototype.indentation = function() {
+        (J.prototype.indentation = function() {
           return (
             countColumn(this.string, null, this.tabSize) -
             (this.lineStart
@@ -1075,7 +1086,7 @@ webpackJsonp([0], {
               : 0)
           )
         }),
-        (Q.prototype.match = function(e, t, r) {
+        (J.prototype.match = function(e, t, r) {
           if ("string" != typeof e) {
             var n = this.string.slice(this.pos).match(e)
             return n && n.index > 0
@@ -1088,10 +1099,10 @@ webpackJsonp([0], {
           if (o(this.string.substr(this.pos, e.length)) == o(e))
             return !1 !== t && (this.pos += e.length), !0
         }),
-        (Q.prototype.current = function() {
+        (J.prototype.current = function() {
           return this.string.slice(this.start, this.pos)
         }),
-        (Q.prototype.hideFirstChars = function(e, t) {
+        (J.prototype.hideFirstChars = function(e, t) {
           this.lineStart += e
           try {
             return t()
@@ -1099,18 +1110,18 @@ webpackJsonp([0], {
             this.lineStart -= e
           }
         }),
-        (Q.prototype.lookAhead = function(e) {
+        (J.prototype.lookAhead = function(e) {
           var t = this.lineOracle
           return t && t.lookAhead(e)
         }),
-        (Q.prototype.baseToken = function() {
+        (J.prototype.baseToken = function() {
           var e = this.lineOracle
           return e && e.baseToken(this.pos)
         })
-      var J = function(e, t) {
+      var ee = function(e, t) {
           ;(this.state = e), (this.lookAhead = t)
         },
-        ee = function(e, t, r, n) {
+        te = function(e, t, r, n) {
           ;(this.state = t),
             (this.doc = e),
             (this.line = r),
@@ -1118,32 +1129,6 @@ webpackJsonp([0], {
             (this.baseTokens = null),
             (this.baseTokenPos = 1)
         }
-      ;(ee.prototype.lookAhead = function(e) {
-        var t = this.doc.getLine(this.line + e)
-        return null != t && e > this.maxLookAhead && (this.maxLookAhead = e), t
-      }),
-        (ee.prototype.baseToken = function(e) {
-          if (!this.baseTokens) return null
-          for (; this.baseTokens[this.baseTokenPos] <= e; )
-            this.baseTokenPos += 2
-          var t = this.baseTokens[this.baseTokenPos + 1]
-          return {
-            type: t && t.replace(/( |^)overlay .*/, ""),
-            size: this.baseTokens[this.baseTokenPos] - e,
-          }
-        }),
-        (ee.prototype.nextLine = function() {
-          this.line++, this.maxLookAhead > 0 && this.maxLookAhead--
-        }),
-        (ee.fromSaved = function(e, t, r) {
-          return t instanceof J
-            ? new ee(e, copyState(e.mode, t.state), r, t.lookAhead)
-            : new ee(e, copyState(e.mode, t), r)
-        }),
-        (ee.prototype.save = function(e) {
-          var t = !1 !== e ? copyState(this.doc.mode, this.state) : this.state
-          return this.maxLookAhead > 0 ? new J(t, this.maxLookAhead) : t
-        })
       function highlightLine(e, t, r, n) {
         var o = [e.state.modeGen],
           i = {}
@@ -1224,7 +1209,7 @@ webpackJsonp([0], {
       function getContextBefore(e, t, r) {
         var n = e.doc,
           o = e.display
-        if (!n.mode.startState) return new ee(n, !0, t)
+        if (!n.mode.startState) return new te(n, !0, t)
         var i = (function findStartLine(e, t, r) {
             for (
               var n,
@@ -1240,7 +1225,8 @@ webpackJsonp([0], {
                 c = l.stateAfter
               if (
                 c &&
-                (!r || a + (c instanceof J ? c.lookAhead : 0) <= i.modeFrontier)
+                (!r ||
+                  a + (c instanceof ee ? c.lookAhead : 0) <= i.modeFrontier)
               )
                 return a
               var u = countColumn(l.text, null, e.options.tabSize)
@@ -1249,7 +1235,7 @@ webpackJsonp([0], {
             return o
           })(e, t, r),
           s = i > n.first && getLine(n, i - 1).stateAfter,
-          a = s ? ee.fromSaved(n, s, i) : new ee(n, startState(n.mode), i)
+          a = s ? te.fromSaved(n, s, i) : new te(n, startState(n.mode), i)
         return (
           n.iter(i, t, function(r) {
             processLine(e, r.text, a)
@@ -1266,7 +1252,7 @@ webpackJsonp([0], {
       }
       function processLine(e, t, r, n) {
         var o = e.doc.mode,
-          i = new Q(t, e.options.tabSize, r)
+          i = new J(t, e.options.tabSize, r)
         for (
           i.start = i.pos = n || 0, "" == t && callBlankLine(o, r.state);
           !i.eol();
@@ -1289,7 +1275,33 @@ webpackJsonp([0], {
         }
         throw new Error("Mode " + e.name + " failed to advance stream.")
       }
-      var te = function(e, t, r) {
+      ;(te.prototype.lookAhead = function(e) {
+        var t = this.doc.getLine(this.line + e)
+        return null != t && e > this.maxLookAhead && (this.maxLookAhead = e), t
+      }),
+        (te.prototype.baseToken = function(e) {
+          if (!this.baseTokens) return null
+          for (; this.baseTokens[this.baseTokenPos] <= e; )
+            this.baseTokenPos += 2
+          var t = this.baseTokens[this.baseTokenPos + 1]
+          return {
+            type: t && t.replace(/( |^)overlay .*/, ""),
+            size: this.baseTokens[this.baseTokenPos] - e,
+          }
+        }),
+        (te.prototype.nextLine = function() {
+          this.line++, this.maxLookAhead > 0 && this.maxLookAhead--
+        }),
+        (te.fromSaved = function(e, t, r) {
+          return t instanceof ee
+            ? new te(e, copyState(e.mode, t.state), r, t.lookAhead)
+            : new te(e, copyState(e.mode, t), r)
+        }),
+        (te.prototype.save = function(e) {
+          var t = !1 !== e ? copyState(this.doc.mode, this.state) : this.state
+          return this.maxLookAhead > 0 ? new ee(t, this.maxLookAhead) : t
+        })
+      var re = function(e, t, r) {
         ;(this.start = e.start),
           (this.end = e.pos),
           (this.string = e.current()),
@@ -1303,12 +1315,12 @@ webpackJsonp([0], {
           a = s.mode,
           l = getLine(s, (t = clipPos(s, t)).line),
           c = getContextBefore(e, t.line, r),
-          u = new Q(l.text, e.options.tabSize, c)
+          u = new J(l.text, e.options.tabSize, c)
         for (n && (i = []); (n || u.pos < t.ch) && !u.eol(); )
           (u.start = u.pos),
             (o = readToken(a, u, c.state)),
-            n && i.push(new te(u, o, copyState(s.mode, c.state)))
-        return n ? i : new te(u, o, c.state)
+            n && i.push(new re(u, o, copyState(s.mode, c.state)))
+        return n ? i : new re(u, o, c.state)
       }
       function extractLineClasses(e, t) {
         if (e)
@@ -1330,7 +1342,7 @@ webpackJsonp([0], {
         var l,
           c = 0,
           u = null,
-          d = new Q(t, e.options.tabSize, n),
+          d = new J(t, e.options.tabSize, n),
           p = e.options.addModeClass && [null]
         for (
           "" == t && extractLineClasses(callBlankLine(r, n.state), i);
@@ -1360,20 +1372,23 @@ webpackJsonp([0], {
           o(f, u), (c = f)
         }
       }
-      var re = function(e, t, r) {
+      var ne = function(e, t, r) {
         ;(this.text = e),
           attachMarkedSpans(this, t),
           (this.height = r ? r(this) : 1)
       }
-      ;(re.prototype.lineNo = function() {
+      function cleanUpLine(e) {
+        ;(e.parent = null), detachMarkedSpans(e)
+      }
+      ;(ne.prototype.lineNo = function() {
         return lineNo(this)
       }),
-        eventMixin(re)
-      var ne = {},
-        oe = {}
+        eventMixin(ne)
+      var oe = {},
+        ie = {}
       function interpretTokenStyle(e, t) {
         if (!e || /^\s*$/.test(e)) return null
-        var r = t.addModeClass ? oe : ne
+        var r = t.addModeClass ? ie : oe
         return r[e] || (r[e] = e.replace(/\S+/g, "cm-$&"))
       }
       function buildLineContent(e, t) {
@@ -1385,23 +1400,23 @@ webpackJsonp([0], {
             pos: 0,
             cm: e,
             trailingSpace: !1,
-            splitSpaces: (s || l) && e.getOption("lineWrapping"),
+            splitSpaces: e.getOption("lineWrapping"),
           }
         t.measure = {}
         for (var o = 0; o <= (t.rest ? t.rest.length : 0); o++) {
           var i = o ? t.rest[o - 1] : t.line,
-            a = void 0
+            s = void 0
           ;(n.pos = 0),
             (n.addToken = buildToken),
             hasBadBidiRects(e.display.measure) &&
-              (a = getOrder(i, e.doc.direction)) &&
-              (n.addToken = buildTokenBadBidi(n.addToken, a)),
-            (n.map = [])
-          insertLineContent(
-            i,
-            n,
-            getLineStyles(e, i, t != e.display.externalMeasured && lineNo(i))
-          ),
+              (s = getOrder(i, e.doc.direction)) &&
+              (n.addToken = buildTokenBadBidi(n.addToken, s)),
+            (n.map = []),
+            insertLineContent(
+              i,
+              n,
+              getLineStyles(e, i, t != e.display.externalMeasured && lineNo(i))
+            ),
             i.styleClasses &&
               (i.styleClasses.bgClass &&
                 (n.bgClass = joinClasses(
@@ -1425,9 +1440,9 @@ webpackJsonp([0], {
                 (t.measure.caches || (t.measure.caches = [])).push({}))
         }
         if (l) {
-          var c = n.content.lastChild
-          ;(/\bcm-tab\b/.test(c.className) ||
-            (c.querySelector && c.querySelector(".cm-tab"))) &&
+          var a = n.content.lastChild
+          ;(/\bcm-tab\b/.test(a.className) ||
+            (a.querySelector && a.querySelector(".cm-tab"))) &&
             (n.content.className = "cm-tab-wrap-hack")
         }
         return (
@@ -1512,12 +1527,18 @@ webpackJsonp([0], {
               (e.pos += t.length)
           if (
             ((e.trailingSpace = 32 == u.charCodeAt(t.length - 1)),
-            r || n || o || p || l)
+            r || n || o || p || i)
           ) {
-            var C = r || ""
-            n && (C += n), o && (C += o)
-            var x = elt("span", [c], C, l)
-            return i && (x.title = i), e.content.appendChild(x)
+            var x = r || ""
+            n && (x += n), o && (x += o)
+            var C = elt("span", [c], x, i)
+            if (l)
+              for (var w in l)
+                l.hasOwnProperty(w) &&
+                  "style" != w &&
+                  "class" != w &&
+                  C.setAttribute(w, l[w])
+            return e.content.appendChild(C)
           }
           e.content.appendChild(c)
         }
@@ -1561,84 +1582,91 @@ webpackJsonp([0], {
 
           ) {
             if (v == f) {
-              ;(l = c = u = d = a = ""), (p = null), (v = 1 / 0)
-              for (var y = [], b = void 0, C = 0; C < n.length; ++C) {
-                var x = n[C],
-                  w = x.marker
-                "bookmark" == w.type && x.from == f && w.widgetNode
-                  ? y.push(w)
-                  : x.from <= f &&
-                    (null == x.to ||
-                      x.to > f ||
-                      (w.collapsed && x.to == f && x.from == f))
-                    ? (null != x.to &&
-                        x.to != f &&
-                        v > x.to &&
-                        ((v = x.to), (c = "")),
-                      w.className && (l += " " + w.className),
-                      w.css && (a = (a ? a + ";" : "") + w.css),
-                      w.startStyle && x.from == f && (u += " " + w.startStyle),
-                      w.endStyle &&
-                        x.to == v &&
-                        (b || (b = [])).push(w.endStyle, x.to),
-                      w.title && !d && (d = w.title),
-                      w.collapsed &&
-                        (!p || compareCollapsedMarkers(p.marker, w) < 0) &&
-                        (p = x))
-                    : x.from > f && v > x.from && (v = x.from)
+              ;(l = c = u = a = ""), (p = null), (d = null), (v = 1 / 0)
+              for (var y = [], b = void 0, x = 0; x < n.length; ++x) {
+                var C = n[x],
+                  w = C.marker
+                if ("bookmark" == w.type && C.from == f && w.widgetNode)
+                  y.push(w)
+                else if (
+                  C.from <= f &&
+                  (null == C.to ||
+                    C.to > f ||
+                    (w.collapsed && C.to == f && C.from == f))
+                ) {
+                  if (
+                    (null != C.to &&
+                      C.to != f &&
+                      v > C.to &&
+                      ((v = C.to), (c = "")),
+                    w.className && (l += " " + w.className),
+                    w.css && (a = (a ? a + ";" : "") + w.css),
+                    w.startStyle && C.from == f && (u += " " + w.startStyle),
+                    w.endStyle &&
+                      C.to == v &&
+                      (b || (b = [])).push(w.endStyle, C.to),
+                    w.title && ((p || (p = {})).title = w.title),
+                    w.attributes)
+                  )
+                    for (var S in w.attributes)
+                      (p || (p = {}))[S] = w.attributes[S]
+                  w.collapsed &&
+                    (!d || compareCollapsedMarkers(d.marker, w) < 0) &&
+                    (d = C)
+                } else C.from > f && v > C.from && (v = C.from)
               }
               if (b)
-                for (var S = 0; S < b.length; S += 2)
-                  b[S + 1] == v && (c += " " + b[S])
-              if (!p || p.from == f)
-                for (var k = 0; k < y.length; ++k)
-                  buildCollapsedSpan(t, 0, y[k])
-              if (p && (p.from || 0) == f) {
+                for (var k = 0; k < b.length; k += 2)
+                  b[k + 1] == v && (c += " " + b[k])
+              if (!d || d.from == f)
+                for (var L = 0; L < y.length; ++L)
+                  buildCollapsedSpan(t, 0, y[L])
+              if (d && (d.from || 0) == f) {
                 if (
                   (buildCollapsedSpan(
                     t,
-                    (null == p.to ? h + 1 : p.to) - f,
-                    p.marker,
-                    null == p.from
+                    (null == d.to ? h + 1 : d.to) - f,
+                    d.marker,
+                    null == d.from
                   ),
-                  null == p.to)
+                  null == d.to)
                 )
                   return
-                p.to == f && (p = !1)
+                d.to == f && (d = !1)
               }
             }
             if (f >= h) break
-            for (var L = Math.min(h, v); ; ) {
+            for (var M = Math.min(h, v); ; ) {
               if (m) {
-                var M = f + m.length
-                if (!p) {
-                  var T = M > L ? m.slice(0, L - f) : m
+                var T = f + m.length
+                if (!d) {
+                  var O = T > M ? m.slice(0, M - f) : m
                   t.addToken(
                     t,
-                    T,
+                    O,
                     s ? s + l : l,
                     u,
-                    f + T.length == v ? c : "",
-                    d,
-                    a
+                    f + O.length == v ? c : "",
+                    a,
+                    p
                   )
                 }
-                if (M >= L) {
-                  ;(m = m.slice(L - f)), (f = L)
+                if (T >= M) {
+                  ;(m = m.slice(M - f)), (f = M)
                   break
                 }
-                ;(f = M), (u = "")
+                ;(f = T), (u = "")
               }
               ;(m = o.slice(i, (i = r[g++]))),
                 (s = interpretTokenStyle(r[g++], t.cm.options))
             }
           }
         else
-          for (var O = 1; O < r.length; O += 2)
+          for (var P = 1; P < r.length; P += 2)
             t.addToken(
               t,
-              o.slice(i, (i = r[O])),
-              interpretTokenStyle(r[O + 1], t.cm.options)
+              o.slice(i, (i = r[P])),
+              interpretTokenStyle(r[P + 1], t.cm.options)
             )
       }
       function LineView(e, t, r) {
@@ -1659,16 +1687,16 @@ webpackJsonp([0], {
         }
         return o
       }
-      var ie = null
       var se = null
+      var ae = null
       function signalLater(e, t) {
         var r = getHandlers(e, t)
         if (r.length) {
           var n,
             o = Array.prototype.slice.call(arguments, 2)
-          ie
-            ? (n = ie.delayedCallbacks)
-            : se ? (n = se) : ((n = se = []), setTimeout(fireOrphanDelayed, 0))
+          se
+            ? (n = se.delayedCallbacks)
+            : ae ? (n = ae) : ((n = ae = []), setTimeout(fireOrphanDelayed, 0))
           for (
             var i = function(e) {
                 n.push(function() {
@@ -1683,8 +1711,8 @@ webpackJsonp([0], {
         }
       }
       function fireOrphanDelayed() {
-        var e = se
-        se = null
+        var e = ae
+        ae = null
         for (var t = 0; t < e.length; ++t) e[t]()
       }
       function updateLineForChanges(e, t, r, n) {
@@ -2049,7 +2077,7 @@ webpackJsonp([0], {
                       (o =
                         s && a < 9 && 0 == c && u == i.coverEnd - i.coverStart
                           ? l.parentNode.getBoundingClientRect()
-                          : getUsefulRect(L(l, c, u).getClientRects(), n))
+                          : getUsefulRect(k(l, c, u).getClientRects(), n))
                         .left ||
                       o.right ||
                       0 == c
@@ -2065,11 +2093,11 @@ webpackJsonp([0], {
                         null == screen.logicalXDPI ||
                         screen.logicalXDPI == screen.deviceXDPI ||
                         !(function hasBadZoomedRects(e) {
-                          if (null != q) return q
+                          if (null != $) return $
                           var t = removeChildrenAndAdd(e, elt("span", "x")),
                             r = t.getBoundingClientRect(),
-                            n = L(t, 0, 1).getBoundingClientRect()
-                          return (q = Math.abs(r.left - n.left) > 1)
+                            n = k(t, 0, 1).getBoundingClientRect()
+                          return ($ = Math.abs(r.left - n.left) > 1)
                         })(e)
                       )
                         return t
@@ -2083,13 +2111,13 @@ webpackJsonp([0], {
                       }
                     })(e.display.measure, o))
                 } else {
-                  c > 0 && (d = n = "right")
                   var h
-                  o =
-                    e.options.lineWrapping &&
-                    (h = l.getClientRects()).length > 1
-                      ? h["right" == n ? h.length - 1 : 0]
-                      : l.getBoundingClientRect()
+                  c > 0 && (d = n = "right"),
+                    (o =
+                      e.options.lineWrapping &&
+                      (h = l.getClientRects()).length > 1
+                        ? h["right" == n ? h.length - 1 : 0]
+                        : l.getBoundingClientRect())
                 }
                 if (s && a < 9 && !c && (!o || (!o.left && !o.right))) {
                   var f = l.parentNode.getClientRects()[0]
@@ -2100,7 +2128,7 @@ webpackJsonp([0], {
                         top: f.top,
                         bottom: f.bottom,
                       }
-                    : ae
+                    : ce
                 }
                 for (
                   var g = o.top - t.rect.top,
@@ -2111,13 +2139,13 @@ webpackJsonp([0], {
                   b < y.length - 1 && !(v < y[b]);
                   b++
                 );
-                var C = b ? y[b - 1] : 0,
-                  x = y[b],
+                var x = b ? y[b - 1] : 0,
+                  C = y[b],
                   w = {
                     left: ("right" == d ? o.right : o.left) - t.rect.left,
                     right: ("left" == d ? o.left : o.right) - t.rect.left,
-                    top: C,
-                    bottom: x,
+                    top: x,
+                    bottom: C,
                   }
                 o.left || o.right || (w.bogus = !0)
                 e.options.singleCursorHeightPerLine ||
@@ -2132,7 +2160,8 @@ webpackJsonp([0], {
           }
         )
       }
-      var ae = { left: 0, right: 0, top: 0, bottom: 0 }
+      var le,
+        ce = { left: 0, right: 0, top: 0, bottom: 0 }
       function nodeAndOffsetInLineMap(e, t, r) {
         for (var n, o, i, s, a, l, c = 0; c < e.length; c += 3)
           if (
@@ -2174,7 +2203,7 @@ webpackJsonp([0], {
         }
       }
       function getUsefulRect(e, t) {
-        var r = ae
+        var r = ce
         if ("left" == t)
           for (var n = 0; n < e.length && (r = e[n]).left == r.right; n++);
         else
@@ -2265,8 +2294,6 @@ webpackJsonp([0], {
         )
       }
       function cursorCoords(e, t, r, n, o, i) {
-        ;(n = n || getLine(e.doc, t.line)),
-          o || (o = prepareMeasureForLine(e, n))
         function get(t, s) {
           var a = measureCharPrepared(e, o, t, s ? "right" : "left", i)
           return (
@@ -2274,6 +2301,8 @@ webpackJsonp([0], {
             intoCoordSystem(e, n, a, r)
           )
         }
+        ;(n = n || getLine(e.doc, t.line)),
+          o || (o = prepareMeasureForLine(e, n))
         var s = getOrder(n, e.doc.direction),
           a = t.ch,
           l = t.sticky
@@ -2322,11 +2351,11 @@ webpackJsonp([0], {
         t < 0 && (t = 0)
         for (var s = getLine(n, o); ; ) {
           var a = coordsCharInner(e, s, o, t, r),
-            l = collapsedSpanAtEnd(s),
-            c = l && l.find(0, !0)
-          if (!l || !(a.ch > c.from.ch || (a.ch == c.from.ch && a.xRel > 0)))
-            return a
-          o = lineNo((s = c.to.line))
+            l = collapsedSpanAround(s, a.ch + (a.xRel > 0 ? 1 : 0))
+          if (!l) return a
+          var c = l.find(1)
+          if (c.line == o) return c
+          s = getLine(n, (o = c.line))
         }
       }
       function wrappedLineExtent(e, t, r, n) {
@@ -2351,12 +2380,14 @@ webpackJsonp([0], {
         }
       }
       function wrappedLineExtentChar(e, t, r, n) {
-        r || (r = prepareMeasureForLine(e, t))
-        return wrappedLineExtent(
-          e,
-          t,
-          r,
-          intoCoordSystem(e, t, measureCharPrepared(e, r, n), "line").top
+        return (
+          r || (r = prepareMeasureForLine(e, t)),
+          wrappedLineExtent(
+            e,
+            t,
+            r,
+            intoCoordSystem(e, t, measureCharPrepared(e, r, n), "line").top
+          )
         )
       }
       function boxIsAfter(e, t, r, n) {
@@ -2469,8 +2500,8 @@ webpackJsonp([0], {
                     c
                     ? "after"
                     : "before")
-          var C = cursorCoords(e, Pos(r, m, h), "line", t, i)
-          ;(p = C.left), (v = o < C.top || o >= C.bottom)
+          var x = cursorCoords(e, Pos(r, m, h), "line", t, i)
+          ;(p = x.left), (v = o < x.top || o >= x.bottom)
         }
         return PosWithInfo(
           r,
@@ -2480,7 +2511,6 @@ webpackJsonp([0], {
           n - p
         )
       }
-      var le
       function textHeight(e) {
         if (null != e.cachedTextHeight) return e.cachedTextHeight
         if (null == le) {
@@ -2729,10 +2759,10 @@ webpackJsonp([0], {
                 y = 0 == u,
                 b = !p || u == p.length - 1
               if (g.top - f.top <= 3) {
-                var C = (c ? v : m) && b,
-                  x = (c ? m : v) && y ? a : (h ? f : g).left,
-                  w = C ? l : (h ? g : f).right
-                add(x, f.top, w - x, f.bottom)
+                var x = (c ? v : m) && b,
+                  C = (c ? m : v) && y ? a : (h ? f : g).left,
+                  w = x ? l : (h ? g : f).right
+                add(C, f.top, w - C, f.bottom)
               } else {
                 var S, k, L, M
                 h
@@ -2822,7 +2852,7 @@ webpackJsonp([0], {
           (e.state.focused &&
             (signal(e, "blur", e, t),
             (e.state.focused = !1),
-            k(e.display.wrapper, "CodeMirror-focused")),
+            L(e.display.wrapper, "CodeMirror-focused")),
           clearInterval(e.display.blinker),
           setTimeout(function() {
             e.state.focused || (e.display.shift = !1)
@@ -2835,25 +2865,40 @@ webpackJsonp([0], {
           n++
         ) {
           var o = t.view[n],
-            i = void 0
+            i = e.options.lineWrapping,
+            l = void 0,
+            c = 0
           if (!o.hidden) {
             if (s && a < 8) {
-              var l = o.node.offsetTop + o.node.offsetHeight
-              ;(i = l - r), (r = l)
+              var u = o.node.offsetTop + o.node.offsetHeight
+              ;(l = u - r), (r = u)
             } else {
-              var c = o.node.getBoundingClientRect()
-              i = c.bottom - c.top
+              var d = o.node.getBoundingClientRect()
+              ;(l = d.bottom - d.top),
+                !i &&
+                  o.text.firstChild &&
+                  (c =
+                    o.text.firstChild.getBoundingClientRect().right -
+                    d.left -
+                    1)
             }
-            var u = o.line.height - i
+            var p = o.line.height - l
             if (
-              (i < 2 && (i = textHeight(t)),
-              (u > 0.005 || u < -0.005) &&
-                (updateLineHeight(o.line, i),
+              (l < 2 && (l = textHeight(t)),
+              (p > 0.005 || p < -0.005) &&
+                (updateLineHeight(o.line, l),
                 updateWidgetHeight(o.line),
                 o.rest))
             )
-              for (var d = 0; d < o.rest.length; d++)
-                updateWidgetHeight(o.rest[d])
+              for (var h = 0; h < o.rest.length; h++)
+                updateWidgetHeight(o.rest[h])
+            if (c > e.display.sizerWidth) {
+              var f = Math.ceil(c / charWidth(e.display))
+              f > e.display.maxLineLength &&
+                ((e.display.maxLineLength = f),
+                (e.display.maxLine = o.line),
+                (e.display.maxLineChanged = !0))
+            }
           }
         }
       }
@@ -3003,15 +3048,14 @@ webpackJsonp([0], {
       }
       function resolveScrollToPos(e) {
         var t = e.curOp.scrollToPos
-        if (t) {
-          e.curOp.scrollToPos = null
+        t &&
+          ((e.curOp.scrollToPos = null),
           scrollToCoordsRange(
             e,
             estimateCoords(e, t.from),
             estimateCoords(e, t.to),
             t.margin
-          )
-        }
+          ))
       }
       function scrollToCoordsRange(e, t, r, n) {
         var o = calculateScrollPos(e, {
@@ -3070,7 +3114,7 @@ webpackJsonp([0], {
           gutterWidth: r,
         }
       }
-      var ce = function(e, t, r) {
+      var ue = function(e, t, r) {
         this.cm = r
         var n = (this.vert = elt(
             "div",
@@ -3082,7 +3126,8 @@ webpackJsonp([0], {
             [elt("div", null, null, "height: 100%; min-height: 1px")],
             "CodeMirror-hscrollbar"
           ))
-        e(n),
+        ;(n.tabIndex = o.tabIndex = -1),
+          e(n),
           e(o),
           j(n, "scroll", function() {
             n.clientHeight && t(n.scrollTop, "vertical")
@@ -3095,7 +3140,7 @@ webpackJsonp([0], {
             a < 8 &&
             (this.horiz.style.minHeight = this.vert.style.minWidth = "18px")
       }
-      ;(ce.prototype.update = function(e) {
+      ;(ue.prototype.update = function(e) {
         var t = e.scrollWidth > e.clientWidth + 1,
           r = e.scrollHeight > e.clientHeight + 1,
           n = e.nativeBarWidth
@@ -3125,17 +3170,17 @@ webpackJsonp([0], {
           { right: r ? n : 0, bottom: t ? n : 0 }
         )
       }),
-        (ce.prototype.setScrollLeft = function(e) {
+        (ue.prototype.setScrollLeft = function(e) {
           this.horiz.scrollLeft != e && (this.horiz.scrollLeft = e),
             this.disableHoriz &&
               this.enableZeroWidthBar(this.horiz, this.disableHoriz, "horiz")
         }),
-        (ce.prototype.setScrollTop = function(e) {
+        (ue.prototype.setScrollTop = function(e) {
           this.vert.scrollTop != e && (this.vert.scrollTop = e),
             this.disableVert &&
               this.enableZeroWidthBar(this.vert, this.disableVert, "vert")
         }),
-        (ce.prototype.zeroWidthHack = function() {
+        (ue.prototype.zeroWidthHack = function() {
           var e = y && !h ? "12px" : "18px"
           ;(this.horiz.style.height = this.vert.style.width = e),
             (this.horiz.style.pointerEvents = this.vert.style.pointerEvents =
@@ -3143,31 +3188,25 @@ webpackJsonp([0], {
             (this.disableHoriz = new T()),
             (this.disableVert = new T())
         }),
-        (ce.prototype.enableZeroWidthBar = function(e, t, r) {
-          e.style.pointerEvents = "auto"
-          t.set(1e3, function maybeDisable() {
-            var n = e.getBoundingClientRect()
-            ;("vert" == r
-              ? document.elementFromPoint(n.right - 1, (n.top + n.bottom) / 2)
-              : document.elementFromPoint(
-                  (n.right + n.left) / 2,
-                  n.bottom - 1
-                )) != e
-              ? (e.style.pointerEvents = "none")
-              : t.set(1e3, maybeDisable)
-          })
+        (ue.prototype.enableZeroWidthBar = function(e, t, r) {
+          ;(e.style.pointerEvents = "auto"),
+            t.set(1e3, function maybeDisable() {
+              var n = e.getBoundingClientRect()
+              ;("vert" == r
+                ? document.elementFromPoint(n.right - 1, (n.top + n.bottom) / 2)
+                : document.elementFromPoint(
+                    (n.right + n.left) / 2,
+                    n.bottom - 1
+                  )) != e
+                ? (e.style.pointerEvents = "none")
+                : t.set(1e3, maybeDisable)
+            })
         }),
-        (ce.prototype.clear = function() {
+        (ue.prototype.clear = function() {
           var e = this.horiz.parentNode
           e.removeChild(this.horiz), e.removeChild(this.vert)
         })
-      var ue = function() {}
-      ;(ue.prototype.update = function() {
-        return { bottom: 0, right: 0 }
-      }),
-        (ue.prototype.setScrollLeft = function() {}),
-        (ue.prototype.setScrollTop = function() {}),
-        (ue.prototype.clear = function() {})
+      var de = function() {}
       function updateScrollbars(e, t) {
         t || (t = measureForScrollbars(e))
         var r = e.display.barWidth,
@@ -3205,13 +3244,19 @@ webpackJsonp([0], {
               (r.gutterFiller.style.width = t.gutterWidth + "px"))
             : (r.gutterFiller.style.display = "")
       }
-      var de = { native: ce, null: ue }
+      ;(de.prototype.update = function() {
+        return { bottom: 0, right: 0 }
+      }),
+        (de.prototype.setScrollLeft = function() {}),
+        (de.prototype.setScrollTop = function() {}),
+        (de.prototype.clear = function() {})
+      var pe = { native: ue, null: de }
       function initScrollbars(e) {
         e.display.scrollbars &&
           (e.display.scrollbars.clear(),
           e.display.scrollbars.addClass &&
-            k(e.display.wrapper, e.display.scrollbars.addClass)),
-          (e.display.scrollbars = new de[e.options.scrollbarStyle](
+            L(e.display.wrapper, e.display.scrollbars.addClass)),
+          (e.display.scrollbars = new pe[e.options.scrollbarStyle](
             function(t) {
               e.display.wrapper.insertBefore(t, e.display.scrollbarFiller),
                 j(t, "mousedown", function() {
@@ -3230,7 +3275,7 @@ webpackJsonp([0], {
           e.display.scrollbars.addClass &&
             addClass(e.display.wrapper, e.display.scrollbars.addClass)
       }
-      var pe = 0
+      var he = 0
       function startOperation(e) {
         ;(e.curOp = {
           cm: e,
@@ -3248,56 +3293,58 @@ webpackJsonp([0], {
           scrollTop: null,
           scrollToPos: null,
           focus: !1,
-          id: ++pe,
+          id: ++he,
         }),
           (function pushOperation(e) {
-            ie
-              ? ie.ops.push(e)
-              : (e.ownsGroup = ie = { ops: [e], delayedCallbacks: [] })
+            se
+              ? se.ops.push(e)
+              : (e.ownsGroup = se = { ops: [e], delayedCallbacks: [] })
           })(e.curOp)
       }
       function endOperation(e) {
-        !(function finishOperation(e, t) {
-          var r = e.ownsGroup
-          if (r)
-            try {
-              !(function fireCallbacksForOps(e) {
-                var t = e.delayedCallbacks,
-                  r = 0
-                do {
-                  for (; r < t.length; r++) t[r].call(null)
-                  for (var n = 0; n < e.ops.length; n++) {
-                    var o = e.ops[n]
-                    if (o.cursorActivityHandlers)
-                      for (
-                        ;
-                        o.cursorActivityCalled <
-                        o.cursorActivityHandlers.length;
+        var t = e.curOp
+        t &&
+          (function finishOperation(e, t) {
+            var r = e.ownsGroup
+            if (r)
+              try {
+                !(function fireCallbacksForOps(e) {
+                  var t = e.delayedCallbacks,
+                    r = 0
+                  do {
+                    for (; r < t.length; r++) t[r].call(null)
+                    for (var n = 0; n < e.ops.length; n++) {
+                      var o = e.ops[n]
+                      if (o.cursorActivityHandlers)
+                        for (
+                          ;
+                          o.cursorActivityCalled <
+                          o.cursorActivityHandlers.length;
 
-                      )
-                        o.cursorActivityHandlers[o.cursorActivityCalled++].call(
-                          null,
-                          o.cm
                         )
-                  }
-                } while (r < t.length)
-              })(r)
-            } finally {
-              ;(ie = null), t(r)
-            }
-        })(e.curOp, function(e) {
-          for (var t = 0; t < e.ops.length; t++) e.ops[t].cm.curOp = null
-          !(function endOperations(e) {
-            for (var t = e.ops, r = 0; r < t.length; r++) endOperation_R1(t[r])
-            for (var n = 0; n < t.length; n++)
-              (o = t[n]).updatedDisplay =
-                o.mustUpdate && updateDisplayIfNeeded(o.cm, o.update)
-            var o
-            for (var i = 0; i < t.length; i++) endOperation_R2(t[i])
-            for (var s = 0; s < t.length; s++) endOperation_W2(t[s])
-            for (var a = 0; a < t.length; a++) endOperation_finish(t[a])
-          })(e)
-        })
+                          o.cursorActivityHandlers[
+                            o.cursorActivityCalled++
+                          ].call(null, o.cm)
+                    }
+                  } while (r < t.length)
+                })(r)
+              } finally {
+                ;(se = null), t(r)
+              }
+          })(t, function(e) {
+            for (var t = 0; t < e.ops.length; t++) e.ops[t].cm.curOp = null
+            !(function endOperations(e) {
+              for (var t = e.ops, r = 0; r < t.length; r++)
+                endOperation_R1(t[r])
+              for (var n = 0; n < t.length; n++)
+                (o = t[n]).updatedDisplay =
+                  o.mustUpdate && updateDisplayIfNeeded(o.cm, o.update)
+              var o
+              for (var i = 0; i < t.length; i++) endOperation_R2(t[i])
+              for (var s = 0; s < t.length; s++) endOperation_W2(t[s])
+              for (var a = 0; a < t.length; a++) endOperation_finish(t[a])
+            })(e)
+          })
       }
       function endOperation_R1(e) {
         var t = e.cm,
@@ -3324,7 +3371,7 @@ webpackJsonp([0], {
             (r.maxLineChanged && t.options.lineWrapping)),
           (e.update =
             e.mustUpdate &&
-            new he(
+            new fe(
               t,
               e.mustUpdate && { top: e.scrollTop, ensure: e.scrollToPos },
               e.forceUpdate
@@ -3379,16 +3426,14 @@ webpackJsonp([0], {
         var t = e.cm,
           r = t.display,
           n = t.doc
-        if (
-          (e.updatedDisplay && postUpdateDisplay(t, e.update),
-          null == r.wheelStartX ||
-            (null == e.scrollTop && null == e.scrollLeft && !e.scrollToPos) ||
-            (r.wheelStartX = r.wheelStartY = null),
-          null != e.scrollTop && setScrollTop(t, e.scrollTop, e.forceScroll),
-          null != e.scrollLeft && setScrollLeft(t, e.scrollLeft, !0, !0),
-          e.scrollToPos)
-        ) {
-          !(function maybeScrollWindow(e, t) {
+        ;(e.updatedDisplay && postUpdateDisplay(t, e.update),
+        null == r.wheelStartX ||
+          (null == e.scrollTop && null == e.scrollLeft && !e.scrollToPos) ||
+          (r.wheelStartX = r.wheelStartY = null),
+        null != e.scrollTop && setScrollTop(t, e.scrollTop, e.forceScroll),
+        null != e.scrollLeft && setScrollLeft(t, e.scrollLeft, !0, !0),
+        e.scrollToPos) &&
+          (function maybeScrollWindow(e, t) {
             if (!signalDOMEvent(e, "scrollCursorIntoView")) {
               var r = e.display,
                 n = r.sizer.getBoundingClientRect(),
@@ -3423,21 +3468,21 @@ webpackJsonp([0], {
           })(
             t,
             (function scrollPosIntoView(e, t, r, n) {
-              null == n && (n = 0)
               var o
-              e.options.lineWrapping ||
-                t != r ||
-                (r =
-                  "before" ==
-                  (t = t.ch
-                    ? Pos(
-                        t.line,
-                        "before" == t.sticky ? t.ch - 1 : t.ch,
-                        "after"
-                      )
-                    : t).sticky
-                    ? Pos(t.line, t.ch + 1, "before")
-                    : t)
+              null == n && (n = 0),
+                e.options.lineWrapping ||
+                  t != r ||
+                  (r =
+                    "before" ==
+                    (t = t.ch
+                      ? Pos(
+                          t.line,
+                          "before" == t.sticky ? t.ch - 1 : t.ch,
+                          "after"
+                        )
+                      : t).sticky
+                      ? Pos(t.line, t.ch + 1, "before")
+                      : t)
               for (var i = 0; i < 5; i++) {
                 var s = !1,
                   a = cursorCoords(e, t),
@@ -3472,7 +3517,6 @@ webpackJsonp([0], {
               e.scrollToPos.margin
             )
           )
-        }
         var o = e.maybeHiddenMarkers,
           i = e.maybeUnhiddenMarkers
         if (o)
@@ -3683,7 +3727,7 @@ webpackJsonp([0], {
               })
         }
       }
-      var he = function(e, t, r) {
+      var fe = function(e, t, r) {
         var n = e.display
         ;(this.viewport = t),
           (this.visible = visibleLines(n, e.doc, t)),
@@ -3695,13 +3739,6 @@ webpackJsonp([0], {
           (this.dims = getDimensions(e)),
           (this.events = [])
       }
-      ;(he.prototype.signal = function(e, t) {
-        hasHandler(e, t) && this.events.push(arguments)
-      }),
-        (he.prototype.finish = function() {
-          for (var e = 0; e < this.events.length; e++)
-            signal.apply(null, this.events[e])
-        })
       function updateDisplayIfNeeded(e, t) {
         var r = e.display,
           n = e.doc
@@ -3887,7 +3924,7 @@ webpackJsonp([0], {
             (e.display.reportedViewTo = e.display.viewTo))
       }
       function updateDisplaySimple(e, t) {
-        var r = new he(e, t)
+        var r = new fe(e, t)
         if (updateDisplayIfNeeded(e, r)) {
           updateHeightsInViewport(e), postUpdateDisplay(e, r)
           var n = measureForScrollbars(e)
@@ -3928,9 +3965,15 @@ webpackJsonp([0], {
             !e.lineNumbers &&
             ((e.gutters = e.gutters.slice(0)), e.gutters.splice(t, 1))
       }
-      var fe = 0,
-        ge = null
-      s ? (ge = -0.53) : r ? (ge = 15) : u ? (ge = -0.7) : p && (ge = -1 / 3)
+      ;(fe.prototype.signal = function(e, t) {
+        hasHandler(e, t) && this.events.push(arguments)
+      }),
+        (fe.prototype.finish = function() {
+          for (var e = 0; e < this.events.length; e++)
+            signal.apply(null, this.events[e])
+        })
+      var ge = 0,
+        me = null
       function wheelEventDelta(e) {
         var t = e.wheelDeltaX,
           r = e.wheelDeltaY
@@ -3947,7 +3990,7 @@ webpackJsonp([0], {
       }
       function wheelEventPixels(e) {
         var t = wheelEventDelta(e)
-        return (t.x *= ge), (t.y *= ge), t
+        return (t.x *= me), (t.y *= me), t
       }
       function onScrollWheel(e, t) {
         var n = wheelEventDelta(t),
@@ -3965,15 +4008,15 @@ webpackJsonp([0], {
                   e.display.currentWheelTarget = p
                   break e
                 }
-          if (o && !r && !d && null != ge)
+          if (o && !r && !d && null != me)
             return (
-              i && u && updateScrollTop(e, Math.max(0, a.scrollTop + i * ge)),
-              setScrollLeft(e, Math.max(0, a.scrollLeft + o * ge)),
+              i && u && updateScrollTop(e, Math.max(0, a.scrollTop + i * me)),
+              setScrollLeft(e, Math.max(0, a.scrollLeft + o * me)),
               (!i || (i && u)) && e_preventDefault(t),
               void (s.wheelStartX = null)
             )
-          if (i && null != ge) {
-            var g = i * ge,
+          if (i && null != me) {
+            var g = i * me,
               m = e.doc.scrollTop,
               v = m + s.wrapper.clientHeight
             g < 0
@@ -3981,7 +4024,7 @@ webpackJsonp([0], {
               : (v = Math.min(e.doc.height, v + g + 50)),
               updateDisplaySimple(e, { top: m, bottom: v })
           }
-          fe < 20 &&
+          ge < 20 &&
             (null == s.wheelStartX
               ? ((s.wheelStartX = a.scrollLeft),
                 (s.wheelStartY = a.scrollTop),
@@ -3995,19 +4038,20 @@ webpackJsonp([0], {
                         (t && s.wheelDY && t / s.wheelDY) ||
                         (e && s.wheelDX && e / s.wheelDX)
                     ;(s.wheelStartX = s.wheelStartY = null),
-                      r && ((ge = (ge * fe + r) / (fe + 1)), ++fe)
+                      r && ((me = (me * ge + r) / (ge + 1)), ++ge)
                   }
                 }, 200))
               : ((s.wheelDX += o), (s.wheelDY += i)))
         }
       }
-      var me = function(e, t) {
+      s ? (me = -0.53) : r ? (me = 15) : u ? (me = -0.7) : p && (me = -1 / 3)
+      var ve = function(e, t) {
         ;(this.ranges = e), (this.primIndex = t)
       }
-      ;(me.prototype.primary = function() {
+      ;(ve.prototype.primary = function() {
         return this.ranges[this.primIndex]
       }),
-        (me.prototype.equals = function(e) {
+        (ve.prototype.equals = function(e) {
           if (e == this) return !0
           if (
             e.primIndex != this.primIndex ||
@@ -4025,20 +4069,20 @@ webpackJsonp([0], {
           }
           return !0
         }),
-        (me.prototype.deepCopy = function() {
+        (ve.prototype.deepCopy = function() {
           for (var e = [], t = 0; t < this.ranges.length; t++)
-            e[t] = new ve(
+            e[t] = new ye(
               copyPos(this.ranges[t].anchor),
               copyPos(this.ranges[t].head)
             )
-          return new me(e, this.primIndex)
+          return new ve(e, this.primIndex)
         }),
-        (me.prototype.somethingSelected = function() {
+        (ve.prototype.somethingSelected = function() {
           for (var e = 0; e < this.ranges.length; e++)
             if (!this.ranges[e].empty()) return !0
           return !1
         }),
-        (me.prototype.contains = function(e, t) {
+        (ve.prototype.contains = function(e, t) {
           t || (t = e)
           for (var r = 0; r < this.ranges.length; r++) {
             var n = this.ranges[r]
@@ -4046,40 +4090,31 @@ webpackJsonp([0], {
           }
           return -1
         })
-      var ve = function(e, t) {
+      var ye = function(e, t) {
         ;(this.anchor = e), (this.head = t)
       }
-      ;(ve.prototype.from = function() {
-        return minPos(this.anchor, this.head)
-      }),
-        (ve.prototype.to = function() {
-          return maxPos(this.anchor, this.head)
-        }),
-        (ve.prototype.empty = function() {
-          return (
-            this.head.line == this.anchor.line && this.head.ch == this.anchor.ch
-          )
-        })
-      function normalizeSelection(e, t) {
-        var r = e[t]
-        e.sort(function(e, t) {
+      function normalizeSelection(e, t, r) {
+        var n = e && e.options.selectionsMayTouch,
+          o = t[r]
+        t.sort(function(e, t) {
           return cmp(e.from(), t.from())
         }),
-          (t = indexOf(e, r))
-        for (var n = 1; n < e.length; n++) {
-          var o = e[n],
-            i = e[n - 1]
-          if (cmp(i.to(), o.from()) >= 0) {
-            var s = minPos(i.from(), o.from()),
-              a = maxPos(i.to(), o.to()),
-              l = i.empty() ? o.from() == o.head : i.from() == i.head
-            n <= t && --t, e.splice(--n, 2, new ve(l ? a : s, l ? s : a))
+          (r = indexOf(t, o))
+        for (var i = 1; i < t.length; i++) {
+          var s = t[i],
+            a = t[i - 1],
+            l = cmp(a.to(), s.from())
+          if (n && !s.empty() ? l > 0 : l >= 0) {
+            var c = minPos(a.from(), s.from()),
+              u = maxPos(a.to(), s.to()),
+              d = a.empty() ? s.from() == s.head : a.from() == a.head
+            i <= r && --r, t.splice(--i, 2, new ye(d ? u : c, d ? c : u))
           }
         }
-        return new me(e, t)
+        return new ve(t, r)
       }
       function simpleSelection(e, t) {
-        return new me([new ve(e, t || e)], 0)
+        return new ve([new ye(e, t || e)], 0)
       }
       function changeEnd(e) {
         return e.text
@@ -4102,10 +4137,10 @@ webpackJsonp([0], {
         for (var r = [], n = 0; n < e.sel.ranges.length; n++) {
           var o = e.sel.ranges[n]
           r.push(
-            new ve(adjustForChange(o.anchor, t), adjustForChange(o.head, t))
+            new ye(adjustForChange(o.anchor, t), adjustForChange(o.head, t))
           )
         }
-        return normalizeSelection(r, e.sel.primIndex)
+        return normalizeSelection(e.cm, r, e.sel.primIndex)
       }
       function offsetPos(e, t, r) {
         return e.line == t.line
@@ -4151,7 +4186,7 @@ webpackJsonp([0], {
         }
         function linesFor(e, t) {
           for (var r = [], o = e; o < t; ++o)
-            r.push(new re(s[o], spansFor(o), n))
+            r.push(new ne(s[o], spansFor(o), n))
           return r
         }
         var o = t.from,
@@ -4175,7 +4210,7 @@ webpackJsonp([0], {
             update(a, a.text.slice(0, o.ch) + c + a.text.slice(i.ch), u)
           else {
             var h = linesFor(1, s.length - 1)
-            h.push(new re(c + a.text.slice(i.ch), u, n)),
+            h.push(new ne(c + a.text.slice(i.ch), u, n)),
               update(a, a.text.slice(0, o.ch) + s[0], spansFor(0)),
               e.insert(o.line + 1, h)
           }
@@ -4218,7 +4253,7 @@ webpackJsonp([0], {
           regChange(e)
       }
       function setDirectionClass(e) {
-        ;("rtl" == e.doc.direction ? addClass : k)(
+        ;("rtl" == e.doc.direction ? addClass : L)(
           e.display.lineDiv,
           "CodeMirror-rtl"
         )
@@ -4267,8 +4302,8 @@ webpackJsonp([0], {
             (o.lastOrigin == t.origin &&
               t.origin &&
               (("+" == t.origin.charAt(0) &&
-                e.cm &&
-                o.lastModTime > a - e.cm.options.historyEventDelay) ||
+                o.lastModTime >
+                  a - (e.cm ? e.cm.options.historyEventDelay : 500)) ||
                 "*" == t.origin.charAt(0)))) &&
           (i = (function lastChangeEvent(e, t) {
             return t
@@ -4380,7 +4415,7 @@ webpackJsonp([0], {
       function copyHistoryArray(e, t, r) {
         for (var n = [], o = 0; o < e.length; ++o) {
           var i = e[o]
-          if (i.ranges) n.push(r ? me.prototype.deepCopy.call(i) : i)
+          if (i.ranges) n.push(r ? ve.prototype.deepCopy.call(i) : i)
           else {
             var s = i.changes,
               a = []
@@ -4407,13 +4442,13 @@ webpackJsonp([0], {
               ? ((o = t), (t = r))
               : i != cmp(t, r) < 0 && (t = r)
           }
-          return new ve(o, t)
+          return new ye(o, t)
         }
-        return new ve(r || t, t)
+        return new ye(r || t, t)
       }
       function extendSelection(e, t, r, n, o) {
         null == o && (o = e.cm && (e.cm.display.shift || e.extend)),
-          setSelection(e, new me([extendRange(e.sel.primary(), t, r, o)], 0), n)
+          setSelection(e, new ve([extendRange(e.sel.primary(), t, r, o)], 0), n)
       }
       function extendSelections(e, t, r) {
         for (
@@ -4422,11 +4457,12 @@ webpackJsonp([0], {
           i++
         )
           n[i] = extendRange(e.sel.ranges[i], t[i], null, o)
-        setSelection(e, normalizeSelection(n, e.sel.primIndex), r)
+        setSelection(e, normalizeSelection(e.cm, n, e.sel.primIndex), r)
       }
       function replaceOneSelection(e, t, r, n) {
         var o = e.sel.ranges.slice(0)
-        ;(o[t] = r), setSelection(e, normalizeSelection(o, e.sel.primIndex), n)
+        ;(o[t] = r),
+          setSelection(e, normalizeSelection(e.cm, o, e.sel.primIndex), n)
       }
       function setSimpleSelection(e, t, r, n) {
         setSelection(e, simpleSelection(t, r), n)
@@ -4451,7 +4487,7 @@ webpackJsonp([0], {
               update: function(t) {
                 this.ranges = []
                 for (var r = 0; r < t.length; r++)
-                  this.ranges[r] = new ve(
+                  this.ranges[r] = new ye(
                     clipPos(e, t[r].anchor),
                     clipPos(e, t[r].head)
                   )
@@ -4462,20 +4498,20 @@ webpackJsonp([0], {
               signal(e, "beforeSelectionChange", e, n),
               e.cm && signal(e.cm, "beforeSelectionChange", e.cm, n),
               n.ranges != t.ranges
-                ? normalizeSelection(n.ranges, n.ranges.length - 1)
+                ? normalizeSelection(e.cm, n.ranges, n.ranges.length - 1)
                 : t
             )
-          })(e, t, r))
-        setSelectionInner(
-          e,
-          skipAtomicInSelection(
+          })(e, t, r)),
+          setSelectionInner(
             e,
-            t,
-            (r && r.bias) ||
-              (cmp(t.primary().head, e.sel.primary().head) < 0 ? -1 : 1),
-            !0
-          )
-        ),
+            skipAtomicInSelection(
+              e,
+              t,
+              (r && r.bias) ||
+                (cmp(t.primary().head, e.sel.primary().head) < 0 ? -1 : 1),
+              !0
+            )
+          ),
           (r && !1 === r.scroll) || !e.cm || ensureCursorVisible(e.cm)
       }
       function setSelectionInner(e, t) {
@@ -4496,9 +4532,9 @@ webpackJsonp([0], {
             l = skipAtomic(e, s.anchor, a && a.anchor, r, n),
             c = skipAtomic(e, s.head, a && a.head, r, n)
           ;(o || l != s.anchor || c != s.head) &&
-            (o || (o = t.ranges.slice(0, i)), (o[i] = new ve(l, c)))
+            (o || (o = t.ranges.slice(0, i)), (o[i] = new ye(l, c)))
         }
-        return o ? normalizeSelection(o, t.primIndex) : t
+        return o ? normalizeSelection(e.cm, o, t.primIndex) : t
       }
       function skipAtomicInner(e, t, r, n, o) {
         var i = getLine(e, t.line)
@@ -4660,60 +4696,61 @@ webpackJsonp([0], {
         }
       }
       function makeChangeFromHistory(e, t, r) {
-        if (!e.cm || !e.cm.state.suppressEdits || r) {
+        var n = e.cm && e.cm.state.suppressEdits
+        if (!n || r) {
           for (
-            var n,
-              o = e.history,
-              i = e.sel,
-              s = "undo" == t ? o.done : o.undone,
-              a = "undo" == t ? o.undone : o.done,
-              l = 0;
-            l < s.length &&
-            ((n = s[l]), r ? !n.ranges || n.equals(e.sel) : n.ranges);
-            l++
+            var o,
+              i = e.history,
+              s = e.sel,
+              a = "undo" == t ? i.done : i.undone,
+              l = "undo" == t ? i.undone : i.done,
+              c = 0;
+            c < a.length &&
+            ((o = a[c]), r ? !o.ranges || o.equals(e.sel) : o.ranges);
+            c++
           );
-          if (l != s.length) {
-            for (
-              o.lastOrigin = o.lastSelOrigin = null;
-              (n = s.pop()).ranges;
-
-            ) {
-              if ((pushSelectionToHistory(n, a), r && !n.equals(e.sel)))
-                return void setSelection(e, n, { clearRedo: !1 })
-              i = n
+          if (c != a.length) {
+            for (i.lastOrigin = i.lastSelOrigin = null; ; ) {
+              if (!(o = a.pop()).ranges) {
+                if (n) return void a.push(o)
+                break
+              }
+              if ((pushSelectionToHistory(o, l), r && !o.equals(e.sel)))
+                return void setSelection(e, o, { clearRedo: !1 })
+              s = o
             }
-            var c = []
-            pushSelectionToHistory(i, a),
-              a.push({ changes: c, generation: o.generation }),
-              (o.generation = n.generation || ++o.maxGeneration)
+            var u = []
+            pushSelectionToHistory(s, l),
+              l.push({ changes: u, generation: i.generation }),
+              (i.generation = o.generation || ++i.maxGeneration)
             for (
-              var u =
+              var d =
                   hasHandler(e, "beforeChange") ||
                   (e.cm && hasHandler(e.cm, "beforeChange")),
-                d = function(r) {
-                  var o = n.changes[r]
-                  if (((o.origin = t), u && !filterChange(e, o, !1)))
-                    return (s.length = 0), {}
-                  c.push(historyChangeFromChange(e, o))
-                  var i = r ? computeSelAfterChange(e, o) : lst(s)
-                  makeChangeSingleDoc(e, o, i, mergeOldSpans(e, o)),
+                p = function(r) {
+                  var n = o.changes[r]
+                  if (((n.origin = t), d && !filterChange(e, n, !1)))
+                    return (a.length = 0), {}
+                  u.push(historyChangeFromChange(e, n))
+                  var i = r ? computeSelAfterChange(e, n) : lst(a)
+                  makeChangeSingleDoc(e, n, i, mergeOldSpans(e, n)),
                     !r &&
                       e.cm &&
-                      e.cm.scrollIntoView({ from: o.from, to: changeEnd(o) })
-                  var a = []
+                      e.cm.scrollIntoView({ from: n.from, to: changeEnd(n) })
+                  var s = []
                   linkedDocs(e, function(e, t) {
                     t ||
-                      -1 != indexOf(a, e.history) ||
-                      (rebaseHist(e.history, o), a.push(e.history)),
-                      makeChangeSingleDoc(e, o, null, mergeOldSpans(e, o))
+                      -1 != indexOf(s, e.history) ||
+                      (rebaseHist(e.history, n), s.push(e.history)),
+                      makeChangeSingleDoc(e, n, null, mergeOldSpans(e, n))
                   })
                 },
-                p = n.changes.length - 1;
-              p >= 0;
-              --p
+                h = o.changes.length - 1;
+              h >= 0;
+              --h
             ) {
-              var h = d(p)
-              if (h) return h.v
+              var f = p(h)
+              if (f) return f.v
             }
           }
         }
@@ -4722,9 +4759,9 @@ webpackJsonp([0], {
         if (
           0 != t &&
           ((e.first += t),
-          (e.sel = new me(
+          (e.sel = new ve(
             map(e.sel.ranges, function(e) {
-              return new ve(
+              return new ye(
                 Pos(e.anchor.line + t, e.anchor.ch),
                 Pos(e.head.line + t, e.head.ch)
               )
@@ -4796,7 +4833,7 @@ webpackJsonp([0], {
                     ) {
                       for (var r = e.first, n = t - 1; n > r; n--) {
                         var o = getLine(e, n).stateAfter
-                        if (o && (!(o instanceof J) || n + o.lookAhead < t)) {
+                        if (o && (!(o instanceof ee) || n + o.lookAhead < t)) {
                           r = n + 1
                           break
                         }
@@ -4836,11 +4873,10 @@ webpackJsonp([0], {
         }
       }
       function replaceRange(e, t, r, n, o) {
-        if ((n || (n = r), cmp(n, r) < 0)) {
-          var i
-          ;(r = (i = [n, r])[0]), (n = i[1])
-        }
-        "string" == typeof t && (t = e.splitLines(t)),
+        var i
+        n || (n = r),
+          cmp(n, r) < 0 && ((r = (i = [n, r])[0]), (n = i[1])),
+          "string" == typeof t && (t = e.splitLines(t)),
           makeChange(e, { from: r, to: n, text: t, origin: o })
       }
       function rebaseHistSelSingle(e, t, r, n) {
@@ -4892,36 +4928,6 @@ webpackJsonp([0], {
           (e[r].parent = this), (t += e[r].height)
         this.height = t
       }
-      LeafChunk.prototype = {
-        chunkSize: function chunkSize() {
-          return this.lines.length
-        },
-        removeInner: function removeInner(e, t) {
-          for (var r = e, n = e + t; r < n; ++r) {
-            var o = this.lines[r]
-            ;(this.height -= o.height),
-              ((i = o).parent = null),
-              detachMarkedSpans(i),
-              signalLater(o, "delete")
-          }
-          var i
-          this.lines.splice(e, t)
-        },
-        collapse: function collapse(e) {
-          e.push.apply(e, this.lines)
-        },
-        insertInner: function insertInner(e, t, r) {
-          ;(this.height += r),
-            (this.lines = this.lines
-              .slice(0, e)
-              .concat(t)
-              .concat(this.lines.slice(e)))
-          for (var n = 0; n < t.length; ++n) t[n].parent = this
-        },
-        iterN: function iterN(e, t, r) {
-          for (var n = e + t; e < n; ++e) if (r(this.lines[e])) return !0
-        },
-      }
       function BranchChunk(e) {
         this.children = e
         for (var t = 0, r = 0, n = 0; n < e.length; ++n) {
@@ -4930,105 +4936,148 @@ webpackJsonp([0], {
         }
         ;(this.size = t), (this.height = r), (this.parent = null)
       }
-      BranchChunk.prototype = {
-        chunkSize: function chunkSize() {
-          return this.size
-        },
-        removeInner: function removeInner(e, t) {
-          this.size -= t
-          for (var r = 0; r < this.children.length; ++r) {
-            var n = this.children[r],
-              o = n.chunkSize()
-            if (e < o) {
-              var i = Math.min(t, o - e),
-                s = n.height
-              if (
-                (n.removeInner(e, i),
-                (this.height -= s - n.height),
-                o == i && (this.children.splice(r--, 1), (n.parent = null)),
-                0 == (t -= i))
-              )
-                break
-              e = 0
-            } else e -= o
-          }
-          if (
-            this.size - t < 25 &&
-            (this.children.length > 1 ||
-              !(this.children[0] instanceof LeafChunk))
-          ) {
-            var a = []
-            this.collapse(a),
-              (this.children = [new LeafChunk(a)]),
-              (this.children[0].parent = this)
-          }
-        },
-        collapse: function collapse(e) {
-          for (var t = 0; t < this.children.length; ++t)
-            this.children[t].collapse(e)
-        },
-        insertInner: function insertInner(e, t, r) {
-          ;(this.size += t.length), (this.height += r)
-          for (var n = 0; n < this.children.length; ++n) {
-            var o = this.children[n],
-              i = o.chunkSize()
-            if (e <= i) {
-              if ((o.insertInner(e, t, r), o.lines && o.lines.length > 50)) {
-                for (
-                  var s = o.lines.length % 25 + 25, a = s;
-                  a < o.lines.length;
-
-                ) {
-                  var l = new LeafChunk(o.lines.slice(a, (a += 25)))
-                  ;(o.height -= l.height),
-                    this.children.splice(++n, 0, l),
-                    (l.parent = this)
-                }
-                ;(o.lines = o.lines.slice(0, s)), this.maybeSpill()
-              }
-              break
+      ;(ye.prototype.from = function() {
+        return minPos(this.anchor, this.head)
+      }),
+        (ye.prototype.to = function() {
+          return maxPos(this.anchor, this.head)
+        }),
+        (ye.prototype.empty = function() {
+          return (
+            this.head.line == this.anchor.line && this.head.ch == this.anchor.ch
+          )
+        }),
+        (LeafChunk.prototype = {
+          chunkSize: function() {
+            return this.lines.length
+          },
+          removeInner: function(e, t) {
+            for (var r = e, n = e + t; r < n; ++r) {
+              var o = this.lines[r]
+              ;(this.height -= o.height),
+                cleanUpLine(o),
+                signalLater(o, "delete")
             }
-            e -= i
-          }
-        },
-        maybeSpill: function maybeSpill() {
-          if (!(this.children.length <= 10)) {
-            var e = this
-            do {
-              var t = new BranchChunk(
-                e.children.splice(e.children.length - 5, 5)
-              )
-              if (e.parent) {
-                ;(e.size -= t.size), (e.height -= t.height)
-                var r = indexOf(e.parent.children, e)
-                e.parent.children.splice(r + 1, 0, t)
-              } else {
-                var n = new BranchChunk(e.children)
-                ;(n.parent = e), (e.children = [n, t]), (e = n)
+            this.lines.splice(e, t)
+          },
+          collapse: function(e) {
+            e.push.apply(e, this.lines)
+          },
+          insertInner: function(e, t, r) {
+            ;(this.height += r),
+              (this.lines = this.lines
+                .slice(0, e)
+                .concat(t)
+                .concat(this.lines.slice(e)))
+            for (var n = 0; n < t.length; ++n) t[n].parent = this
+          },
+          iterN: function(e, t, r) {
+            for (var n = e + t; e < n; ++e) if (r(this.lines[e])) return !0
+          },
+        }),
+        (BranchChunk.prototype = {
+          chunkSize: function() {
+            return this.size
+          },
+          removeInner: function(e, t) {
+            this.size -= t
+            for (var r = 0; r < this.children.length; ++r) {
+              var n = this.children[r],
+                o = n.chunkSize()
+              if (e < o) {
+                var i = Math.min(t, o - e),
+                  s = n.height
+                if (
+                  (n.removeInner(e, i),
+                  (this.height -= s - n.height),
+                  o == i && (this.children.splice(r--, 1), (n.parent = null)),
+                  0 == (t -= i))
+                )
+                  break
+                e = 0
+              } else e -= o
+            }
+            if (
+              this.size - t < 25 &&
+              (this.children.length > 1 ||
+                !(this.children[0] instanceof LeafChunk))
+            ) {
+              var a = []
+              this.collapse(a),
+                (this.children = [new LeafChunk(a)]),
+                (this.children[0].parent = this)
+            }
+          },
+          collapse: function(e) {
+            for (var t = 0; t < this.children.length; ++t)
+              this.children[t].collapse(e)
+          },
+          insertInner: function(e, t, r) {
+            ;(this.size += t.length), (this.height += r)
+            for (var n = 0; n < this.children.length; ++n) {
+              var o = this.children[n],
+                i = o.chunkSize()
+              if (e <= i) {
+                if ((o.insertInner(e, t, r), o.lines && o.lines.length > 50)) {
+                  for (
+                    var s = o.lines.length % 25 + 25, a = s;
+                    a < o.lines.length;
+
+                  ) {
+                    var l = new LeafChunk(o.lines.slice(a, (a += 25)))
+                    ;(o.height -= l.height),
+                      this.children.splice(++n, 0, l),
+                      (l.parent = this)
+                  }
+                  ;(o.lines = o.lines.slice(0, s)), this.maybeSpill()
+                }
+                break
               }
-              t.parent = e.parent
-            } while (e.children.length > 10)
-            e.parent.maybeSpill()
-          }
-        },
-        iterN: function iterN(e, t, r) {
-          for (var n = 0; n < this.children.length; ++n) {
-            var o = this.children[n],
-              i = o.chunkSize()
-            if (e < i) {
-              var s = Math.min(t, i - e)
-              if (o.iterN(e, s, r)) return !0
-              if (0 == (t -= s)) break
-              e = 0
-            } else e -= i
-          }
-        },
-      }
-      var ye = function(e, t, r) {
+              e -= i
+            }
+          },
+          maybeSpill: function() {
+            if (!(this.children.length <= 10)) {
+              var e = this
+              do {
+                var t = new BranchChunk(
+                  e.children.splice(e.children.length - 5, 5)
+                )
+                if (e.parent) {
+                  ;(e.size -= t.size), (e.height -= t.height)
+                  var r = indexOf(e.parent.children, e)
+                  e.parent.children.splice(r + 1, 0, t)
+                } else {
+                  var n = new BranchChunk(e.children)
+                  ;(n.parent = e), (e.children = [n, t]), (e = n)
+                }
+                t.parent = e.parent
+              } while (e.children.length > 10)
+              e.parent.maybeSpill()
+            }
+          },
+          iterN: function(e, t, r) {
+            for (var n = 0; n < this.children.length; ++n) {
+              var o = this.children[n],
+                i = o.chunkSize()
+              if (e < i) {
+                var s = Math.min(t, i - e)
+                if (o.iterN(e, s, r)) return !0
+                if (0 == (t -= s)) break
+                e = 0
+              } else e -= i
+            }
+          },
+        })
+      var be = function(e, t, r) {
         if (r) for (var n in r) r.hasOwnProperty(n) && (this[n] = r[n])
         ;(this.doc = e), (this.node = t)
       }
-      ;(ye.prototype.clear = function() {
+      function adjustScrollWhenAboveVisible(e, t, r) {
+        heightAtLine(t) < ((e.curOp && e.curOp.scrollTop) || e.doc.scrollTop) &&
+          addToScrollTop(e, r)
+      }
+      ;(be.prototype.clear = function() {
         var e = this.doc.cm,
           t = this.line.widgets,
           r = this.line,
@@ -5046,7 +5095,7 @@ webpackJsonp([0], {
               signalLater(e, "lineWidgetCleared", e, this, n))
         }
       }),
-        (ye.prototype.changed = function() {
+        (be.prototype.changed = function() {
           var e = this,
             t = this.height,
             r = this.doc.cm,
@@ -5054,7 +5103,7 @@ webpackJsonp([0], {
           this.height = null
           var o = widgetHeight(this) - t
           o &&
-            (updateLineHeight(n, n.height + o),
+            (lineIsHidden(this.doc, n) || updateLineHeight(n, n.height + o),
             r &&
               runInOp(r, function() {
                 ;(r.curOp.forceUpdate = !0),
@@ -5062,120 +5111,11 @@ webpackJsonp([0], {
                   signalLater(r, "lineWidgetChanged", r, e, lineNo(n))
               }))
         }),
-        eventMixin(ye)
-      function adjustScrollWhenAboveVisible(e, t, r) {
-        heightAtLine(t) < ((e.curOp && e.curOp.scrollTop) || e.doc.scrollTop) &&
-          addToScrollTop(e, r)
-      }
-      var be = 0,
+        eventMixin(be)
+      var xe = 0,
         Ce = function(e, t) {
-          ;(this.lines = []), (this.type = t), (this.doc = e), (this.id = ++be)
+          ;(this.lines = []), (this.type = t), (this.doc = e), (this.id = ++xe)
         }
-      ;(Ce.prototype.clear = function() {
-        if (!this.explicitlyCleared) {
-          var e = this.doc.cm,
-            t = e && !e.curOp
-          if ((t && startOperation(e), hasHandler(this, "clear"))) {
-            var r = this.find()
-            r && signalLater(this, "clear", r.from, r.to)
-          }
-          for (var n = null, o = null, i = 0; i < this.lines.length; ++i) {
-            var s = this.lines[i],
-              a = getMarkedSpanFor(s.markedSpans, this)
-            e && !this.collapsed
-              ? regLineChange(e, lineNo(s), "text")
-              : e &&
-                (null != a.to && (o = lineNo(s)),
-                null != a.from && (n = lineNo(s))),
-              (s.markedSpans = removeMarkedSpan(s.markedSpans, a)),
-              null == a.from &&
-                this.collapsed &&
-                !lineIsHidden(this.doc, s) &&
-                e &&
-                updateLineHeight(s, textHeight(e.display))
-          }
-          if (e && this.collapsed && !e.options.lineWrapping)
-            for (var l = 0; l < this.lines.length; ++l) {
-              var c = visualLine(this.lines[l]),
-                u = lineLength(c)
-              u > e.display.maxLineLength &&
-                ((e.display.maxLine = c),
-                (e.display.maxLineLength = u),
-                (e.display.maxLineChanged = !0))
-            }
-          null != n && e && this.collapsed && regChange(e, n, o + 1),
-            (this.lines.length = 0),
-            (this.explicitlyCleared = !0),
-            this.atomic &&
-              this.doc.cantEdit &&
-              ((this.doc.cantEdit = !1), e && reCheckSelection(e.doc)),
-            e && signalLater(e, "markerCleared", e, this, n, o),
-            t && endOperation(e),
-            this.parent && this.parent.clear()
-        }
-      }),
-        (Ce.prototype.find = function(e, t) {
-          null == e && "bookmark" == this.type && (e = 1)
-          for (var r, n, o = 0; o < this.lines.length; ++o) {
-            var i = this.lines[o],
-              s = getMarkedSpanFor(i.markedSpans, this)
-            if (
-              null != s.from &&
-              ((r = Pos(t ? i : lineNo(i), s.from)), -1 == e)
-            )
-              return r
-            if (null != s.to && ((n = Pos(t ? i : lineNo(i), s.to)), 1 == e))
-              return n
-          }
-          return r && { from: r, to: n }
-        }),
-        (Ce.prototype.changed = function() {
-          var e = this,
-            t = this.find(-1, !0),
-            r = this,
-            n = this.doc.cm
-          t &&
-            n &&
-            runInOp(n, function() {
-              var o = t.line,
-                i = lineNo(t.line),
-                s = findViewForLine(n, i)
-              if (
-                (s &&
-                  (clearLineMeasurementCacheFor(s),
-                  (n.curOp.selectionChanged = n.curOp.forceUpdate = !0)),
-                (n.curOp.updateMaxLine = !0),
-                !lineIsHidden(r.doc, o) && null != r.height)
-              ) {
-                var a = r.height
-                r.height = null
-                var l = widgetHeight(r) - a
-                l && updateLineHeight(o, o.height + l)
-              }
-              signalLater(n, "markerChanged", n, e)
-            })
-        }),
-        (Ce.prototype.attachLine = function(e) {
-          if (!this.lines.length && this.doc.cm) {
-            var t = this.doc.cm.curOp
-            ;(t.maybeHiddenMarkers &&
-              -1 != indexOf(t.maybeHiddenMarkers, this)) ||
-              (t.maybeUnhiddenMarkers || (t.maybeUnhiddenMarkers = [])).push(
-                this
-              )
-          }
-          this.lines.push(e)
-        }),
-        (Ce.prototype.detachLine = function(e) {
-          if (
-            (this.lines.splice(indexOf(this.lines, e), 1),
-            !this.lines.length && this.doc.cm)
-          ) {
-            var t = this.doc.cm.curOp
-            ;(t.maybeHiddenMarkers || (t.maybeHiddenMarkers = [])).push(this)
-          }
-        }),
-        eventMixin(Ce)
       function markText(e, t, r, n, o) {
         if (n && n.shared)
           return (function markTextShared(e, t, r, n, o) {
@@ -5191,7 +5131,7 @@ webpackJsonp([0], {
                   if (e.linked[l].isParent) return
                 s = lst(i)
               }),
-              new xe(i, s)
+              new we(i, s)
             )
           })(e, t, r, n, o)
         if (e.cm && !e.cm.curOp) return operation(e.cm, markText)(e, t, r, n, o)
@@ -5272,17 +5212,18 @@ webpackJsonp([0], {
             })(),
             (e.history.done.length || e.history.undone.length) &&
               e.clearHistory()),
-          i.collapsed && ((i.id = ++be), (i.atomic = !0)),
+          i.collapsed && ((i.id = ++xe), (i.atomic = !0)),
           c)
         ) {
           if ((a && (c.curOp.updateMaxLine = !0), i.collapsed))
             regChange(c, t.line, r.line + 1)
           else if (
             i.className ||
-            i.title ||
             i.startStyle ||
             i.endStyle ||
-            i.css
+            i.css ||
+            i.attributes ||
+            i.title
           )
             for (var u = t.line; u <= r.line; u++) regLineChange(c, u, "text")
           i.atomic && reCheckSelection(c.doc),
@@ -5290,21 +5231,116 @@ webpackJsonp([0], {
         }
         return i
       }
-      var xe = function(e, t) {
+      ;(Ce.prototype.clear = function() {
+        if (!this.explicitlyCleared) {
+          var e = this.doc.cm,
+            t = e && !e.curOp
+          if ((t && startOperation(e), hasHandler(this, "clear"))) {
+            var r = this.find()
+            r && signalLater(this, "clear", r.from, r.to)
+          }
+          for (var n = null, o = null, i = 0; i < this.lines.length; ++i) {
+            var s = this.lines[i],
+              a = getMarkedSpanFor(s.markedSpans, this)
+            e && !this.collapsed
+              ? regLineChange(e, lineNo(s), "text")
+              : e &&
+                (null != a.to && (o = lineNo(s)),
+                null != a.from && (n = lineNo(s))),
+              (s.markedSpans = removeMarkedSpan(s.markedSpans, a)),
+              null == a.from &&
+                this.collapsed &&
+                !lineIsHidden(this.doc, s) &&
+                e &&
+                updateLineHeight(s, textHeight(e.display))
+          }
+          if (e && this.collapsed && !e.options.lineWrapping)
+            for (var l = 0; l < this.lines.length; ++l) {
+              var c = visualLine(this.lines[l]),
+                u = lineLength(c)
+              u > e.display.maxLineLength &&
+                ((e.display.maxLine = c),
+                (e.display.maxLineLength = u),
+                (e.display.maxLineChanged = !0))
+            }
+          null != n && e && this.collapsed && regChange(e, n, o + 1),
+            (this.lines.length = 0),
+            (this.explicitlyCleared = !0),
+            this.atomic &&
+              this.doc.cantEdit &&
+              ((this.doc.cantEdit = !1), e && reCheckSelection(e.doc)),
+            e && signalLater(e, "markerCleared", e, this, n, o),
+            t && endOperation(e),
+            this.parent && this.parent.clear()
+        }
+      }),
+        (Ce.prototype.find = function(e, t) {
+          var r, n
+          null == e && "bookmark" == this.type && (e = 1)
+          for (var o = 0; o < this.lines.length; ++o) {
+            var i = this.lines[o],
+              s = getMarkedSpanFor(i.markedSpans, this)
+            if (
+              null != s.from &&
+              ((r = Pos(t ? i : lineNo(i), s.from)), -1 == e)
+            )
+              return r
+            if (null != s.to && ((n = Pos(t ? i : lineNo(i), s.to)), 1 == e))
+              return n
+          }
+          return r && { from: r, to: n }
+        }),
+        (Ce.prototype.changed = function() {
+          var e = this,
+            t = this.find(-1, !0),
+            r = this,
+            n = this.doc.cm
+          t &&
+            n &&
+            runInOp(n, function() {
+              var o = t.line,
+                i = lineNo(t.line),
+                s = findViewForLine(n, i)
+              if (
+                (s &&
+                  (clearLineMeasurementCacheFor(s),
+                  (n.curOp.selectionChanged = n.curOp.forceUpdate = !0)),
+                (n.curOp.updateMaxLine = !0),
+                !lineIsHidden(r.doc, o) && null != r.height)
+              ) {
+                var a = r.height
+                r.height = null
+                var l = widgetHeight(r) - a
+                l && updateLineHeight(o, o.height + l)
+              }
+              signalLater(n, "markerChanged", n, e)
+            })
+        }),
+        (Ce.prototype.attachLine = function(e) {
+          if (!this.lines.length && this.doc.cm) {
+            var t = this.doc.cm.curOp
+            ;(t.maybeHiddenMarkers &&
+              -1 != indexOf(t.maybeHiddenMarkers, this)) ||
+              (t.maybeUnhiddenMarkers || (t.maybeUnhiddenMarkers = [])).push(
+                this
+              )
+          }
+          this.lines.push(e)
+        }),
+        (Ce.prototype.detachLine = function(e) {
+          if (
+            (this.lines.splice(indexOf(this.lines, e), 1),
+            !this.lines.length && this.doc.cm)
+          ) {
+            var t = this.doc.cm.curOp
+            ;(t.maybeHiddenMarkers || (t.maybeHiddenMarkers = [])).push(this)
+          }
+        }),
+        eventMixin(Ce)
+      var we = function(e, t) {
         ;(this.markers = e), (this.primary = t)
         for (var r = 0; r < e.length; ++r) e[r].parent = this
       }
-      ;(xe.prototype.clear = function() {
-        if (!this.explicitlyCleared) {
-          this.explicitlyCleared = !0
-          for (var e = 0; e < this.markers.length; ++e) this.markers[e].clear()
-          signalLater(this, "clear")
-        }
-      }),
-        (xe.prototype.find = function(e, t) {
-          return this.primary.find(e, t)
-        }),
-        eventMixin(xe)
       function findSharedMarkers(e) {
         return e.findMarks(
           Pos(e.first, 0),
@@ -5334,11 +5370,22 @@ webpackJsonp([0], {
         )
           t(r)
       }
-      var we = 0,
-        Se = function(e, t, r, n, o) {
-          if (!(this instanceof Se)) return new Se(e, t, r, n, o)
+      ;(we.prototype.clear = function() {
+        if (!this.explicitlyCleared) {
+          this.explicitlyCleared = !0
+          for (var e = 0; e < this.markers.length; ++e) this.markers[e].clear()
+          signalLater(this, "clear")
+        }
+      }),
+        (we.prototype.find = function(e, t) {
+          return this.primary.find(e, t)
+        }),
+        eventMixin(we)
+      var Se = 0,
+        ke = function(e, t, r, n, o) {
+          if (!(this instanceof ke)) return new ke(e, t, r, n, o)
           null == r && (r = 0),
-            BranchChunk.call(this, [new LeafChunk([new re("", null)])]),
+            BranchChunk.call(this, [new LeafChunk([new ne("", null)])]),
             (this.first = r),
             (this.scrollTop = this.scrollLeft = 0),
             (this.cantEdit = !1),
@@ -5347,7 +5394,7 @@ webpackJsonp([0], {
           var i = Pos(r, 0)
           ;(this.sel = simpleSelection(i)),
             (this.history = new History(null)),
-            (this.id = ++we),
+            (this.id = ++Se),
             (this.modeOption = t),
             (this.lineSep = n),
             (this.direction = "rtl" == o ? "rtl" : "ltr"),
@@ -5356,8 +5403,8 @@ webpackJsonp([0], {
             updateDoc(this, { from: i, to: i, text: e }),
             setSelection(this, simpleSelection(i), A)
         }
-      ;(Se.prototype = createObj(BranchChunk.prototype, {
-        constructor: Se,
+      ;(ke.prototype = createObj(BranchChunk.prototype, {
+        constructor: ke,
         iter: function(e, t, r) {
           r
             ? this.iterN(e - this.first, t - e, r)
@@ -5466,18 +5513,18 @@ webpackJsonp([0], {
         setSelections: docMethodOp(function(e, t, r) {
           if (e.length) {
             for (var n = [], o = 0; o < e.length; o++)
-              n[o] = new ve(
+              n[o] = new ye(
                 clipPos(this, e[o].anchor),
                 clipPos(this, e[o].head)
               )
             null == t && (t = Math.min(e.length - 1, this.sel.primIndex)),
-              setSelection(this, normalizeSelection(n, t), r)
+              setSelection(this, normalizeSelection(this.cm, n, t), r)
           }
         }),
         addSelection: docMethodOp(function(e, t, r) {
           var n = this.sel.ranges.slice(0)
-          n.push(new ve(clipPos(this, e), clipPos(this, t || e))),
-            setSelection(this, normalizeSelection(n, n.length - 1), r)
+          n.push(new ye(clipPos(this, e), clipPos(this, t || e))),
+            setSelection(this, normalizeSelection(this.cm, n, n.length - 1), r)
         }),
         getSelection: function(e) {
           for (var t, r = this.sel.ranges, n = 0; n < r.length; n++) {
@@ -5523,10 +5570,10 @@ webpackJsonp([0], {
                     if (((o = a.to), (i = c), "around" == r)) {
                       var u = e.sel.ranges[s],
                         d = cmp(u.head, u.anchor) < 0
-                      n[s] = new ve(d ? c : l, d ? l : c)
-                    } else n[s] = new ve(l, l)
+                      n[s] = new ye(d ? c : l, d ? l : c)
+                    } else n[s] = new ye(l, l)
                   }
-                  return new me(n, e.sel.primIndex)
+                  return new ve(n, e.sel.primIndex)
                 })(this, n, t),
               l = n.length - 1;
             l >= 0;
@@ -5679,7 +5726,7 @@ webpackJsonp([0], {
         }),
         addLineWidget: docMethodOp(function(e, t, r) {
           return (function addLineWidget(e, t, r, n) {
-            var o = new ye(e, r, n),
+            var o = new be(e, r, n),
               i = e.cm
             return (
               i && o.noHScroll && (i.display.alignWidgets = !0),
@@ -5703,13 +5750,14 @@ webpackJsonp([0], {
                 }
                 return !0
               }),
-              signalLater(
-                i,
-                "lineWidgetAdded",
-                i,
-                o,
-                "number" == typeof t ? t : lineNo(t)
-              ),
+              i &&
+                signalLater(
+                  i,
+                  "lineWidgetAdded",
+                  i,
+                  o,
+                  "number" == typeof t ? t : lineNo(t)
+                ),
               o
             )
           })(this, e, t, r)
@@ -5806,7 +5854,7 @@ webpackJsonp([0], {
           )
         },
         copy: function(e) {
-          var t = new Se(
+          var t = new ke(
             getLines(this, this.first, this.first + this.size),
             this.modeOption,
             this.first,
@@ -5830,7 +5878,7 @@ webpackJsonp([0], {
             r = this.first + this.size
           null != e.from && e.from > t && (t = e.from),
             null != e.to && e.to < r && (r = e.to)
-          var n = new Se(
+          var n = new ke(
             getLines(this, t, r),
             e.mode || this.modeOption,
             t,
@@ -5862,7 +5910,7 @@ webpackJsonp([0], {
           )
         },
         unlinkDoc: function(e) {
-          if ((e instanceof CodeMirror$1 && (e = e.doc), this.linked))
+          if ((e instanceof CodeMirror && (e = e.doc), this.linked))
             for (var t = 0; t < this.linked.length; ++t) {
               if (this.linked[t].doc == e) {
                 this.linked.splice(t, 1),
@@ -5895,7 +5943,7 @@ webpackJsonp([0], {
           return this.cm
         },
         splitLines: function(e) {
-          return this.lineSep ? e.split(this.lineSep) : G(e)
+          return this.lineSep ? e.split(this.lineSep) : K(e)
         },
         lineSeparator: function() {
           return this.lineSep || "\n"
@@ -5915,15 +5963,15 @@ webpackJsonp([0], {
                 })(this.cm))
         }),
       })),
-        (Se.prototype.eachLine = Se.prototype.iter)
-      var ke = 0
+        (ke.prototype.eachLine = ke.prototype.iter)
+      var Le = 0
       function onDrop(e) {
         var t = this
         if (
           (clearDragCursor(t),
           !signalDOMEvent(t, e) && !eventInWidget(t.display, e))
         ) {
-          e_preventDefault(e), s && (ke = +new Date())
+          e_preventDefault(e), s && (Le = +new Date())
           var r = posFromMouse(t, e, !0),
             n = e.dataTransfer.files
           if (r && !t.isReadOnly())
@@ -6002,19 +6050,26 @@ webpackJsonp([0], {
           (e.display.dragCursor = null))
       }
       function forEachCodeMirror(e) {
-        if (document.getElementsByClassName)
+        if (document.getElementsByClassName) {
           for (
-            var t = document.getElementsByClassName("CodeMirror"), r = 0;
-            r < t.length;
-            r++
+            var t = document.getElementsByClassName("CodeMirror"),
+              r = [],
+              n = 0;
+            n < t.length;
+            n++
           ) {
-            var n = t[r].CodeMirror
-            n && e(n)
+            var o = t[n].CodeMirror
+            o && r.push(o)
           }
+          r.length &&
+            r[0].operation(function() {
+              for (var t = 0; t < r.length; t++) e(r[t])
+            })
+        }
       }
-      var Le = !1
+      var Me = !1
       function ensureGlobalHandlers() {
-        Le ||
+        Me ||
           (!(function registerGlobalHandlers() {
             var e
             j(window, "resize", function() {
@@ -6027,19 +6082,17 @@ webpackJsonp([0], {
                 return forEachCodeMirror(onBlur)
               })
           })(),
-          (Le = !0))
+          (Me = !0))
       }
       function onResize(e) {
         var t = e.display
-        ;(t.lastWrapHeight == t.wrapper.clientHeight &&
-          t.lastWrapWidth == t.wrapper.clientWidth) ||
-          ((t.cachedCharWidth = t.cachedTextHeight = t.cachedPaddingH = null),
+        ;(t.cachedCharWidth = t.cachedTextHeight = t.cachedPaddingH = null),
           (t.scrollbarsClipped = !1),
-          e.setSize())
+          e.setSize()
       }
       for (
-        var Me = {
-            3: "Enter",
+        var Te = {
+            3: "Pause",
             8: "Backspace",
             9: "Tab",
             13: "Enter",
@@ -6072,6 +6125,7 @@ webpackJsonp([0], {
             110: ".",
             111: "/",
             127: "Delete",
+            145: "ScrollLock",
             173: "-",
             186: ";",
             187: "=",
@@ -6095,133 +6149,37 @@ webpackJsonp([0], {
             63277: "PageDown",
             63302: "Insert",
           },
-          Te = 0;
-        Te < 10;
-        Te++
+          Oe = 0;
+        Oe < 10;
+        Oe++
       )
-        Me[Te + 48] = Me[Te + 96] = String(Te)
-      for (var Oe = 65; Oe <= 90; Oe++) Me[Oe] = String.fromCharCode(Oe)
-      for (var Pe = 1; Pe <= 12; Pe++) Me[Pe + 111] = Me[Pe + 63235] = "F" + Pe
-      var Ae = {}
-      ;(Ae.basic = {
-        Left: "goCharLeft",
-        Right: "goCharRight",
-        Up: "goLineUp",
-        Down: "goLineDown",
-        End: "goLineEnd",
-        Home: "goLineStartSmart",
-        PageUp: "goPageUp",
-        PageDown: "goPageDown",
-        Delete: "delCharAfter",
-        Backspace: "delCharBefore",
-        "Shift-Backspace": "delCharBefore",
-        Tab: "defaultTab",
-        "Shift-Tab": "indentAuto",
-        Enter: "newlineAndIndent",
-        Insert: "toggleOverwrite",
-        Esc: "singleSelection",
-      }),
-        (Ae.pcDefault = {
-          "Ctrl-A": "selectAll",
-          "Ctrl-D": "deleteLine",
-          "Ctrl-Z": "undo",
-          "Shift-Ctrl-Z": "redo",
-          "Ctrl-Y": "redo",
-          "Ctrl-Home": "goDocStart",
-          "Ctrl-End": "goDocEnd",
-          "Ctrl-Up": "goLineUp",
-          "Ctrl-Down": "goLineDown",
-          "Ctrl-Left": "goGroupLeft",
-          "Ctrl-Right": "goGroupRight",
-          "Alt-Left": "goLineStart",
-          "Alt-Right": "goLineEnd",
-          "Ctrl-Backspace": "delGroupBefore",
-          "Ctrl-Delete": "delGroupAfter",
-          "Ctrl-S": "save",
-          "Ctrl-F": "find",
-          "Ctrl-G": "findNext",
-          "Shift-Ctrl-G": "findPrev",
-          "Shift-Ctrl-F": "replace",
-          "Shift-Ctrl-R": "replaceAll",
-          "Ctrl-[": "indentLess",
-          "Ctrl-]": "indentMore",
-          "Ctrl-U": "undoSelection",
-          "Shift-Ctrl-U": "redoSelection",
-          "Alt-U": "redoSelection",
-          fallthrough: "basic",
-        }),
-        (Ae.emacsy = {
-          "Ctrl-F": "goCharRight",
-          "Ctrl-B": "goCharLeft",
-          "Ctrl-P": "goLineUp",
-          "Ctrl-N": "goLineDown",
-          "Alt-F": "goWordRight",
-          "Alt-B": "goWordLeft",
-          "Ctrl-A": "goLineStart",
-          "Ctrl-E": "goLineEnd",
-          "Ctrl-V": "goPageDown",
-          "Shift-Ctrl-V": "goPageUp",
-          "Ctrl-D": "delCharAfter",
-          "Ctrl-H": "delCharBefore",
-          "Alt-D": "delWordAfter",
-          "Alt-Backspace": "delWordBefore",
-          "Ctrl-K": "killLine",
-          "Ctrl-T": "transposeChars",
-          "Ctrl-O": "openLine",
-        }),
-        (Ae.macDefault = {
-          "Cmd-A": "selectAll",
-          "Cmd-D": "deleteLine",
-          "Cmd-Z": "undo",
-          "Shift-Cmd-Z": "redo",
-          "Cmd-Y": "redo",
-          "Cmd-Home": "goDocStart",
-          "Cmd-Up": "goDocStart",
-          "Cmd-End": "goDocEnd",
-          "Cmd-Down": "goDocEnd",
-          "Alt-Left": "goGroupLeft",
-          "Alt-Right": "goGroupRight",
-          "Cmd-Left": "goLineLeft",
-          "Cmd-Right": "goLineRight",
-          "Alt-Backspace": "delGroupBefore",
-          "Ctrl-Alt-Backspace": "delGroupAfter",
-          "Alt-Delete": "delGroupAfter",
-          "Cmd-S": "save",
-          "Cmd-F": "find",
-          "Cmd-G": "findNext",
-          "Shift-Cmd-G": "findPrev",
-          "Cmd-Alt-F": "replace",
-          "Shift-Cmd-Alt-F": "replaceAll",
-          "Cmd-[": "indentLess",
-          "Cmd-]": "indentMore",
-          "Cmd-Backspace": "delWrappedLineLeft",
-          "Cmd-Delete": "delWrappedLineRight",
-          "Cmd-U": "undoSelection",
-          "Shift-Cmd-U": "redoSelection",
-          "Ctrl-Up": "goDocStart",
-          "Ctrl-Down": "goDocEnd",
-          fallthrough: ["basic", "emacsy"],
-        }),
-        (Ae.default = y ? Ae.macDefault : Ae.pcDefault)
+        Te[Oe + 48] = Te[Oe + 96] = String(Oe)
+      for (var Pe = 65; Pe <= 90; Pe++) Te[Pe] = String.fromCharCode(Pe)
+      for (var Ae = 1; Ae <= 12; Ae++) Te[Ae + 111] = Te[Ae + 63235] = "F" + Ae
+      var Ne = {}
       function normalizeKeyName(e) {
-        var t = e.split(/-(?!$)/)
-        e = t[t.length - 1]
-        for (var r, n, o, i, s = 0; s < t.length - 1; s++) {
-          var a = t[s]
-          if (/^(cmd|meta|m)$/i.test(a)) i = !0
-          else if (/^a(lt)?$/i.test(a)) r = !0
-          else if (/^(c|ctrl|control)$/i.test(a)) n = !0
+        var t,
+          r,
+          n,
+          o,
+          i = e.split(/-(?!$)/)
+        e = i[i.length - 1]
+        for (var s = 0; s < i.length - 1; s++) {
+          var a = i[s]
+          if (/^(cmd|meta|m)$/i.test(a)) o = !0
+          else if (/^a(lt)?$/i.test(a)) t = !0
+          else if (/^(c|ctrl|control)$/i.test(a)) r = !0
           else {
             if (!/^s(hift)?$/i.test(a))
               throw new Error("Unrecognized modifier name: " + a)
-            o = !0
+            n = !0
           }
         }
         return (
-          r && (e = "Alt-" + e),
-          n && (e = "Ctrl-" + e),
-          i && (e = "Cmd-" + e),
-          o && (e = "Shift-" + e),
+          t && (e = "Alt-" + e),
+          r && (e = "Ctrl-" + e),
+          o && (e = "Cmd-" + e),
+          n && (e = "Shift-" + e),
           e
         )
       }
@@ -6270,7 +6228,7 @@ webpackJsonp([0], {
         }
       }
       function isModifierKey(e) {
-        var t = "string" == typeof e ? e : Me[e.keyCode]
+        var t = "string" == typeof e ? e : Te[e.keyCode]
         return "Ctrl" == t || "Alt" == t || "Shift" == t || "Mod" == t
       }
       function addModifierNames(e, t, r) {
@@ -6285,11 +6243,15 @@ webpackJsonp([0], {
       }
       function keyName(e, t) {
         if (d && 34 == e.keyCode && e.char) return !1
-        var r = Me[e.keyCode]
-        return null != r && !e.altGraphKey && addModifierNames(r, e, t)
+        var r = Te[e.keyCode]
+        return (
+          null != r &&
+          !e.altGraphKey &&
+          (3 == e.keyCode && e.code && (r = e.code), addModifierNames(r, e, t))
+        )
       }
       function getKeyMap(e) {
-        return "string" == typeof e ? Ae[e] : e
+        return "string" == typeof e ? Ne[e] : e
       }
       function deleteNearSelection(e, t) {
         for (var r = e.doc.sel.ranges, n = [], o = 0; o < r.length; o++) {
@@ -6341,7 +6303,107 @@ webpackJsonp([0], {
         }
         return new Pos(n, o < 0 ? r.text.length : 0, o < 0 ? "before" : "after")
       }
-      var Ne = {
+      ;(Ne.basic = {
+        Left: "goCharLeft",
+        Right: "goCharRight",
+        Up: "goLineUp",
+        Down: "goLineDown",
+        End: "goLineEnd",
+        Home: "goLineStartSmart",
+        PageUp: "goPageUp",
+        PageDown: "goPageDown",
+        Delete: "delCharAfter",
+        Backspace: "delCharBefore",
+        "Shift-Backspace": "delCharBefore",
+        Tab: "defaultTab",
+        "Shift-Tab": "indentAuto",
+        Enter: "newlineAndIndent",
+        Insert: "toggleOverwrite",
+        Esc: "singleSelection",
+      }),
+        (Ne.pcDefault = {
+          "Ctrl-A": "selectAll",
+          "Ctrl-D": "deleteLine",
+          "Ctrl-Z": "undo",
+          "Shift-Ctrl-Z": "redo",
+          "Ctrl-Y": "redo",
+          "Ctrl-Home": "goDocStart",
+          "Ctrl-End": "goDocEnd",
+          "Ctrl-Up": "goLineUp",
+          "Ctrl-Down": "goLineDown",
+          "Ctrl-Left": "goGroupLeft",
+          "Ctrl-Right": "goGroupRight",
+          "Alt-Left": "goLineStart",
+          "Alt-Right": "goLineEnd",
+          "Ctrl-Backspace": "delGroupBefore",
+          "Ctrl-Delete": "delGroupAfter",
+          "Ctrl-S": "save",
+          "Ctrl-F": "find",
+          "Ctrl-G": "findNext",
+          "Shift-Ctrl-G": "findPrev",
+          "Shift-Ctrl-F": "replace",
+          "Shift-Ctrl-R": "replaceAll",
+          "Ctrl-[": "indentLess",
+          "Ctrl-]": "indentMore",
+          "Ctrl-U": "undoSelection",
+          "Shift-Ctrl-U": "redoSelection",
+          "Alt-U": "redoSelection",
+          fallthrough: "basic",
+        }),
+        (Ne.emacsy = {
+          "Ctrl-F": "goCharRight",
+          "Ctrl-B": "goCharLeft",
+          "Ctrl-P": "goLineUp",
+          "Ctrl-N": "goLineDown",
+          "Alt-F": "goWordRight",
+          "Alt-B": "goWordLeft",
+          "Ctrl-A": "goLineStart",
+          "Ctrl-E": "goLineEnd",
+          "Ctrl-V": "goPageDown",
+          "Shift-Ctrl-V": "goPageUp",
+          "Ctrl-D": "delCharAfter",
+          "Ctrl-H": "delCharBefore",
+          "Alt-D": "delWordAfter",
+          "Alt-Backspace": "delWordBefore",
+          "Ctrl-K": "killLine",
+          "Ctrl-T": "transposeChars",
+          "Ctrl-O": "openLine",
+        }),
+        (Ne.macDefault = {
+          "Cmd-A": "selectAll",
+          "Cmd-D": "deleteLine",
+          "Cmd-Z": "undo",
+          "Shift-Cmd-Z": "redo",
+          "Cmd-Y": "redo",
+          "Cmd-Home": "goDocStart",
+          "Cmd-Up": "goDocStart",
+          "Cmd-End": "goDocEnd",
+          "Cmd-Down": "goDocEnd",
+          "Alt-Left": "goGroupLeft",
+          "Alt-Right": "goGroupRight",
+          "Cmd-Left": "goLineLeft",
+          "Cmd-Right": "goLineRight",
+          "Alt-Backspace": "delGroupBefore",
+          "Ctrl-Alt-Backspace": "delGroupAfter",
+          "Alt-Delete": "delGroupAfter",
+          "Cmd-S": "save",
+          "Cmd-F": "find",
+          "Cmd-G": "findNext",
+          "Shift-Cmd-G": "findPrev",
+          "Cmd-Alt-F": "replace",
+          "Shift-Cmd-Alt-F": "replaceAll",
+          "Cmd-[": "indentLess",
+          "Cmd-]": "indentMore",
+          "Cmd-Backspace": "delWrappedLineLeft",
+          "Cmd-Delete": "delWrappedLineRight",
+          "Cmd-U": "undoSelection",
+          "Shift-Cmd-U": "redoSelection",
+          "Ctrl-Up": "goDocStart",
+          "Ctrl-Down": "goDocEnd",
+          fallthrough: ["basic", "emacsy"],
+        }),
+        (Ne.default = y ? Ne.macDefault : Ne.pcDefault)
+      var De = {
         selectAll: selectAll,
         singleSelection: function(e) {
           return e.setSelection(e.getCursor("anchor"), e.getCursor("head"), A)
@@ -6578,7 +6640,7 @@ webpackJsonp([0], {
                         "+transpose"
                       ))
                   }
-                r.push(new ve(o, o))
+                r.push(new ye(o, o))
               }
             e.setSelections(r)
           })
@@ -6622,7 +6684,7 @@ webpackJsonp([0], {
         return r
       }
       function doHandleBinding(e, t, r) {
-        if ("string" == typeof t && !(t = Ne[t])) return !1
+        if ("string" == typeof t && !(t = De[t])) return !1
         e.display.input.ensurePolled()
         var n = e.display.shift,
           o = !1
@@ -6635,7 +6697,7 @@ webpackJsonp([0], {
         }
         return o
       }
-      var De = new T()
+      var He = new T()
       function dispatchKey(e, t, r, n) {
         var o = e.state.keySeq
         if (o) {
@@ -6643,7 +6705,7 @@ webpackJsonp([0], {
           if (
             (/\'$/.test(t)
               ? (e.state.keySeq = null)
-              : De.set(50, function() {
+              : He.set(50, function() {
                   e.state.keySeq == o &&
                     ((e.state.keySeq = null), e.display.input.reset())
                 }),
@@ -6689,107 +6751,102 @@ webpackJsonp([0], {
               }))
         )
       }
-      var He = null
+      var We = null
       function onKeyDown(e) {
-        if (((this.curOp.focus = activeElt()), !signalDOMEvent(this, e))) {
+        var t = this
+        if (((t.curOp.focus = activeElt()), !signalDOMEvent(t, e))) {
           s && a < 11 && 27 == e.keyCode && (e.returnValue = !1)
-          var t = e.keyCode
-          this.display.shift = 16 == t || e.shiftKey
-          var r = handleKeyBinding(this, e)
+          var r = e.keyCode
+          t.display.shift = 16 == r || e.shiftKey
+          var n = handleKeyBinding(t, e)
           d &&
-            ((He = r ? t : null),
-            !r &&
-              88 == t &&
-              !$ &&
+            ((We = n ? r : null),
+            !n &&
+              88 == r &&
+              !X &&
               (y ? e.metaKey : e.ctrlKey) &&
-              this.replaceSelection("", null, "cut")),
-            18 != t ||
-              /\bCodeMirror-crosshair\b/.test(this.display.lineDiv.className) ||
+              t.replaceSelection("", null, "cut")),
+            18 != r ||
+              /\bCodeMirror-crosshair\b/.test(t.display.lineDiv.className) ||
               (function showCrossHair(e) {
                 var t = e.display.lineDiv
-                addClass(t, "CodeMirror-crosshair")
                 function up(e) {
                   ;(18 != e.keyCode && e.altKey) ||
-                    (k(t, "CodeMirror-crosshair"),
+                    (L(t, "CodeMirror-crosshair"),
                     off(document, "keyup", up),
                     off(document, "mouseover", up))
                 }
-                j(document, "keyup", up), j(document, "mouseover", up)
-              })(this)
+                addClass(t, "CodeMirror-crosshair"),
+                  j(document, "keyup", up),
+                  j(document, "mouseover", up)
+              })(t)
         }
       }
       function onKeyUp(e) {
         16 == e.keyCode && (this.doc.sel.shift = !1), signalDOMEvent(this, e)
       }
       function onKeyPress(e) {
+        var t = this
         if (
           !(
-            eventInWidget(this.display, e) ||
-            signalDOMEvent(this, e) ||
+            eventInWidget(t.display, e) ||
+            signalDOMEvent(t, e) ||
             (e.ctrlKey && !e.altKey) ||
             (y && e.metaKey)
           )
         ) {
-          var t = e.keyCode,
-            r = e.charCode
-          if (d && t == He) return (He = null), void e_preventDefault(e)
-          if (
-            !d ||
-            (e.which && !(e.which < 10)) ||
-            !handleKeyBinding(this, e)
-          ) {
-            var n = String.fromCharCode(null == r ? t : r)
-            "\b" != n &&
+          var r = e.keyCode,
+            n = e.charCode
+          if (d && r == We) return (We = null), void e_preventDefault(e)
+          if (!d || (e.which && !(e.which < 10)) || !handleKeyBinding(t, e)) {
+            var o = String.fromCharCode(null == n ? r : n)
+            "\b" != o &&
               ((function handleCharBinding(e, t, r) {
                 return dispatchKey(e, "'" + r + "'", t, function(t) {
                   return doHandleBinding(e, t, !0)
                 })
-              })(this, e, n) ||
-                this.display.input.onKeyPress(e))
+              })(t, e, o) ||
+                t.display.input.onKeyPress(e))
           }
         }
       }
-      var We = function(e, t, r) {
-        ;(this.time = e), (this.pos = t), (this.button = r)
-      }
-      We.prototype.compare = function(e, t, r) {
-        return this.time + 400 > e && 0 == cmp(t, this.pos) && r == this.button
-      }
-      var Ee, Ie
+      var Ee,
+        Ie,
+        Fe = function(e, t, r) {
+          ;(this.time = e), (this.pos = t), (this.button = r)
+        }
       function onMouseDown(e) {
-        var t = this.display
+        var t = this,
+          r = t.display
         if (
-          !(
-            signalDOMEvent(this, e) ||
-            (t.activeTouch && t.input.supportsTouch())
-          )
+          !(signalDOMEvent(t, e) || (r.activeTouch && r.input.supportsTouch()))
         )
           if (
-            (t.input.ensurePolled(),
-            (t.shift = e.shiftKey),
-            eventInWidget(t, e))
+            (r.input.ensurePolled(),
+            (r.shift = e.shiftKey),
+            eventInWidget(r, e))
           )
             l ||
-              ((t.scroller.draggable = !1),
+              ((r.scroller.draggable = !1),
               setTimeout(function() {
-                return (t.scroller.draggable = !0)
+                return (r.scroller.draggable = !0)
               }, 100))
-          else if (!clickInGutter(this, e)) {
-            var r = posFromMouse(this, e),
-              n = e_button(e),
-              o = r
+          else if (!clickInGutter(t, e)) {
+            var n = posFromMouse(t, e),
+              o = e_button(e),
+              i = n
                 ? (function clickRepeat(e, t) {
                     var r = +new Date()
                     return Ie && Ie.compare(r, e, t)
                       ? ((Ee = Ie = null), "triple")
                       : Ee && Ee.compare(r, e, t)
-                        ? ((Ie = new We(r, e, t)), (Ee = null), "double")
-                        : ((Ee = new We(r, e, t)), (Ie = null), "single")
-                  })(r, n)
+                        ? ((Ie = new Fe(r, e, t)), (Ee = null), "double")
+                        : ((Ee = new Fe(r, e, t)), (Ie = null), "single")
+                  })(n, o)
                 : "single"
             window.focus(),
-              1 == n && this.state.selectingText && this.state.selectingText(e),
-              (r &&
+              1 == o && t.state.selectingText && t.state.selectingText(e),
+              (n &&
                 (function handleMappedButton(e, t, r, n, o) {
                   var i = "Click"
                   "double" == n
@@ -6803,7 +6860,7 @@ webpackJsonp([0], {
                     ),
                     o,
                     function(t) {
-                      if (("string" == typeof t && (t = Ne[t]), !t)) return !1
+                      if (("string" == typeof t && (t = De[t]), !t)) return !1
                       var n = !1
                       try {
                         e.isReadOnly() && (e.state.suppressEdits = !0),
@@ -6814,9 +6871,9 @@ webpackJsonp([0], {
                       return n
                     }
                   )
-                })(this, n, r, o, e)) ||
-                (1 == n
-                  ? r
+                })(t, o, n, i, e)) ||
+                (1 == o
+                  ? n
                     ? (function leftButtonDown(e, t, r, n) {
                         s
                           ? setTimeout(bind(ensureFocus, e), 0)
@@ -6843,7 +6900,7 @@ webpackJsonp([0], {
                           })(e, r, n),
                           c = e.doc.sel
                         e.options.dragDrop &&
-                        _ &&
+                        U &&
                         !e.isReadOnly() &&
                         "single" == r &&
                         (o = c.contains(t)) > -1 &&
@@ -6855,8 +6912,12 @@ webpackJsonp([0], {
                                 c = operation(e, function(t) {
                                   l && (o.scroller.draggable = !1),
                                     (e.state.draggingText = !1),
-                                    off(document, "mouseup", c),
-                                    off(document, "mousemove", u),
+                                    off(o.wrapper.ownerDocument, "mouseup", c),
+                                    off(
+                                      o.wrapper.ownerDocument,
+                                      "mousemove",
+                                      u
+                                    ),
                                     off(o.scroller, "dragstart", d),
                                     off(o.scroller, "drop", c),
                                     i ||
@@ -6871,7 +6932,7 @@ webpackJsonp([0], {
                                         ),
                                       l || (s && 9 == a)
                                         ? setTimeout(function() {
-                                            document.body.focus(),
+                                            o.wrapper.ownerDocument.body.focus(),
                                               o.input.focus()
                                           }, 20)
                                         : o.input.focus())
@@ -6890,8 +6951,8 @@ webpackJsonp([0], {
                               ;(e.state.draggingText = c),
                                 (c.copy = !n.moveOnDrag),
                                 o.scroller.dragDrop && o.scroller.dragDrop()
-                              j(document, "mouseup", c),
-                                j(document, "mousemove", u),
+                              j(o.wrapper.ownerDocument, "mouseup", c),
+                                j(o.wrapper.ownerDocument, "mousemove", u),
                                 j(o.scroller, "dragstart", d),
                                 j(o.scroller, "drop", c),
                                 delayBlurEvent(e),
@@ -6909,10 +6970,10 @@ webpackJsonp([0], {
                                 c = l.ranges
                               n.addNew && !n.extend
                                 ? ((a = i.sel.contains(r)),
-                                  (s = a > -1 ? c[a] : new ve(r, r)))
+                                  (s = a > -1 ? c[a] : new ye(r, r)))
                                 : ((s = i.sel.primary()), (a = i.sel.primIndex))
                               if ("rectangle" == n.unit)
-                                n.addNew || (s = new ve(r, r)),
+                                n.addNew || (s = new ye(r, r)),
                                   (r = posFromMouse(e, t, !0, !0)),
                                   (a = -1)
                               else {
@@ -6926,7 +6987,7 @@ webpackJsonp([0], {
                                   ? ((a = c.length),
                                     setSelection(
                                       i,
-                                      normalizeSelection(c.concat([s]), a),
+                                      normalizeSelection(e, c.concat([s]), a),
                                       { scroll: !1, origin: "*mouse" }
                                     ))
                                   : c.length > 1 &&
@@ -6936,6 +6997,7 @@ webpackJsonp([0], {
                                     ? (setSelection(
                                         i,
                                         normalizeSelection(
+                                          e,
                                           c.slice(0, a).concat(c.slice(a + 1)),
                                           0
                                         ),
@@ -6944,7 +7006,7 @@ webpackJsonp([0], {
                                       (l = i.sel))
                                     : replaceOneSelection(i, a, s, N)
                                 : ((a = 0),
-                                  setSelection(i, new me([s], 0), N),
+                                  setSelection(i, new ve([s], 0), N),
                                   (l = i.sel))
                               var d = r
                               function extendTo(t) {
@@ -6976,19 +7038,20 @@ webpackJsonp([0], {
                                       var v = getLine(i, g).text,
                                         y = findColumn(v, h, c)
                                       h == f
-                                        ? o.push(new ve(Pos(g, y), Pos(g, y)))
+                                        ? o.push(new ye(Pos(g, y), Pos(g, y)))
                                         : v.length > y &&
                                           o.push(
-                                            new ve(
+                                            new ye(
                                               Pos(g, y),
                                               Pos(g, findColumn(v, f, c))
                                             )
                                           )
                                     }
-                                    o.length || o.push(new ve(r, r)),
+                                    o.length || o.push(new ye(r, r)),
                                       setSelection(
                                         i,
                                         normalizeSelection(
+                                          e,
                                           l.ranges.slice(0, a).concat(o),
                                           a
                                         ),
@@ -6997,14 +7060,14 @@ webpackJsonp([0], {
                                       e.scrollIntoView(t)
                                   } else {
                                     var b,
-                                      C = s,
-                                      x = rangeForUnit(e, t, n.unit),
-                                      w = C.anchor
-                                    cmp(x.anchor, w) > 0
-                                      ? ((b = x.head),
-                                        (w = minPos(C.from(), x.anchor)))
-                                      : ((b = x.anchor),
-                                        (w = maxPos(C.to(), x.head)))
+                                      x = s,
+                                      C = rangeForUnit(e, t, n.unit),
+                                      w = x.anchor
+                                    cmp(C.anchor, w) > 0
+                                      ? ((b = C.head),
+                                        (w = minPos(x.from(), C.anchor)))
+                                      : ((b = C.anchor),
+                                        (w = maxPos(x.to(), C.head)))
                                     var S = l.ranges.slice(0)
                                     ;(S[a] = (function bidiSimplify(e, t) {
                                       var r = t.anchor,
@@ -7021,15 +7084,15 @@ webpackJsonp([0], {
                                         a = i[s]
                                       if (a.from != r.ch && a.to != r.ch)
                                         return t
-                                      var l =
-                                        s +
-                                        ((a.from == r.ch) == (1 != a.level)
-                                          ? 0
-                                          : 1)
-                                      if (0 == l || l == i.length) return t
-                                      var c
-                                      if (n.line != r.line)
+                                      var l,
                                         c =
+                                          s +
+                                          ((a.from == r.ch) == (1 != a.level)
+                                            ? 0
+                                            : 1)
+                                      if (0 == c || c == i.length) return t
+                                      if (n.line != r.line)
+                                        l =
                                           (n.line - r.line) *
                                             ("ltr" == e.doc.direction
                                               ? 1
@@ -7045,19 +7108,19 @@ webpackJsonp([0], {
                                             u - s ||
                                             (n.ch - r.ch) *
                                               (1 == a.level ? -1 : 1)
-                                        c = u == l - 1 || u == l ? d < 0 : d > 0
+                                        l = u == c - 1 || u == c ? d < 0 : d > 0
                                       }
-                                      var p = i[l + (c ? -1 : 0)],
-                                        h = c == (1 == p.level),
+                                      var p = i[c + (l ? -1 : 0)],
+                                        h = l == (1 == p.level),
                                         f = h ? p.from : p.to,
                                         g = h ? "after" : "before"
                                       return r.ch == f && r.sticky == g
                                         ? t
-                                        : new ve(new Pos(r.line, f, g), n)
-                                    })(e, new ve(clipPos(i, w), b))),
+                                        : new ye(new Pos(r.line, f, g), n)
+                                    })(e, new ye(clipPos(i, w), b))),
                                       setSelection(
                                         i,
-                                        normalizeSelection(S, a),
+                                        normalizeSelection(e, S, a),
                                         N
                                       )
                                   }
@@ -7069,12 +7132,12 @@ webpackJsonp([0], {
                                   (h = 1 / 0),
                                   e_preventDefault(t),
                                   o.input.focus(),
-                                  off(document, "mousemove", f),
-                                  off(document, "mouseup", g),
+                                  off(o.wrapper.ownerDocument, "mousemove", f),
+                                  off(o.wrapper.ownerDocument, "mouseup", g),
                                   (i.history.lastSelOrigin = null)
                               }
                               var f = operation(e, function(t) {
-                                  e_button(t)
+                                  0 !== t.buttons && e_button(t)
                                     ? (function extend(t) {
                                         var r = ++h
                                         var s = posFromMouse(
@@ -7116,27 +7179,29 @@ webpackJsonp([0], {
                                 }),
                                 g = operation(e, done)
                               ;(e.state.selectingText = g),
-                                j(document, "mousemove", f),
-                                j(document, "mouseup", g)
+                                j(o.wrapper.ownerDocument, "mousemove", f),
+                                j(o.wrapper.ownerDocument, "mouseup", g)
                             })(e, n, t, i)
-                      })(this, r, o, e)
-                    : e_target(e) == t.scroller && e_preventDefault(e)
-                  : 2 == n
-                    ? (r && extendSelection(this.doc, r),
+                      })(t, n, i, e)
+                    : e_target(e) == r.scroller && e_preventDefault(e)
+                  : 2 == o
+                    ? (n && extendSelection(t.doc, n),
                       setTimeout(function() {
-                        return t.input.focus()
+                        return r.input.focus()
                       }, 20))
-                    : 3 == n &&
-                      (S ? onContextMenu(this, e) : delayBlurEvent(this)))
+                    : 3 == o &&
+                      (S
+                        ? t.display.input.onContextMenu(e)
+                        : delayBlurEvent(t)))
           }
       }
       function rangeForUnit(e, t, r) {
-        if ("char" == r) return new ve(t, t)
+        if ("char" == r) return new ye(t, t)
         if ("word" == r) return e.findWordAt(t)
         if ("line" == r)
-          return new ve(Pos(t.line, 0), clipPos(e.doc, Pos(t.line + 1, 0)))
+          return new ye(Pos(t.line, 0), clipPos(e.doc, Pos(t.line + 1, 0)))
         var n = r(e, t)
-        return new ve(n.from, n.to)
+        return new ye(n.from, n.to)
       }
       function gutterEvent(e, t, r, n) {
         var o, i
@@ -7156,12 +7221,11 @@ webpackJsonp([0], {
         i -= a.top - s.viewOffset
         for (var l = 0; l < e.options.gutters.length; ++l) {
           var c = s.gutters.childNodes[l]
-          if (c && c.getBoundingClientRect().right >= o) {
+          if (c && c.getBoundingClientRect().right >= o)
             return (
               signal(e, r, e, lineAtHeight(e.doc, i), e.options.gutters[l], t),
               e_defaultPrevented(t)
             )
-          }
         }
       }
       function clickInGutter(e, t) {
@@ -7174,6 +7238,7 @@ webpackJsonp([0], {
             return gutterEvent(e, t, "gutterContextMenu", !1)
           })(e, t) ||
           signalDOMEvent(e, t, "contextmenu") ||
+          S ||
           e.display.input.onContextMenu(t)
       }
       function themeChanged(e) {
@@ -7182,18 +7247,21 @@ webpackJsonp([0], {
           e.options.theme.replace(/(^|\s)\s*/g, " cm-s-")),
           clearCaches(e)
       }
-      var Fe = {
+      Fe.prototype.compare = function(e, t, r) {
+        return this.time + 400 > e && 0 == cmp(t, this.pos) && r == this.button
+      }
+      var Be = {
           toString: function() {
             return "CodeMirror.Init"
           },
         },
-        Be = {},
-        ze = {}
+        ze = {},
+        Re = {}
       function guttersChanged(e) {
         updateGutters(e), regChange(e), alignHorizontally(e)
       }
       function dragDropChanged(e, t, r) {
-        if (!t != !(r && r != Fe)) {
+        if (!t != !(r && r != Be)) {
           var n = e.display.dragFunctions,
             o = t ? j : off
           o(e.display.scroller, "dragstart", n.start),
@@ -7208,7 +7276,7 @@ webpackJsonp([0], {
           ? (addClass(e.display.wrapper, "CodeMirror-wrap"),
             (e.display.sizer.style.minWidth = ""),
             (e.display.sizerWidth = null))
-          : (k(e.display.wrapper, "CodeMirror-wrap"), findMaxLine(e)),
+          : (L(e.display.wrapper, "CodeMirror-wrap"), findMaxLine(e)),
           estimateLineHeights(e),
           regChange(e),
           clearCaches(e),
@@ -7216,337 +7284,331 @@ webpackJsonp([0], {
             return updateScrollbars(e)
           }, 100)
       }
-      function CodeMirror$1(e, t) {
+      function CodeMirror(e, t) {
         var n = this
-        if (!(this instanceof CodeMirror$1)) return new CodeMirror$1(e, t)
+        if (!(this instanceof CodeMirror)) return new CodeMirror(e, t)
         ;(this.options = t = t ? copyObj(t) : {}),
-          copyObj(Be, t, !1),
+          copyObj(ze, t, !1),
           setGuttersForLineNumbers(t)
         var o = t.value
-        "string" == typeof o &&
-          (o = new Se(o, t.mode, null, t.lineSeparator, t.direction)),
+        "string" == typeof o
+          ? (o = new ke(o, t.mode, null, t.lineSeparator, t.direction))
+          : t.mode && (o.modeOption = t.mode),
           (this.doc = o)
-        var i = new CodeMirror$1.inputStyles[t.inputStyle](this),
+        var i = new CodeMirror.inputStyles[t.inputStyle](this),
           c = (this.display = new function Display(e, t, n) {
+            var o = this
             ;(this.input = n),
-              (this.scrollbarFiller = elt(
+              (o.scrollbarFiller = elt(
                 "div",
                 null,
                 "CodeMirror-scrollbar-filler"
               )),
-              this.scrollbarFiller.setAttribute("cm-not-content", "true"),
-              (this.gutterFiller = elt(
-                "div",
-                null,
-                "CodeMirror-gutter-filler"
-              )),
-              this.gutterFiller.setAttribute("cm-not-content", "true"),
-              (this.lineDiv = eltP("div", null, "CodeMirror-code")),
-              (this.selectionDiv = elt(
+              o.scrollbarFiller.setAttribute("cm-not-content", "true"),
+              (o.gutterFiller = elt("div", null, "CodeMirror-gutter-filler")),
+              o.gutterFiller.setAttribute("cm-not-content", "true"),
+              (o.lineDiv = eltP("div", null, "CodeMirror-code")),
+              (o.selectionDiv = elt(
                 "div",
                 null,
                 null,
                 "position: relative; z-index: 1"
               )),
-              (this.cursorDiv = elt("div", null, "CodeMirror-cursors")),
-              (this.measure = elt("div", null, "CodeMirror-measure")),
-              (this.lineMeasure = elt("div", null, "CodeMirror-measure")),
-              (this.lineSpace = eltP(
+              (o.cursorDiv = elt("div", null, "CodeMirror-cursors")),
+              (o.measure = elt("div", null, "CodeMirror-measure")),
+              (o.lineMeasure = elt("div", null, "CodeMirror-measure")),
+              (o.lineSpace = eltP(
                 "div",
                 [
-                  this.measure,
-                  this.lineMeasure,
-                  this.selectionDiv,
-                  this.cursorDiv,
-                  this.lineDiv,
+                  o.measure,
+                  o.lineMeasure,
+                  o.selectionDiv,
+                  o.cursorDiv,
+                  o.lineDiv,
                 ],
                 null,
                 "position: relative; outline: none"
               ))
-            var o = eltP("div", [this.lineSpace], "CodeMirror-lines")
-            ;(this.mover = elt("div", [o], null, "position: relative")),
-              (this.sizer = elt("div", [this.mover], "CodeMirror-sizer")),
-              (this.sizerWidth = null),
-              (this.heightForcer = elt(
+            var i = eltP("div", [o.lineSpace], "CodeMirror-lines")
+            ;(o.mover = elt("div", [i], null, "position: relative")),
+              (o.sizer = elt("div", [o.mover], "CodeMirror-sizer")),
+              (o.sizerWidth = null),
+              (o.heightForcer = elt(
                 "div",
                 null,
                 null,
                 "position: absolute; height: " + O + "px; width: 1px;"
               )),
-              (this.gutters = elt("div", null, "CodeMirror-gutters")),
-              (this.lineGutter = null),
-              (this.scroller = elt(
+              (o.gutters = elt("div", null, "CodeMirror-gutters")),
+              (o.lineGutter = null),
+              (o.scroller = elt(
                 "div",
-                [this.sizer, this.heightForcer, this.gutters],
+                [o.sizer, o.heightForcer, o.gutters],
                 "CodeMirror-scroll"
               )),
-              this.scroller.setAttribute("tabIndex", "-1"),
-              (this.wrapper = elt(
+              o.scroller.setAttribute("tabIndex", "-1"),
+              (o.wrapper = elt(
                 "div",
-                [this.scrollbarFiller, this.gutterFiller, this.scroller],
+                [o.scrollbarFiller, o.gutterFiller, o.scroller],
                 "CodeMirror"
               )),
               s &&
                 a < 8 &&
-                ((this.gutters.style.zIndex = -1),
-                (this.scroller.style.paddingRight = 0)),
-              l || (r && v) || (this.scroller.draggable = !0),
-              e &&
-                (e.appendChild ? e.appendChild(this.wrapper) : e(this.wrapper)),
-              (this.viewFrom = this.viewTo = t.first),
-              (this.reportedViewFrom = this.reportedViewTo = t.first),
-              (this.view = []),
-              (this.renderedView = null),
-              (this.externalMeasured = null),
-              (this.viewOffset = 0),
-              (this.lastWrapHeight = this.lastWrapWidth = 0),
-              (this.updateLineNumbers = null),
-              (this.nativeBarWidth = this.barHeight = this.barWidth = 0),
-              (this.scrollbarsClipped = !1),
-              (this.lineNumWidth = this.lineNumInnerWidth = this.lineNumChars = null),
-              (this.alignWidgets = !1),
-              (this.cachedCharWidth = this.cachedTextHeight = this.cachedPaddingH = null),
-              (this.maxLine = null),
-              (this.maxLineLength = 0),
-              (this.maxLineChanged = !1),
-              (this.wheelDX = this.wheelDY = this.wheelStartX = this.wheelStartY = null),
-              (this.shift = !1),
-              (this.selForContextMenu = null),
-              (this.activeTouch = null),
-              n.init(this)
+                ((o.gutters.style.zIndex = -1),
+                (o.scroller.style.paddingRight = 0)),
+              l || (r && v) || (o.scroller.draggable = !0),
+              e && (e.appendChild ? e.appendChild(o.wrapper) : e(o.wrapper)),
+              (o.viewFrom = o.viewTo = t.first),
+              (o.reportedViewFrom = o.reportedViewTo = t.first),
+              (o.view = []),
+              (o.renderedView = null),
+              (o.externalMeasured = null),
+              (o.viewOffset = 0),
+              (o.lastWrapHeight = o.lastWrapWidth = 0),
+              (o.updateLineNumbers = null),
+              (o.nativeBarWidth = o.barHeight = o.barWidth = 0),
+              (o.scrollbarsClipped = !1),
+              (o.lineNumWidth = o.lineNumInnerWidth = o.lineNumChars = null),
+              (o.alignWidgets = !1),
+              (o.cachedCharWidth = o.cachedTextHeight = o.cachedPaddingH = null),
+              (o.maxLine = null),
+              (o.maxLineLength = 0),
+              (o.maxLineChanged = !1),
+              (o.wheelDX = o.wheelDY = o.wheelStartX = o.wheelStartY = null),
+              (o.shift = !1),
+              (o.selForContextMenu = null),
+              (o.activeTouch = null),
+              n.init(o)
           }(e, o, i))
-        ;(c.wrapper.CodeMirror = this),
-          updateGutters(this),
-          themeChanged(this),
-          t.lineWrapping &&
-            (this.display.wrapper.className += " CodeMirror-wrap"),
-          initScrollbars(this),
-          (this.state = {
-            keyMaps: [],
-            overlays: [],
-            modeGen: 0,
-            overwrite: !1,
-            delayingBlurEvent: !1,
-            focused: !1,
-            suppressEdits: !1,
-            pasteIncoming: !1,
-            cutIncoming: !1,
-            selectingText: !1,
-            draggingText: !1,
-            highlight: new T(),
-            keySeq: null,
-            specialChars: null,
-          }),
-          t.autofocus && !v && c.input.focus(),
-          s &&
-            a < 11 &&
-            setTimeout(function() {
-              return n.display.input.reset(!0)
-            }, 20),
-          (function registerEventHandlers(e) {
-            var t = e.display
-            j(t.scroller, "mousedown", operation(e, onMouseDown)),
-              j(
-                t.scroller,
-                "dblclick",
-                s && a < 11
-                  ? operation(e, function(t) {
-                      if (!signalDOMEvent(e, t)) {
-                        var r = posFromMouse(e, t)
-                        if (
-                          r &&
-                          !clickInGutter(e, t) &&
-                          !eventInWidget(e.display, t)
-                        ) {
-                          e_preventDefault(t)
-                          var n = e.findWordAt(r)
-                          extendSelection(e.doc, n.anchor, n.head)
-                        }
-                      }
-                    })
-                  : function(t) {
-                      return signalDOMEvent(e, t) || e_preventDefault(t)
-                    }
-              )
-            S ||
-              j(t.scroller, "contextmenu", function(t) {
-                return onContextMenu(e, t)
-              })
-            var r,
-              n = { end: 0 }
-            function finishTouch() {
-              t.activeTouch &&
-                ((r = setTimeout(function() {
-                  return (t.activeTouch = null)
-                }, 1e3)),
-                ((n = t.activeTouch).end = +new Date()))
-            }
-            function farAway(e, t) {
-              if (null == t.left) return !0
-              var r = t.left - e.left,
-                n = t.top - e.top
-              return r * r + n * n > 400
-            }
-            j(t.scroller, "touchstart", function(o) {
-              if (
-                !signalDOMEvent(e, o) &&
-                !(function isMouseLikeTouchEvent(e) {
-                  if (1 != e.touches.length) return !1
-                  var t = e.touches[0]
-                  return t.radiusX <= 1 && t.radiusY <= 1
-                })(o) &&
-                !clickInGutter(e, o)
-              ) {
-                t.input.ensurePolled(), clearTimeout(r)
-                var i = +new Date()
-                ;(t.activeTouch = {
-                  start: i,
-                  moved: !1,
-                  prev: i - n.end <= 300 ? n : null,
-                }),
-                  1 == o.touches.length &&
-                    ((t.activeTouch.left = o.touches[0].pageX),
-                    (t.activeTouch.top = o.touches[0].pageY))
-              }
-            }),
-              j(t.scroller, "touchmove", function() {
-                t.activeTouch && (t.activeTouch.moved = !0)
-              }),
-              j(t.scroller, "touchend", function(r) {
-                var n = t.activeTouch
-                if (
-                  n &&
-                  !eventInWidget(t, r) &&
-                  null != n.left &&
-                  !n.moved &&
-                  new Date() - n.start < 300
-                ) {
-                  var o,
-                    i = e.coordsChar(t.activeTouch, "page")
-                  ;(o =
-                    !n.prev || farAway(n, n.prev)
-                      ? new ve(i, i)
-                      : !n.prev.prev || farAway(n, n.prev.prev)
-                        ? e.findWordAt(i)
-                        : new ve(
-                            Pos(i.line, 0),
-                            clipPos(e.doc, Pos(i.line + 1, 0))
-                          )),
-                    e.setSelection(o.anchor, o.head),
-                    e.focus(),
-                    e_preventDefault(r)
-                }
-                finishTouch()
-              }),
-              j(t.scroller, "touchcancel", finishTouch),
-              j(t.scroller, "scroll", function() {
-                t.scroller.clientHeight &&
-                  (updateScrollTop(e, t.scroller.scrollTop),
-                  setScrollLeft(e, t.scroller.scrollLeft, !0),
-                  signal(e, "scroll", e))
-              }),
-              j(t.scroller, "mousewheel", function(t) {
-                return onScrollWheel(e, t)
-              }),
-              j(t.scroller, "DOMMouseScroll", function(t) {
-                return onScrollWheel(e, t)
-              }),
-              j(t.wrapper, "scroll", function() {
-                return (t.wrapper.scrollTop = t.wrapper.scrollLeft = 0)
-              }),
-              (t.dragFunctions = {
-                enter: function(t) {
-                  signalDOMEvent(e, t) || e_stop(t)
-                },
-                over: function(t) {
-                  signalDOMEvent(e, t) ||
-                    (!(function onDragOver(e, t) {
+        for (var u in ((c.wrapper.CodeMirror = this),
+        updateGutters(this),
+        themeChanged(this),
+        t.lineWrapping &&
+          (this.display.wrapper.className += " CodeMirror-wrap"),
+        initScrollbars(this),
+        (this.state = {
+          keyMaps: [],
+          overlays: [],
+          modeGen: 0,
+          overwrite: !1,
+          delayingBlurEvent: !1,
+          focused: !1,
+          suppressEdits: !1,
+          pasteIncoming: !1,
+          cutIncoming: !1,
+          selectingText: !1,
+          draggingText: !1,
+          highlight: new T(),
+          keySeq: null,
+          specialChars: null,
+        }),
+        t.autofocus && !v && c.input.focus(),
+        s &&
+          a < 11 &&
+          setTimeout(function() {
+            return n.display.input.reset(!0)
+          }, 20),
+        (function registerEventHandlers(e) {
+          var t = e.display
+          j(t.scroller, "mousedown", operation(e, onMouseDown)),
+            j(
+              t.scroller,
+              "dblclick",
+              s && a < 11
+                ? operation(e, function(t) {
+                    if (!signalDOMEvent(e, t)) {
                       var r = posFromMouse(e, t)
-                      if (r) {
-                        var n = document.createDocumentFragment()
-                        drawSelectionCursor(e, r, n),
-                          e.display.dragCursor ||
-                            ((e.display.dragCursor = elt(
-                              "div",
-                              null,
-                              "CodeMirror-cursors CodeMirror-dragcursors"
-                            )),
-                            e.display.lineSpace.insertBefore(
-                              e.display.dragCursor,
-                              e.display.cursorDiv
-                            )),
-                          removeChildrenAndAdd(e.display.dragCursor, n)
+                      if (
+                        r &&
+                        !clickInGutter(e, t) &&
+                        !eventInWidget(e.display, t)
+                      ) {
+                        e_preventDefault(t)
+                        var n = e.findWordAt(r)
+                        extendSelection(e.doc, n.anchor, n.head)
                       }
-                    })(e, t),
-                    e_stop(t))
-                },
-                start: function(t) {
-                  return (function onDragStart(e, t) {
-                    if (s && (!e.state.draggingText || +new Date() - ke < 100))
-                      e_stop(t)
-                    else if (
-                      !signalDOMEvent(e, t) &&
-                      !eventInWidget(e.display, t) &&
-                      (t.dataTransfer.setData("Text", e.getSelection()),
-                      (t.dataTransfer.effectAllowed = "copyMove"),
-                      t.dataTransfer.setDragImage && !p)
-                    ) {
-                      var r = elt(
-                        "img",
-                        null,
-                        null,
-                        "position: fixed; left: 0; top: 0;"
-                      )
-                      ;(r.src =
-                        "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="),
-                        d &&
-                          ((r.width = r.height = 1),
-                          e.display.wrapper.appendChild(r),
-                          (r._top = r.offsetTop)),
-                        t.dataTransfer.setDragImage(r, 0, 0),
-                        d && r.parentNode.removeChild(r)
                     }
-                  })(e, t)
-                },
-                drop: operation(e, onDrop),
-                leave: function(t) {
-                  signalDOMEvent(e, t) || clearDragCursor(e)
-                },
-              })
-            var o = t.input.getField()
-            j(o, "keyup", function(t) {
-              return onKeyUp.call(e, t)
-            }),
-              j(o, "keydown", operation(e, onKeyDown)),
-              j(o, "keypress", operation(e, onKeyPress)),
-              j(o, "focus", function(t) {
-                return onFocus(e, t)
+                  })
+                : function(t) {
+                    return signalDOMEvent(e, t) || e_preventDefault(t)
+                  }
+            )
+          j(t.scroller, "contextmenu", function(t) {
+            return onContextMenu(e, t)
+          })
+          var r,
+            n = { end: 0 }
+          function finishTouch() {
+            t.activeTouch &&
+              ((r = setTimeout(function() {
+                return (t.activeTouch = null)
+              }, 1e3)),
+              ((n = t.activeTouch).end = +new Date()))
+          }
+          function farAway(e, t) {
+            if (null == t.left) return !0
+            var r = t.left - e.left,
+              n = t.top - e.top
+            return r * r + n * n > 400
+          }
+          j(t.scroller, "touchstart", function(o) {
+            if (
+              !signalDOMEvent(e, o) &&
+              !(function isMouseLikeTouchEvent(e) {
+                if (1 != e.touches.length) return !1
+                var t = e.touches[0]
+                return t.radiusX <= 1 && t.radiusY <= 1
+              })(o) &&
+              !clickInGutter(e, o)
+            ) {
+              t.input.ensurePolled(), clearTimeout(r)
+              var i = +new Date()
+              ;(t.activeTouch = {
+                start: i,
+                moved: !1,
+                prev: i - n.end <= 300 ? n : null,
               }),
-              j(o, "blur", function(t) {
-                return onBlur(e, t)
-              })
-          })(this),
-          ensureGlobalHandlers(),
-          startOperation(this),
-          (this.curOp.forceUpdate = !0),
-          attachDoc(this, o),
-          (t.autofocus && !v) || this.hasFocus()
-            ? setTimeout(bind(onFocus, this), 20)
-            : onBlur(this)
-        for (var u in ze) ze.hasOwnProperty(u) && ze[u](n, t[u], Fe)
+                1 == o.touches.length &&
+                  ((t.activeTouch.left = o.touches[0].pageX),
+                  (t.activeTouch.top = o.touches[0].pageY))
+            }
+          }),
+            j(t.scroller, "touchmove", function() {
+              t.activeTouch && (t.activeTouch.moved = !0)
+            }),
+            j(t.scroller, "touchend", function(r) {
+              var n = t.activeTouch
+              if (
+                n &&
+                !eventInWidget(t, r) &&
+                null != n.left &&
+                !n.moved &&
+                new Date() - n.start < 300
+              ) {
+                var o,
+                  i = e.coordsChar(t.activeTouch, "page")
+                ;(o =
+                  !n.prev || farAway(n, n.prev)
+                    ? new ye(i, i)
+                    : !n.prev.prev || farAway(n, n.prev.prev)
+                      ? e.findWordAt(i)
+                      : new ye(
+                          Pos(i.line, 0),
+                          clipPos(e.doc, Pos(i.line + 1, 0))
+                        )),
+                  e.setSelection(o.anchor, o.head),
+                  e.focus(),
+                  e_preventDefault(r)
+              }
+              finishTouch()
+            }),
+            j(t.scroller, "touchcancel", finishTouch),
+            j(t.scroller, "scroll", function() {
+              t.scroller.clientHeight &&
+                (updateScrollTop(e, t.scroller.scrollTop),
+                setScrollLeft(e, t.scroller.scrollLeft, !0),
+                signal(e, "scroll", e))
+            }),
+            j(t.scroller, "mousewheel", function(t) {
+              return onScrollWheel(e, t)
+            }),
+            j(t.scroller, "DOMMouseScroll", function(t) {
+              return onScrollWheel(e, t)
+            }),
+            j(t.wrapper, "scroll", function() {
+              return (t.wrapper.scrollTop = t.wrapper.scrollLeft = 0)
+            }),
+            (t.dragFunctions = {
+              enter: function(t) {
+                signalDOMEvent(e, t) || e_stop(t)
+              },
+              over: function(t) {
+                signalDOMEvent(e, t) ||
+                  (!(function onDragOver(e, t) {
+                    var r = posFromMouse(e, t)
+                    if (r) {
+                      var n = document.createDocumentFragment()
+                      drawSelectionCursor(e, r, n),
+                        e.display.dragCursor ||
+                          ((e.display.dragCursor = elt(
+                            "div",
+                            null,
+                            "CodeMirror-cursors CodeMirror-dragcursors"
+                          )),
+                          e.display.lineSpace.insertBefore(
+                            e.display.dragCursor,
+                            e.display.cursorDiv
+                          )),
+                        removeChildrenAndAdd(e.display.dragCursor, n)
+                    }
+                  })(e, t),
+                  e_stop(t))
+              },
+              start: function(t) {
+                return (function onDragStart(e, t) {
+                  if (s && (!e.state.draggingText || +new Date() - Le < 100))
+                    e_stop(t)
+                  else if (
+                    !signalDOMEvent(e, t) &&
+                    !eventInWidget(e.display, t) &&
+                    (t.dataTransfer.setData("Text", e.getSelection()),
+                    (t.dataTransfer.effectAllowed = "copyMove"),
+                    t.dataTransfer.setDragImage && !p)
+                  ) {
+                    var r = elt(
+                      "img",
+                      null,
+                      null,
+                      "position: fixed; left: 0; top: 0;"
+                    )
+                    ;(r.src =
+                      "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="),
+                      d &&
+                        ((r.width = r.height = 1),
+                        e.display.wrapper.appendChild(r),
+                        (r._top = r.offsetTop)),
+                      t.dataTransfer.setDragImage(r, 0, 0),
+                      d && r.parentNode.removeChild(r)
+                  }
+                })(e, t)
+              },
+              drop: operation(e, onDrop),
+              leave: function(t) {
+                signalDOMEvent(e, t) || clearDragCursor(e)
+              },
+            })
+          var o = t.input.getField()
+          j(o, "keyup", function(t) {
+            return onKeyUp.call(e, t)
+          }),
+            j(o, "keydown", operation(e, onKeyDown)),
+            j(o, "keypress", operation(e, onKeyPress)),
+            j(o, "focus", function(t) {
+              return onFocus(e, t)
+            }),
+            j(o, "blur", function(t) {
+              return onBlur(e, t)
+            })
+        })(this),
+        ensureGlobalHandlers(),
+        startOperation(this),
+        (this.curOp.forceUpdate = !0),
+        attachDoc(this, o),
+        (t.autofocus && !v) || this.hasFocus()
+          ? setTimeout(bind(onFocus, this), 20)
+          : onBlur(this),
+        Re))
+          Re.hasOwnProperty(u) && Re[u](n, t[u], Be)
         maybeUpdateLineNumberWidth(this), t.finishInit && t.finishInit(this)
-        for (var h = 0; h < Re.length; ++h) Re[h](n)
+        for (var h = 0; h < je.length; ++h) je[h](n)
         endOperation(this),
           l &&
             t.lineWrapping &&
             "optimizelegibility" == getComputedStyle(c.lineDiv).textRendering &&
             (c.lineDiv.style.textRendering = "auto")
       }
-      ;(CodeMirror$1.defaults = Be), (CodeMirror$1.optionHandlers = ze)
-      var Re = []
-      CodeMirror$1.defineInitHook = function(e) {
-        return Re.push(e)
-      }
+      ;(CodeMirror.defaults = ze), (CodeMirror.optionHandlers = Re)
+      var je = []
       function indentLine(e, t, r, n) {
         var o,
           i = e.doc
@@ -7591,65 +7653,70 @@ webpackJsonp([0], {
           var g = i.sel.ranges[f]
           if (g.head.line == t && g.head.ch < u.length) {
             var m = Pos(t, u.length)
-            replaceOneSelection(i, f, new ve(m, m))
+            replaceOneSelection(i, f, new ye(m, m))
             break
           }
         }
       }
-      var je = null
+      CodeMirror.defineInitHook = function(e) {
+        return je.push(e)
+      }
+      var Ve = null
       function setLastCopied(e) {
-        je = e
+        Ve = e
       }
       function applyTextInput(e, t, r, n, o) {
         var i = e.doc
         ;(e.display.shift = !1), n || (n = i.sel)
-        var s = e.state.pasteIncoming || "paste" == o,
-          a = G(t),
-          l = null
-        if (s && n.ranges.length > 1)
-          if (je && je.text.join("\n") == t) {
-            if (n.ranges.length % je.text.length == 0) {
-              l = []
-              for (var c = 0; c < je.text.length; c++)
-                l.push(i.splitLines(je.text[c]))
+        var s,
+          a = e.state.pasteIncoming || "paste" == o,
+          l = K(t),
+          c = null
+        if (a && n.ranges.length > 1)
+          if (Ve && Ve.text.join("\n") == t) {
+            if (n.ranges.length % Ve.text.length == 0) {
+              c = []
+              for (var u = 0; u < Ve.text.length; u++)
+                c.push(i.splitLines(Ve.text[u]))
             }
           } else
-            a.length == n.ranges.length &&
+            l.length == n.ranges.length &&
               e.options.pasteLinesPerSelection &&
-              (l = map(a, function(e) {
+              (c = map(l, function(e) {
                 return [e]
               }))
-        for (var u, d = n.ranges.length - 1; d >= 0; d--) {
+        for (var d = n.ranges.length - 1; d >= 0; d--) {
           var p = n.ranges[d],
             h = p.from(),
             f = p.to()
           p.empty() &&
             (r && r > 0
               ? (h = Pos(h.line, h.ch - r))
-              : e.state.overwrite && !s
+              : e.state.overwrite && !a
                 ? (f = Pos(
                     f.line,
                     Math.min(
                       getLine(i, f.line).text.length,
-                      f.ch + lst(a).length
+                      f.ch + lst(l).length
                     )
                   ))
-                : je &&
-                  je.lineWise &&
-                  je.text.join("\n") == t &&
+                : a &&
+                  Ve &&
+                  Ve.lineWise &&
+                  Ve.text.join("\n") == t &&
                   (h = f = Pos(h.line, 0))),
-            (u = e.curOp.updateInput)
+            (s = e.curOp.updateInput)
           var g = {
             from: h,
             to: f,
-            text: l ? l[d % l.length] : a,
-            origin: o || (s ? "paste" : e.state.cutIncoming ? "cut" : "+input"),
+            text: c ? c[d % c.length] : l,
+            origin: o || (a ? "paste" : e.state.cutIncoming ? "cut" : "+input"),
           }
           makeChange(e.doc, g), signalLater(e, "inputRead", e, g)
         }
-        t && !s && triggerElectric(e, t),
+        t && !a && triggerElectric(e, t),
           ensureCursorVisible(e),
-          (e.curOp.updateInput = u),
+          (e.curOp.updateInput = s),
           (e.curOp.typing = !0),
           (e.state.pasteIncoming = e.state.cutIncoming = !1)
       }
@@ -7851,26 +7918,27 @@ webpackJsonp([0], {
       }
       function findPosV(e, t, r, n) {
         var o,
-          i = e.doc,
-          s = t.left
+          i,
+          s = e.doc,
+          a = t.left
         if ("page" == n) {
-          var a = Math.min(
+          var l = Math.min(
               e.display.wrapper.clientHeight,
               window.innerHeight || document.documentElement.clientHeight
             ),
-            l = Math.max(a - 0.5 * textHeight(e.display), 3)
-          o = (r > 0 ? t.bottom : t.top) + r * l
+            c = Math.max(l - 0.5 * textHeight(e.display), 3)
+          o = (r > 0 ? t.bottom : t.top) + r * c
         } else "line" == n && (o = r > 0 ? t.bottom + 3 : t.top - 3)
-        for (var c; (c = coordsChar(e, s, o)).outside; ) {
-          if (r < 0 ? o <= 0 : o >= i.height) {
-            c.hitSide = !0
+        for (; (i = coordsChar(e, a, o)).outside; ) {
+          if (r < 0 ? o <= 0 : o >= s.height) {
+            i.hitSide = !0
             break
           }
           o += 5 * r
         }
-        return c
+        return i
       }
-      var Ve = function(e) {
+      var _e = function(e) {
         ;(this.cm = e),
           (this.lastAnchorNode = this.lastAnchorOffset = this.lastFocusNode = this.lastFocusOffset = null),
           (this.polling = new T()),
@@ -7878,438 +7946,6 @@ webpackJsonp([0], {
           (this.gracePeriod = !1),
           (this.readDOMTimeout = null)
       }
-      ;(Ve.prototype.init = function(e) {
-        var t = this,
-          r = this,
-          n = r.cm,
-          o = (r.div = e.lineDiv)
-        disableBrowserMagic(o, n.options.spellcheck),
-          j(o, "paste", function(e) {
-            signalDOMEvent(n, e) ||
-              handlePaste(e, n) ||
-              (a <= 11 &&
-                setTimeout(
-                  operation(n, function() {
-                    return t.updateFromDOM()
-                  }),
-                  20
-                ))
-          }),
-          j(o, "compositionstart", function(e) {
-            t.composing = { data: e.data, done: !1 }
-          }),
-          j(o, "compositionupdate", function(e) {
-            t.composing || (t.composing = { data: e.data, done: !1 })
-          }),
-          j(o, "compositionend", function(e) {
-            t.composing &&
-              (e.data != t.composing.data && t.readFromDOMSoon(),
-              (t.composing.done = !0))
-          }),
-          j(o, "touchstart", function() {
-            return r.forceCompositionEnd()
-          }),
-          j(o, "input", function() {
-            t.composing || t.readFromDOMSoon()
-          })
-        function onCopyCut(e) {
-          if (!signalDOMEvent(n, e)) {
-            if (n.somethingSelected())
-              setLastCopied({ lineWise: !1, text: n.getSelections() }),
-                "cut" == e.type && n.replaceSelection("", null, "cut")
-            else {
-              if (!n.options.lineWiseCopyCut) return
-              var t = copyableRanges(n)
-              setLastCopied({ lineWise: !0, text: t.text }),
-                "cut" == e.type &&
-                  n.operation(function() {
-                    n.setSelections(t.ranges, 0, A),
-                      n.replaceSelection("", null, "cut")
-                  })
-            }
-            if (e.clipboardData) {
-              e.clipboardData.clearData()
-              var i = je.text.join("\n")
-              if (
-                (e.clipboardData.setData("Text", i),
-                e.clipboardData.getData("Text") == i)
-              )
-                return void e.preventDefault()
-            }
-            var s = hiddenTextarea(),
-              a = s.firstChild
-            n.display.lineSpace.insertBefore(s, n.display.lineSpace.firstChild),
-              (a.value = je.text.join("\n"))
-            var l = document.activeElement
-            M(a),
-              setTimeout(function() {
-                n.display.lineSpace.removeChild(s),
-                  l.focus(),
-                  l == o && r.showPrimarySelection()
-              }, 50)
-          }
-        }
-        j(o, "copy", onCopyCut), j(o, "cut", onCopyCut)
-      }),
-        (Ve.prototype.prepareSelection = function() {
-          var e = prepareSelection(this.cm, !1)
-          return (e.focus = this.cm.state.focused), e
-        }),
-        (Ve.prototype.showSelection = function(e, t) {
-          e &&
-            this.cm.display.view.length &&
-            ((e.focus || t) && this.showPrimarySelection(),
-            this.showMultipleSelections(e))
-        }),
-        (Ve.prototype.showPrimarySelection = function() {
-          var e = window.getSelection(),
-            t = this.cm,
-            n = t.doc.sel.primary(),
-            o = n.from(),
-            i = n.to()
-          if (
-            t.display.viewTo == t.display.viewFrom ||
-            o.line >= t.display.viewTo ||
-            i.line < t.display.viewFrom
-          )
-            e.removeAllRanges()
-          else {
-            var s = domToPos(t, e.anchorNode, e.anchorOffset),
-              a = domToPos(t, e.focusNode, e.focusOffset)
-            if (
-              !s ||
-              s.bad ||
-              !a ||
-              a.bad ||
-              0 != cmp(minPos(s, a), o) ||
-              0 != cmp(maxPos(s, a), i)
-            ) {
-              var l = t.display.view,
-                c = (o.line >= t.display.viewFrom && posToDOM(t, o)) || {
-                  node: l[0].measure.map[2],
-                  offset: 0,
-                },
-                u = i.line < t.display.viewTo && posToDOM(t, i)
-              if (!u) {
-                var d = l[l.length - 1].measure,
-                  p = d.maps ? d.maps[d.maps.length - 1] : d.map
-                u = {
-                  node: p[p.length - 1],
-                  offset: p[p.length - 2] - p[p.length - 3],
-                }
-              }
-              if (c && u) {
-                var h,
-                  f = e.rangeCount && e.getRangeAt(0)
-                try {
-                  h = L(c.node, c.offset, u.offset, u.node)
-                } catch (e) {}
-                h &&
-                  (!r && t.state.focused
-                    ? (e.collapse(c.node, c.offset),
-                      h.collapsed || (e.removeAllRanges(), e.addRange(h)))
-                    : (e.removeAllRanges(), e.addRange(h)),
-                  f && null == e.anchorNode
-                    ? e.addRange(f)
-                    : r && this.startGracePeriod()),
-                  this.rememberSelection()
-              } else e.removeAllRanges()
-            }
-          }
-        }),
-        (Ve.prototype.startGracePeriod = function() {
-          var e = this
-          clearTimeout(this.gracePeriod),
-            (this.gracePeriod = setTimeout(function() {
-              ;(e.gracePeriod = !1),
-                e.selectionChanged() &&
-                  e.cm.operation(function() {
-                    return (e.cm.curOp.selectionChanged = !0)
-                  })
-            }, 20))
-        }),
-        (Ve.prototype.showMultipleSelections = function(e) {
-          removeChildrenAndAdd(this.cm.display.cursorDiv, e.cursors),
-            removeChildrenAndAdd(this.cm.display.selectionDiv, e.selection)
-        }),
-        (Ve.prototype.rememberSelection = function() {
-          var e = window.getSelection()
-          ;(this.lastAnchorNode = e.anchorNode),
-            (this.lastAnchorOffset = e.anchorOffset),
-            (this.lastFocusNode = e.focusNode),
-            (this.lastFocusOffset = e.focusOffset)
-        }),
-        (Ve.prototype.selectionInEditor = function() {
-          var e = window.getSelection()
-          if (!e.rangeCount) return !1
-          var t = e.getRangeAt(0).commonAncestorContainer
-          return contains(this.div, t)
-        }),
-        (Ve.prototype.focus = function() {
-          "nocursor" != this.cm.options.readOnly &&
-            (this.selectionInEditor() ||
-              this.showSelection(this.prepareSelection(), !0),
-            this.div.focus())
-        }),
-        (Ve.prototype.blur = function() {
-          this.div.blur()
-        }),
-        (Ve.prototype.getField = function() {
-          return this.div
-        }),
-        (Ve.prototype.supportsTouch = function() {
-          return !0
-        }),
-        (Ve.prototype.receivedFocus = function() {
-          var e = this
-          this.selectionInEditor()
-            ? this.pollSelection()
-            : runInOp(this.cm, function() {
-                return (e.cm.curOp.selectionChanged = !0)
-              })
-          this.polling.set(this.cm.options.pollInterval, function poll() {
-            e.cm.state.focused &&
-              (e.pollSelection(),
-              e.polling.set(e.cm.options.pollInterval, poll))
-          })
-        }),
-        (Ve.prototype.selectionChanged = function() {
-          var e = window.getSelection()
-          return (
-            e.anchorNode != this.lastAnchorNode ||
-            e.anchorOffset != this.lastAnchorOffset ||
-            e.focusNode != this.lastFocusNode ||
-            e.focusOffset != this.lastFocusOffset
-          )
-        }),
-        (Ve.prototype.pollSelection = function() {
-          if (
-            null == this.readDOMTimeout &&
-            !this.gracePeriod &&
-            this.selectionChanged()
-          ) {
-            var e = window.getSelection(),
-              t = this.cm
-            if (
-              m &&
-              u &&
-              this.cm.options.gutters.length &&
-              (function isInGutter(e) {
-                for (var t = e; t; t = t.parentNode)
-                  if (/CodeMirror-gutter-wrapper/.test(t.className)) return !0
-                return !1
-              })(e.anchorNode)
-            )
-              return (
-                this.cm.triggerOnKeyDown({
-                  type: "keydown",
-                  keyCode: 8,
-                  preventDefault: Math.abs,
-                }),
-                this.blur(),
-                void this.focus()
-              )
-            if (!this.composing) {
-              this.rememberSelection()
-              var r = domToPos(t, e.anchorNode, e.anchorOffset),
-                n = domToPos(t, e.focusNode, e.focusOffset)
-              r &&
-                n &&
-                runInOp(t, function() {
-                  setSelection(t.doc, simpleSelection(r, n), A),
-                    (r.bad || n.bad) && (t.curOp.selectionChanged = !0)
-                })
-            }
-          }
-        }),
-        (Ve.prototype.pollContent = function() {
-          null != this.readDOMTimeout &&
-            (clearTimeout(this.readDOMTimeout), (this.readDOMTimeout = null))
-          var e = this.cm,
-            t = e.display,
-            r = e.doc.sel.primary(),
-            n = r.from(),
-            o = r.to()
-          if (
-            (0 == n.ch &&
-              n.line > e.firstLine() &&
-              (n = Pos(n.line - 1, getLine(e.doc, n.line - 1).length)),
-            o.ch == getLine(e.doc, o.line).text.length &&
-              o.line < e.lastLine() &&
-              (o = Pos(o.line + 1, 0)),
-            n.line < t.viewFrom || o.line > t.viewTo - 1)
-          )
-            return !1
-          var i, s, a
-          n.line == t.viewFrom || 0 == (i = findViewIndex(e, n.line))
-            ? ((s = lineNo(t.view[0].line)), (a = t.view[0].node))
-            : ((s = lineNo(t.view[i].line)),
-              (a = t.view[i - 1].node.nextSibling))
-          var l,
-            c,
-            u = findViewIndex(e, o.line)
-          if (
-            (u == t.view.length - 1
-              ? ((l = t.viewTo - 1), (c = t.lineDiv.lastChild))
-              : ((l = lineNo(t.view[u + 1].line) - 1),
-                (c = t.view[u + 1].node.previousSibling)),
-            !a)
-          )
-            return !1
-          for (
-            var d = e.doc.splitLines(
-                (function domTextBetween(e, t, r, n, o) {
-                  var i = "",
-                    s = !1,
-                    a = e.doc.lineSeparator()
-                  function close() {
-                    s && ((i += a), (s = !1))
-                  }
-                  function addText(e) {
-                    e && (close(), (i += e))
-                  }
-                  function walk(t) {
-                    if (1 == t.nodeType) {
-                      var r = t.getAttribute("cm-text")
-                      if (null != r)
-                        return void addText(
-                          r || t.textContent.replace(/\u200b/g, "")
-                        )
-                      var i,
-                        l = t.getAttribute("cm-marker")
-                      if (l) {
-                        var c = e.findMarks(
-                          Pos(n, 0),
-                          Pos(o + 1, 0),
-                          (function recognizeMarker(e) {
-                            return function(t) {
-                              return t.id == e
-                            }
-                          })(+l)
-                        )
-                        return void (
-                          c.length &&
-                          (i = c[0].find(0)) &&
-                          addText(getBetween(e.doc, i.from, i.to).join(a))
-                        )
-                      }
-                      if ("false" == t.getAttribute("contenteditable")) return
-                      var u = /^(pre|div|p)$/i.test(t.nodeName)
-                      u && close()
-                      for (var d = 0; d < t.childNodes.length; d++)
-                        walk(t.childNodes[d])
-                      u && (s = !0)
-                    } else 3 == t.nodeType && addText(t.nodeValue)
-                  }
-                  for (; walk(t), t != r; ) t = t.nextSibling
-                  return i
-                })(e, a, c, s, l)
-              ),
-              p = getBetween(
-                e.doc,
-                Pos(s, 0),
-                Pos(l, getLine(e.doc, l).text.length)
-              );
-            d.length > 1 && p.length > 1;
-
-          )
-            if (lst(d) == lst(p)) d.pop(), p.pop(), l--
-            else {
-              if (d[0] != p[0]) break
-              d.shift(), p.shift(), s++
-            }
-          for (
-            var h = 0,
-              f = 0,
-              g = d[0],
-              m = p[0],
-              v = Math.min(g.length, m.length);
-            h < v && g.charCodeAt(h) == m.charCodeAt(h);
-
-          )
-            ++h
-          for (
-            var y = lst(d),
-              b = lst(p),
-              C = Math.min(
-                y.length - (1 == d.length ? h : 0),
-                b.length - (1 == p.length ? h : 0)
-              );
-            f < C &&
-            y.charCodeAt(y.length - f - 1) == b.charCodeAt(b.length - f - 1);
-
-          )
-            ++f
-          if (1 == d.length && 1 == p.length && s == n.line)
-            for (
-              ;
-              h &&
-              h > n.ch &&
-              y.charCodeAt(y.length - f - 1) == b.charCodeAt(b.length - f - 1);
-
-            )
-              h--, f++
-          ;(d[d.length - 1] = y.slice(0, y.length - f).replace(/^\u200b+/, "")),
-            (d[0] = d[0].slice(h).replace(/\u200b+$/, ""))
-          var x = Pos(s, h),
-            w = Pos(l, p.length ? lst(p).length - f : 0)
-          return d.length > 1 || d[0] || cmp(x, w)
-            ? (replaceRange(e.doc, d, x, w, "+input"), !0)
-            : void 0
-        }),
-        (Ve.prototype.ensurePolled = function() {
-          this.forceCompositionEnd()
-        }),
-        (Ve.prototype.reset = function() {
-          this.forceCompositionEnd()
-        }),
-        (Ve.prototype.forceCompositionEnd = function() {
-          this.composing &&
-            (clearTimeout(this.readDOMTimeout),
-            (this.composing = null),
-            this.updateFromDOM(),
-            this.div.blur(),
-            this.div.focus())
-        }),
-        (Ve.prototype.readFromDOMSoon = function() {
-          var e = this
-          null == this.readDOMTimeout &&
-            (this.readDOMTimeout = setTimeout(function() {
-              if (((e.readDOMTimeout = null), e.composing)) {
-                if (!e.composing.done) return
-                e.composing = null
-              }
-              e.updateFromDOM()
-            }, 80))
-        }),
-        (Ve.prototype.updateFromDOM = function() {
-          var e = this
-          ;(!this.cm.isReadOnly() && this.pollContent()) ||
-            runInOp(this.cm, function() {
-              return regChange(e.cm)
-            })
-        }),
-        (Ve.prototype.setUneditable = function(e) {
-          e.contentEditable = "false"
-        }),
-        (Ve.prototype.onKeyPress = function(e) {
-          0 != e.charCode &&
-            (e.preventDefault(),
-            this.cm.isReadOnly() ||
-              operation(this.cm, applyTextInput)(
-                this.cm,
-                String.fromCharCode(
-                  null == e.charCode ? e.keyCode : e.charCode
-                ),
-                0
-              ))
-        }),
-        (Ve.prototype.readOnlyChanged = function(e) {
-          this.div.contentEditable = String("nocursor" != e)
-        }),
-        (Ve.prototype.onContextMenu = function() {}),
-        (Ve.prototype.resetPosition = function() {}),
-        (Ve.prototype.needsContentAttribute = !0)
       function posToDOM(e, t) {
         var r = findViewForLine(e, t.line)
         if (!r || r.hidden) return null
@@ -8317,9 +7953,7 @@ webpackJsonp([0], {
           o = mapFromLineView(r, n, t.line),
           i = getOrder(n, e.doc.direction),
           s = "left"
-        if (i) {
-          s = getBidiPartAt(i, t.ch) % 2 ? "right" : "left"
-        }
+        i && (s = getBidiPartAt(i, t.ch) % 2 ? "right" : "left")
         var a = nodeAndOffsetInLineMap(o.map, t.ch, s)
         return (a.offset = "right" == a.collapse ? a.end : a.start), a
       }
@@ -8391,7 +8025,455 @@ webpackJsonp([0], {
           f += h.textContent.length
         }
       }
-      var _e = function(e) {
+      ;(_e.prototype.init = function(e) {
+        var t = this,
+          r = this,
+          n = r.cm,
+          o = (r.div = e.lineDiv)
+        function onCopyCut(e) {
+          if (!signalDOMEvent(n, e)) {
+            if (n.somethingSelected())
+              setLastCopied({ lineWise: !1, text: n.getSelections() }),
+                "cut" == e.type && n.replaceSelection("", null, "cut")
+            else {
+              if (!n.options.lineWiseCopyCut) return
+              var t = copyableRanges(n)
+              setLastCopied({ lineWise: !0, text: t.text }),
+                "cut" == e.type &&
+                  n.operation(function() {
+                    n.setSelections(t.ranges, 0, A),
+                      n.replaceSelection("", null, "cut")
+                  })
+            }
+            if (e.clipboardData) {
+              e.clipboardData.clearData()
+              var i = Ve.text.join("\n")
+              if (
+                (e.clipboardData.setData("Text", i),
+                e.clipboardData.getData("Text") == i)
+              )
+                return void e.preventDefault()
+            }
+            var s = hiddenTextarea(),
+              a = s.firstChild
+            n.display.lineSpace.insertBefore(s, n.display.lineSpace.firstChild),
+              (a.value = Ve.text.join("\n"))
+            var l = document.activeElement
+            M(a),
+              setTimeout(function() {
+                n.display.lineSpace.removeChild(s),
+                  l.focus(),
+                  l == o && r.showPrimarySelection()
+              }, 50)
+          }
+        }
+        disableBrowserMagic(o, n.options.spellcheck),
+          j(o, "paste", function(e) {
+            signalDOMEvent(n, e) ||
+              handlePaste(e, n) ||
+              (a <= 11 &&
+                setTimeout(
+                  operation(n, function() {
+                    return t.updateFromDOM()
+                  }),
+                  20
+                ))
+          }),
+          j(o, "compositionstart", function(e) {
+            t.composing = { data: e.data, done: !1 }
+          }),
+          j(o, "compositionupdate", function(e) {
+            t.composing || (t.composing = { data: e.data, done: !1 })
+          }),
+          j(o, "compositionend", function(e) {
+            t.composing &&
+              (e.data != t.composing.data && t.readFromDOMSoon(),
+              (t.composing.done = !0))
+          }),
+          j(o, "touchstart", function() {
+            return r.forceCompositionEnd()
+          }),
+          j(o, "input", function() {
+            t.composing || t.readFromDOMSoon()
+          }),
+          j(o, "copy", onCopyCut),
+          j(o, "cut", onCopyCut)
+      }),
+        (_e.prototype.prepareSelection = function() {
+          var e = prepareSelection(this.cm, !1)
+          return (e.focus = this.cm.state.focused), e
+        }),
+        (_e.prototype.showSelection = function(e, t) {
+          e &&
+            this.cm.display.view.length &&
+            ((e.focus || t) && this.showPrimarySelection(),
+            this.showMultipleSelections(e))
+        }),
+        (_e.prototype.getSelection = function() {
+          return this.cm.display.wrapper.ownerDocument.getSelection()
+        }),
+        (_e.prototype.showPrimarySelection = function() {
+          var e = this.getSelection(),
+            t = this.cm,
+            n = t.doc.sel.primary(),
+            o = n.from(),
+            i = n.to()
+          if (
+            t.display.viewTo == t.display.viewFrom ||
+            o.line >= t.display.viewTo ||
+            i.line < t.display.viewFrom
+          )
+            e.removeAllRanges()
+          else {
+            var s = domToPos(t, e.anchorNode, e.anchorOffset),
+              a = domToPos(t, e.focusNode, e.focusOffset)
+            if (
+              !s ||
+              s.bad ||
+              !a ||
+              a.bad ||
+              0 != cmp(minPos(s, a), o) ||
+              0 != cmp(maxPos(s, a), i)
+            ) {
+              var l = t.display.view,
+                c = (o.line >= t.display.viewFrom && posToDOM(t, o)) || {
+                  node: l[0].measure.map[2],
+                  offset: 0,
+                },
+                u = i.line < t.display.viewTo && posToDOM(t, i)
+              if (!u) {
+                var d = l[l.length - 1].measure,
+                  p = d.maps ? d.maps[d.maps.length - 1] : d.map
+                u = {
+                  node: p[p.length - 1],
+                  offset: p[p.length - 2] - p[p.length - 3],
+                }
+              }
+              if (c && u) {
+                var h,
+                  f = e.rangeCount && e.getRangeAt(0)
+                try {
+                  h = k(c.node, c.offset, u.offset, u.node)
+                } catch (e) {}
+                h &&
+                  (!r && t.state.focused
+                    ? (e.collapse(c.node, c.offset),
+                      h.collapsed || (e.removeAllRanges(), e.addRange(h)))
+                    : (e.removeAllRanges(), e.addRange(h)),
+                  f && null == e.anchorNode
+                    ? e.addRange(f)
+                    : r && this.startGracePeriod()),
+                  this.rememberSelection()
+              } else e.removeAllRanges()
+            }
+          }
+        }),
+        (_e.prototype.startGracePeriod = function() {
+          var e = this
+          clearTimeout(this.gracePeriod),
+            (this.gracePeriod = setTimeout(function() {
+              ;(e.gracePeriod = !1),
+                e.selectionChanged() &&
+                  e.cm.operation(function() {
+                    return (e.cm.curOp.selectionChanged = !0)
+                  })
+            }, 20))
+        }),
+        (_e.prototype.showMultipleSelections = function(e) {
+          removeChildrenAndAdd(this.cm.display.cursorDiv, e.cursors),
+            removeChildrenAndAdd(this.cm.display.selectionDiv, e.selection)
+        }),
+        (_e.prototype.rememberSelection = function() {
+          var e = this.getSelection()
+          ;(this.lastAnchorNode = e.anchorNode),
+            (this.lastAnchorOffset = e.anchorOffset),
+            (this.lastFocusNode = e.focusNode),
+            (this.lastFocusOffset = e.focusOffset)
+        }),
+        (_e.prototype.selectionInEditor = function() {
+          var e = this.getSelection()
+          if (!e.rangeCount) return !1
+          var t = e.getRangeAt(0).commonAncestorContainer
+          return contains(this.div, t)
+        }),
+        (_e.prototype.focus = function() {
+          "nocursor" != this.cm.options.readOnly &&
+            (this.selectionInEditor() ||
+              this.showSelection(this.prepareSelection(), !0),
+            this.div.focus())
+        }),
+        (_e.prototype.blur = function() {
+          this.div.blur()
+        }),
+        (_e.prototype.getField = function() {
+          return this.div
+        }),
+        (_e.prototype.supportsTouch = function() {
+          return !0
+        }),
+        (_e.prototype.receivedFocus = function() {
+          var e = this
+          this.selectionInEditor()
+            ? this.pollSelection()
+            : runInOp(this.cm, function() {
+                return (e.cm.curOp.selectionChanged = !0)
+              }),
+            this.polling.set(this.cm.options.pollInterval, function poll() {
+              e.cm.state.focused &&
+                (e.pollSelection(),
+                e.polling.set(e.cm.options.pollInterval, poll))
+            })
+        }),
+        (_e.prototype.selectionChanged = function() {
+          var e = this.getSelection()
+          return (
+            e.anchorNode != this.lastAnchorNode ||
+            e.anchorOffset != this.lastAnchorOffset ||
+            e.focusNode != this.lastFocusNode ||
+            e.focusOffset != this.lastFocusOffset
+          )
+        }),
+        (_e.prototype.pollSelection = function() {
+          if (
+            null == this.readDOMTimeout &&
+            !this.gracePeriod &&
+            this.selectionChanged()
+          ) {
+            var e = this.getSelection(),
+              t = this.cm
+            if (
+              m &&
+              u &&
+              this.cm.options.gutters.length &&
+              (function isInGutter(e) {
+                for (var t = e; t; t = t.parentNode)
+                  if (/CodeMirror-gutter-wrapper/.test(t.className)) return !0
+                return !1
+              })(e.anchorNode)
+            )
+              return (
+                this.cm.triggerOnKeyDown({
+                  type: "keydown",
+                  keyCode: 8,
+                  preventDefault: Math.abs,
+                }),
+                this.blur(),
+                void this.focus()
+              )
+            if (!this.composing) {
+              this.rememberSelection()
+              var r = domToPos(t, e.anchorNode, e.anchorOffset),
+                n = domToPos(t, e.focusNode, e.focusOffset)
+              r &&
+                n &&
+                runInOp(t, function() {
+                  setSelection(t.doc, simpleSelection(r, n), A),
+                    (r.bad || n.bad) && (t.curOp.selectionChanged = !0)
+                })
+            }
+          }
+        }),
+        (_e.prototype.pollContent = function() {
+          null != this.readDOMTimeout &&
+            (clearTimeout(this.readDOMTimeout), (this.readDOMTimeout = null))
+          var e,
+            t,
+            r,
+            n = this.cm,
+            o = n.display,
+            i = n.doc.sel.primary(),
+            s = i.from(),
+            a = i.to()
+          if (
+            (0 == s.ch &&
+              s.line > n.firstLine() &&
+              (s = Pos(s.line - 1, getLine(n.doc, s.line - 1).length)),
+            a.ch == getLine(n.doc, a.line).text.length &&
+              a.line < n.lastLine() &&
+              (a = Pos(a.line + 1, 0)),
+            s.line < o.viewFrom || a.line > o.viewTo - 1)
+          )
+            return !1
+          s.line == o.viewFrom || 0 == (e = findViewIndex(n, s.line))
+            ? ((t = lineNo(o.view[0].line)), (r = o.view[0].node))
+            : ((t = lineNo(o.view[e].line)),
+              (r = o.view[e - 1].node.nextSibling))
+          var l,
+            c,
+            u = findViewIndex(n, a.line)
+          if (
+            (u == o.view.length - 1
+              ? ((l = o.viewTo - 1), (c = o.lineDiv.lastChild))
+              : ((l = lineNo(o.view[u + 1].line) - 1),
+                (c = o.view[u + 1].node.previousSibling)),
+            !r)
+          )
+            return !1
+          for (
+            var d = n.doc.splitLines(
+                (function domTextBetween(e, t, r, n, o) {
+                  var i = "",
+                    s = !1,
+                    a = e.doc.lineSeparator(),
+                    l = !1
+                  function close() {
+                    s && ((i += a), l && (i += a), (s = l = !1))
+                  }
+                  function addText(e) {
+                    e && (close(), (i += e))
+                  }
+                  function walk(t) {
+                    if (1 == t.nodeType) {
+                      var r = t.getAttribute("cm-text")
+                      if (r) return void addText(r)
+                      var i,
+                        c = t.getAttribute("cm-marker")
+                      if (c) {
+                        var u = e.findMarks(
+                          Pos(n, 0),
+                          Pos(o + 1, 0),
+                          (function recognizeMarker(e) {
+                            return function(t) {
+                              return t.id == e
+                            }
+                          })(+c)
+                        )
+                        return void (
+                          u.length &&
+                          (i = u[0].find(0)) &&
+                          addText(getBetween(e.doc, i.from, i.to).join(a))
+                        )
+                      }
+                      if ("false" == t.getAttribute("contenteditable")) return
+                      var d = /^(pre|div|p|li|table|br)$/i.test(t.nodeName)
+                      if (
+                        !/^br$/i.test(t.nodeName) &&
+                        0 == t.textContent.length
+                      )
+                        return
+                      d && close()
+                      for (var p = 0; p < t.childNodes.length; p++)
+                        walk(t.childNodes[p])
+                      ;/^(pre|p)$/i.test(t.nodeName) && (l = !0), d && (s = !0)
+                    } else
+                      3 == t.nodeType &&
+                        addText(
+                          t.nodeValue
+                            .replace(/\u200b/g, "")
+                            .replace(/\u00a0/g, " ")
+                        )
+                  }
+                  for (; walk(t), t != r; ) (t = t.nextSibling), (l = !1)
+                  return i
+                })(n, r, c, t, l)
+              ),
+              p = getBetween(
+                n.doc,
+                Pos(t, 0),
+                Pos(l, getLine(n.doc, l).text.length)
+              );
+            d.length > 1 && p.length > 1;
+
+          )
+            if (lst(d) == lst(p)) d.pop(), p.pop(), l--
+            else {
+              if (d[0] != p[0]) break
+              d.shift(), p.shift(), t++
+            }
+          for (
+            var h = 0,
+              f = 0,
+              g = d[0],
+              m = p[0],
+              v = Math.min(g.length, m.length);
+            h < v && g.charCodeAt(h) == m.charCodeAt(h);
+
+          )
+            ++h
+          for (
+            var y = lst(d),
+              b = lst(p),
+              x = Math.min(
+                y.length - (1 == d.length ? h : 0),
+                b.length - (1 == p.length ? h : 0)
+              );
+            f < x &&
+            y.charCodeAt(y.length - f - 1) == b.charCodeAt(b.length - f - 1);
+
+          )
+            ++f
+          if (1 == d.length && 1 == p.length && t == s.line)
+            for (
+              ;
+              h &&
+              h > s.ch &&
+              y.charCodeAt(y.length - f - 1) == b.charCodeAt(b.length - f - 1);
+
+            )
+              h--, f++
+          ;(d[d.length - 1] = y.slice(0, y.length - f).replace(/^\u200b+/, "")),
+            (d[0] = d[0].slice(h).replace(/\u200b+$/, ""))
+          var C = Pos(t, h),
+            w = Pos(l, p.length ? lst(p).length - f : 0)
+          return d.length > 1 || d[0] || cmp(C, w)
+            ? (replaceRange(n.doc, d, C, w, "+input"), !0)
+            : void 0
+        }),
+        (_e.prototype.ensurePolled = function() {
+          this.forceCompositionEnd()
+        }),
+        (_e.prototype.reset = function() {
+          this.forceCompositionEnd()
+        }),
+        (_e.prototype.forceCompositionEnd = function() {
+          this.composing &&
+            (clearTimeout(this.readDOMTimeout),
+            (this.composing = null),
+            this.updateFromDOM(),
+            this.div.blur(),
+            this.div.focus())
+        }),
+        (_e.prototype.readFromDOMSoon = function() {
+          var e = this
+          null == this.readDOMTimeout &&
+            (this.readDOMTimeout = setTimeout(function() {
+              if (((e.readDOMTimeout = null), e.composing)) {
+                if (!e.composing.done) return
+                e.composing = null
+              }
+              e.updateFromDOM()
+            }, 80))
+        }),
+        (_e.prototype.updateFromDOM = function() {
+          var e = this
+          ;(!this.cm.isReadOnly() && this.pollContent()) ||
+            runInOp(this.cm, function() {
+              return regChange(e.cm)
+            })
+        }),
+        (_e.prototype.setUneditable = function(e) {
+          e.contentEditable = "false"
+        }),
+        (_e.prototype.onKeyPress = function(e) {
+          0 == e.charCode ||
+            this.composing ||
+            (e.preventDefault(),
+            this.cm.isReadOnly() ||
+              operation(this.cm, applyTextInput)(
+                this.cm,
+                String.fromCharCode(
+                  null == e.charCode ? e.keyCode : e.charCode
+                ),
+                0
+              ))
+        }),
+        (_e.prototype.readOnlyChanged = function(e) {
+          this.div.contentEditable = String("nocursor" != e)
+        }),
+        (_e.prototype.onContextMenu = function() {}),
+        (_e.prototype.resetPosition = function() {}),
+        (_e.prototype.needsContentAttribute = !0)
+      var Ue = function(e) {
         ;(this.cm = e),
           (this.prevInput = ""),
           (this.pollingFast = !1),
@@ -8399,22 +8481,12 @@ webpackJsonp([0], {
           (this.hasSelection = !1),
           (this.composing = null)
       }
-      ;(_e.prototype.init = function(e) {
+      ;(Ue.prototype.init = function(e) {
         var t = this,
           r = this,
-          n = this.cm,
-          o = (this.wrapper = hiddenTextarea()),
-          i = (this.textarea = o.firstChild)
-        e.wrapper.insertBefore(o, e.wrapper.firstChild),
-          g && (i.style.width = "0px"),
-          j(i, "input", function() {
-            s && a >= 9 && t.hasSelection && (t.hasSelection = null), r.poll()
-          }),
-          j(i, "paste", function(e) {
-            signalDOMEvent(n, e) ||
-              handlePaste(e, n) ||
-              ((n.state.pasteIncoming = !0), r.fastPoll())
-          })
+          n = this.cm
+        this.createField(e)
+        var o = this.textarea
         function prepareCopyCut(e) {
           if (!signalDOMEvent(n, e)) {
             if (n.somethingSelected())
@@ -8425,13 +8497,23 @@ webpackJsonp([0], {
               setLastCopied({ lineWise: !0, text: t.text }),
                 "cut" == e.type
                   ? n.setSelections(t.ranges, null, A)
-                  : ((r.prevInput = ""), (i.value = t.text.join("\n")), M(i))
+                  : ((r.prevInput = ""), (o.value = t.text.join("\n")), M(o))
             }
             "cut" == e.type && (n.state.cutIncoming = !0)
           }
         }
-        j(i, "cut", prepareCopyCut),
-          j(i, "copy", prepareCopyCut),
+        e.wrapper.insertBefore(this.wrapper, e.wrapper.firstChild),
+          g && (o.style.width = "0px"),
+          j(o, "input", function() {
+            s && a >= 9 && t.hasSelection && (t.hasSelection = null), r.poll()
+          }),
+          j(o, "paste", function(e) {
+            signalDOMEvent(n, e) ||
+              handlePaste(e, n) ||
+              ((n.state.pasteIncoming = !0), r.fastPoll())
+          }),
+          j(o, "cut", prepareCopyCut),
+          j(o, "copy", prepareCopyCut),
           j(e.scroller, "paste", function(t) {
             eventInWidget(e, t) ||
               signalDOMEvent(n, t) ||
@@ -8440,7 +8522,7 @@ webpackJsonp([0], {
           j(e.lineSpace, "selectstart", function(t) {
             eventInWidget(e, t) || e_preventDefault(t)
           }),
-          j(i, "compositionstart", function() {
+          j(o, "compositionstart", function() {
             var e = n.getCursor("from")
             r.composing && r.composing.range.clear(),
               (r.composing = {
@@ -8450,12 +8532,16 @@ webpackJsonp([0], {
                 }),
               })
           }),
-          j(i, "compositionend", function() {
+          j(o, "compositionend", function() {
             r.composing &&
               (r.poll(), r.composing.range.clear(), (r.composing = null))
           })
       }),
-        (_e.prototype.prepareSelection = function() {
+        (Ue.prototype.createField = function(e) {
+          ;(this.wrapper = hiddenTextarea()),
+            (this.textarea = this.wrapper.firstChild)
+        }),
+        (Ue.prototype.prepareSelection = function() {
           var e = this.cm,
             t = e.display,
             r = e.doc,
@@ -8475,7 +8561,7 @@ webpackJsonp([0], {
           }
           return n
         }),
-        (_e.prototype.showSelection = function(e) {
+        (Ue.prototype.showSelection = function(e) {
           var t = this.cm.display
           removeChildrenAndAdd(t.cursorDiv, e.cursors),
             removeChildrenAndAdd(t.selectionDiv, e.selection),
@@ -8483,7 +8569,7 @@ webpackJsonp([0], {
               ((this.wrapper.style.top = e.teTop + "px"),
               (this.wrapper.style.left = e.teLeft + "px"))
         }),
-        (_e.prototype.reset = function(e) {
+        (Ue.prototype.reset = function(e) {
           if (!this.contextMenuPending && !this.composing) {
             var t = this.cm
             if (t.somethingSelected()) {
@@ -8498,13 +8584,13 @@ webpackJsonp([0], {
                 s && a >= 9 && (this.hasSelection = null))
           }
         }),
-        (_e.prototype.getField = function() {
+        (Ue.prototype.getField = function() {
           return this.textarea
         }),
-        (_e.prototype.supportsTouch = function() {
+        (Ue.prototype.supportsTouch = function() {
           return !1
         }),
-        (_e.prototype.focus = function() {
+        (Ue.prototype.focus = function() {
           if (
             "nocursor" != this.cm.options.readOnly &&
             (!v || activeElt() != this.textarea)
@@ -8513,33 +8599,33 @@ webpackJsonp([0], {
               this.textarea.focus()
             } catch (e) {}
         }),
-        (_e.prototype.blur = function() {
+        (Ue.prototype.blur = function() {
           this.textarea.blur()
         }),
-        (_e.prototype.resetPosition = function() {
+        (Ue.prototype.resetPosition = function() {
           this.wrapper.style.top = this.wrapper.style.left = 0
         }),
-        (_e.prototype.receivedFocus = function() {
+        (Ue.prototype.receivedFocus = function() {
           this.slowPoll()
         }),
-        (_e.prototype.slowPoll = function() {
+        (Ue.prototype.slowPoll = function() {
           var e = this
           this.pollingFast ||
             this.polling.set(this.cm.options.pollInterval, function() {
               e.poll(), e.cm.state.focused && e.slowPoll()
             })
         }),
-        (_e.prototype.fastPoll = function() {
+        (Ue.prototype.fastPoll = function() {
           var e = !1,
             t = this
-          t.pollingFast = !0
-          t.polling.set(20, function p() {
-            t.poll() || e
-              ? ((t.pollingFast = !1), t.slowPoll())
-              : ((e = !0), t.polling.set(60, p))
-          })
+          ;(t.pollingFast = !0),
+            t.polling.set(20, function p() {
+              t.poll() || e
+                ? ((t.pollingFast = !1), t.slowPoll())
+                : ((e = !0), t.polling.set(60, p))
+            })
         }),
-        (_e.prototype.poll = function() {
+        (Ue.prototype.poll = function() {
           var e = this,
             t = this.cm,
             r = this.textarea,
@@ -8547,7 +8633,7 @@ webpackJsonp([0], {
           if (
             this.contextMenuPending ||
             !t.state.focused ||
-            (K(r) && !n && !this.composing) ||
+            (q(r) && !n && !this.composing) ||
             t.isReadOnly() ||
             t.options.disableInput ||
             t.state.keySeq
@@ -8594,13 +8680,13 @@ webpackJsonp([0], {
             !0
           )
         }),
-        (_e.prototype.ensurePolled = function() {
+        (Ue.prototype.ensurePolled = function() {
           this.pollingFast && this.poll() && (this.pollingFast = !1)
         }),
-        (_e.prototype.onKeyPress = function() {
+        (Ue.prototype.onKeyPress = function() {
           s && a >= 9 && (this.hasSelection = null), this.fastPoll()
         }),
-        (_e.prototype.onContextMenu = function(e) {
+        (Ue.prototype.onContextMenu = function(e) {
           var t = this,
             r = t.cm,
             n = r.display,
@@ -8614,20 +8700,20 @@ webpackJsonp([0], {
             var u = o.style.cssText,
               p = t.wrapper.style.cssText
             t.wrapper.style.cssText = "position: absolute"
-            var h = t.wrapper.getBoundingClientRect()
-            o.style.cssText =
-              "position: absolute; width: 30px; height: 30px;\n      top: " +
-              (e.clientY - h.top - 5) +
-              "px; left: " +
-              (e.clientX - h.left - 5) +
-              "px;\n      z-index: 1000; background: " +
-              (s ? "rgba(255, 255, 255, .05)" : "transparent") +
-              ";\n      outline: none; border-width: 0; outline: none; overflow: hidden; opacity: .05; filter: alpha(opacity=5);"
-            var f
+            var h,
+              f = t.wrapper.getBoundingClientRect()
             if (
-              (l && (f = window.scrollY),
+              ((o.style.cssText =
+                "position: absolute; width: 30px; height: 30px;\n      top: " +
+                (e.clientY - f.top - 5) +
+                "px; left: " +
+                (e.clientX - f.left - 5) +
+                "px;\n      z-index: 1000; background: " +
+                (s ? "rgba(255, 255, 255, .05)" : "transparent") +
+                ";\n      outline: none; border-width: 0; outline: none; overflow: hidden; opacity: .05; filter: alpha(opacity=5);"),
+              l && (h = window.scrollY),
               n.input.focus(),
-              l && window.scrollTo(null, f),
+              l && window.scrollTo(null, h),
               n.input.reset(),
               r.somethingSelected() || (o.value = t.prevInput = " "),
               (t.contextMenuPending = !0),
@@ -8681,235 +8767,243 @@ webpackJsonp([0], {
             }
           }
         }),
-        (_e.prototype.readOnlyChanged = function(e) {
+        (Ue.prototype.readOnlyChanged = function(e) {
           e || this.reset(), (this.textarea.disabled = "nocursor" == e)
         }),
-        (_e.prototype.setUneditable = function() {}),
-        (_e.prototype.needsContentAttribute = !1)
-      !(function defineOptions(e) {
-        var t = e.optionHandlers
-        function option(r, n, o, i) {
-          ;(e.defaults[r] = n),
-            o &&
-              (t[r] = i
-                ? function(e, t, r) {
-                    r != Fe && o(e, t, r)
+        (Ue.prototype.setUneditable = function() {}),
+        (Ue.prototype.needsContentAttribute = !1),
+        (function defineOptions(e) {
+          var t = e.optionHandlers
+          function option(r, n, o, i) {
+            ;(e.defaults[r] = n),
+              o &&
+                (t[r] = i
+                  ? function(e, t, r) {
+                      r != Be && o(e, t, r)
+                    }
+                  : o)
+          }
+          ;(e.defineOption = option),
+            (e.Init = Be),
+            option(
+              "value",
+              "",
+              function(e, t) {
+                return e.setValue(t)
+              },
+              !0
+            ),
+            option(
+              "mode",
+              null,
+              function(e, t) {
+                ;(e.doc.modeOption = t), loadMode(e)
+              },
+              !0
+            ),
+            option("indentUnit", 2, loadMode, !0),
+            option("indentWithTabs", !1),
+            option("smartIndent", !0),
+            option(
+              "tabSize",
+              4,
+              function(e) {
+                resetModeState(e), clearCaches(e), regChange(e)
+              },
+              !0
+            ),
+            option("lineSeparator", null, function(e, t) {
+              if (((e.doc.lineSep = t), t)) {
+                var r = [],
+                  n = e.doc.first
+                e.doc.iter(function(e) {
+                  for (var o = 0; ; ) {
+                    var i = e.text.indexOf(t, o)
+                    if (-1 == i) break
+                    ;(o = i + t.length), r.push(Pos(n, i))
                   }
-                : o)
-        }
-        ;(e.defineOption = option),
-          (e.Init = Fe),
-          option(
-            "value",
-            "",
-            function(e, t) {
-              return e.setValue(t)
-            },
-            !0
-          ),
-          option(
-            "mode",
-            null,
-            function(e, t) {
-              ;(e.doc.modeOption = t), loadMode(e)
-            },
-            !0
-          ),
-          option("indentUnit", 2, loadMode, !0),
-          option("indentWithTabs", !1),
-          option("smartIndent", !0),
-          option(
-            "tabSize",
-            4,
-            function(e) {
-              resetModeState(e), clearCaches(e), regChange(e)
-            },
-            !0
-          ),
-          option("lineSeparator", null, function(e, t) {
-            if (((e.doc.lineSep = t), t)) {
-              var r = [],
-                n = e.doc.first
-              e.doc.iter(function(e) {
-                for (var o = 0; ; ) {
-                  var i = e.text.indexOf(t, o)
-                  if (-1 == i) break
-                  ;(o = i + t.length), r.push(Pos(n, i))
-                }
-                n++
-              })
-              for (var o = r.length - 1; o >= 0; o--)
-                replaceRange(e.doc, t, r[o], Pos(r[o].line, r[o].ch + t.length))
-            }
-          }),
-          option(
-            "specialChars",
-            /[\u0000-\u001f\u007f-\u009f\u00ad\u061c\u200b-\u200f\u2028\u2029\ufeff]/g,
-            function(e, t, r) {
-              ;(e.state.specialChars = new RegExp(
-                t.source + (t.test("\t") ? "" : "|\t"),
-                "g"
-              )),
-                r != Fe && e.refresh()
-            }
-          ),
-          option(
-            "specialCharPlaceholder",
-            defaultSpecialCharPlaceholder,
-            function(e) {
-              return e.refresh()
-            },
-            !0
-          ),
-          option("electricChars", !0),
-          option(
-            "inputStyle",
-            v ? "contenteditable" : "textarea",
-            function() {
-              throw new Error(
-                "inputStyle can not (yet) be changed in a running editor"
-              )
-            },
-            !0
-          ),
-          option(
-            "spellcheck",
-            !1,
-            function(e, t) {
-              return (e.getInputField().spellcheck = t)
-            },
-            !0
-          ),
-          option("rtlMoveVisually", !C),
-          option("wholeLineUpdateBefore", !0),
-          option(
-            "theme",
-            "default",
-            function(e) {
-              themeChanged(e), guttersChanged(e)
-            },
-            !0
-          ),
-          option("keyMap", "default", function(e, t, r) {
-            var n = getKeyMap(t),
-              o = r != Fe && getKeyMap(r)
-            o && o.detach && o.detach(e, n), n.attach && n.attach(e, o || null)
-          }),
-          option("extraKeys", null),
-          option("configureMouse", null),
-          option("lineWrapping", !1, wrappingChanged, !0),
-          option(
-            "gutters",
-            [],
-            function(e) {
-              setGuttersForLineNumbers(e.options), guttersChanged(e)
-            },
-            !0
-          ),
-          option(
-            "fixedGutter",
-            !0,
-            function(e, t) {
-              ;(e.display.gutters.style.left = t
-                ? compensateForHScroll(e.display) + "px"
-                : "0"),
-                e.refresh()
-            },
-            !0
-          ),
-          option(
-            "coverGutterNextToScrollbar",
-            !1,
-            function(e) {
-              return updateScrollbars(e)
-            },
-            !0
-          ),
-          option(
-            "scrollbarStyle",
-            "native",
-            function(e) {
-              initScrollbars(e),
-                updateScrollbars(e),
-                e.display.scrollbars.setScrollTop(e.doc.scrollTop),
-                e.display.scrollbars.setScrollLeft(e.doc.scrollLeft)
-            },
-            !0
-          ),
-          option(
-            "lineNumbers",
-            !1,
-            function(e) {
-              setGuttersForLineNumbers(e.options), guttersChanged(e)
-            },
-            !0
-          ),
-          option("firstLineNumber", 1, guttersChanged, !0),
-          option(
-            "lineNumberFormatter",
-            function(e) {
-              return e
-            },
-            guttersChanged,
-            !0
-          ),
-          option("showCursorWhenSelecting", !1, updateSelection, !0),
-          option("resetSelectionOnContextMenu", !0),
-          option("lineWiseCopyCut", !0),
-          option("pasteLinesPerSelection", !0),
-          option("readOnly", !1, function(e, t) {
-            "nocursor" == t && (onBlur(e), e.display.input.blur()),
-              e.display.input.readOnlyChanged(t)
-          }),
-          option(
-            "disableInput",
-            !1,
-            function(e, t) {
-              t || e.display.input.reset()
-            },
-            !0
-          ),
-          option("dragDrop", !0, dragDropChanged),
-          option("allowDropFileTypes", null),
-          option("cursorBlinkRate", 530),
-          option("cursorScrollMargin", 0),
-          option("cursorHeight", 1, updateSelection, !0),
-          option("singleCursorHeightPerLine", !0, updateSelection, !0),
-          option("workTime", 100),
-          option("workDelay", 100),
-          option("flattenSpans", !0, resetModeState, !0),
-          option("addModeClass", !1, resetModeState, !0),
-          option("pollInterval", 100),
-          option("undoDepth", 200, function(e, t) {
-            return (e.doc.history.undoDepth = t)
-          }),
-          option("historyEventDelay", 1250),
-          option(
-            "viewportMargin",
-            10,
-            function(e) {
-              return e.refresh()
-            },
-            !0
-          ),
-          option("maxHighlightLength", 1e4, resetModeState, !0),
-          option("moveInputWithCursor", !0, function(e, t) {
-            t || e.display.input.resetPosition()
-          }),
-          option("tabindex", null, function(e, t) {
-            return (e.display.input.getField().tabIndex = t || "")
-          }),
-          option("autofocus", null),
-          option(
-            "direction",
-            "ltr",
-            function(e, t) {
-              return e.doc.setDirection(t)
-            },
-            !0
-          )
-      })(CodeMirror$1),
-        (function(e) {
+                  n++
+                })
+                for (var o = r.length - 1; o >= 0; o--)
+                  replaceRange(
+                    e.doc,
+                    t,
+                    r[o],
+                    Pos(r[o].line, r[o].ch + t.length)
+                  )
+              }
+            }),
+            option(
+              "specialChars",
+              /[\u0000-\u001f\u007f-\u009f\u00ad\u061c\u200b-\u200f\u2028\u2029\ufeff]/g,
+              function(e, t, r) {
+                ;(e.state.specialChars = new RegExp(
+                  t.source + (t.test("\t") ? "" : "|\t"),
+                  "g"
+                )),
+                  r != Be && e.refresh()
+              }
+            ),
+            option(
+              "specialCharPlaceholder",
+              defaultSpecialCharPlaceholder,
+              function(e) {
+                return e.refresh()
+              },
+              !0
+            ),
+            option("electricChars", !0),
+            option(
+              "inputStyle",
+              v ? "contenteditable" : "textarea",
+              function() {
+                throw new Error(
+                  "inputStyle can not (yet) be changed in a running editor"
+                )
+              },
+              !0
+            ),
+            option(
+              "spellcheck",
+              !1,
+              function(e, t) {
+                return (e.getInputField().spellcheck = t)
+              },
+              !0
+            ),
+            option("rtlMoveVisually", !x),
+            option("wholeLineUpdateBefore", !0),
+            option(
+              "theme",
+              "default",
+              function(e) {
+                themeChanged(e), guttersChanged(e)
+              },
+              !0
+            ),
+            option("keyMap", "default", function(e, t, r) {
+              var n = getKeyMap(t),
+                o = r != Be && getKeyMap(r)
+              o && o.detach && o.detach(e, n),
+                n.attach && n.attach(e, o || null)
+            }),
+            option("extraKeys", null),
+            option("configureMouse", null),
+            option("lineWrapping", !1, wrappingChanged, !0),
+            option(
+              "gutters",
+              [],
+              function(e) {
+                setGuttersForLineNumbers(e.options), guttersChanged(e)
+              },
+              !0
+            ),
+            option(
+              "fixedGutter",
+              !0,
+              function(e, t) {
+                ;(e.display.gutters.style.left = t
+                  ? compensateForHScroll(e.display) + "px"
+                  : "0"),
+                  e.refresh()
+              },
+              !0
+            ),
+            option(
+              "coverGutterNextToScrollbar",
+              !1,
+              function(e) {
+                return updateScrollbars(e)
+              },
+              !0
+            ),
+            option(
+              "scrollbarStyle",
+              "native",
+              function(e) {
+                initScrollbars(e),
+                  updateScrollbars(e),
+                  e.display.scrollbars.setScrollTop(e.doc.scrollTop),
+                  e.display.scrollbars.setScrollLeft(e.doc.scrollLeft)
+              },
+              !0
+            ),
+            option(
+              "lineNumbers",
+              !1,
+              function(e) {
+                setGuttersForLineNumbers(e.options), guttersChanged(e)
+              },
+              !0
+            ),
+            option("firstLineNumber", 1, guttersChanged, !0),
+            option(
+              "lineNumberFormatter",
+              function(e) {
+                return e
+              },
+              guttersChanged,
+              !0
+            ),
+            option("showCursorWhenSelecting", !1, updateSelection, !0),
+            option("resetSelectionOnContextMenu", !0),
+            option("lineWiseCopyCut", !0),
+            option("pasteLinesPerSelection", !0),
+            option("selectionsMayTouch", !1),
+            option("readOnly", !1, function(e, t) {
+              "nocursor" == t && (onBlur(e), e.display.input.blur()),
+                e.display.input.readOnlyChanged(t)
+            }),
+            option(
+              "disableInput",
+              !1,
+              function(e, t) {
+                t || e.display.input.reset()
+              },
+              !0
+            ),
+            option("dragDrop", !0, dragDropChanged),
+            option("allowDropFileTypes", null),
+            option("cursorBlinkRate", 530),
+            option("cursorScrollMargin", 0),
+            option("cursorHeight", 1, updateSelection, !0),
+            option("singleCursorHeightPerLine", !0, updateSelection, !0),
+            option("workTime", 100),
+            option("workDelay", 100),
+            option("flattenSpans", !0, resetModeState, !0),
+            option("addModeClass", !1, resetModeState, !0),
+            option("pollInterval", 100),
+            option("undoDepth", 200, function(e, t) {
+              return (e.doc.history.undoDepth = t)
+            }),
+            option("historyEventDelay", 1250),
+            option(
+              "viewportMargin",
+              10,
+              function(e) {
+                return e.refresh()
+              },
+              !0
+            ),
+            option("maxHighlightLength", 1e4, resetModeState, !0),
+            option("moveInputWithCursor", !0, function(e, t) {
+              t || e.display.input.resetPosition()
+            }),
+            option("tabindex", null, function(e, t) {
+              return (e.display.input.getField().tabIndex = t || "")
+            }),
+            option("autofocus", null),
+            option(
+              "direction",
+              "ltr",
+              function(e, t) {
+                return e.doc.setDirection(t)
+              },
+              !0
+            ),
+            option("phrases", null)
+        })(CodeMirror),
+        (function addEditorMethods(e) {
           var t = e.optionHandlers,
             r = (e.helpers = {})
           ;(e.prototype = {
@@ -8999,7 +9093,7 @@ webpackJsonp([0], {
                   0 == i.ch &&
                     t.length == c.length &&
                     c[n].from().ch > 0 &&
-                    replaceOneSelection(this.doc, n, new ve(i, c[n].to()), A)
+                    replaceOneSelection(this.doc, n, new ye(i, c[n].to()), A)
                 }
               }
             }),
@@ -9176,7 +9270,7 @@ webpackJsonp([0], {
             triggerOnKeyUp: onKeyUp,
             triggerOnMouseDown: methodOp(onMouseDown),
             execCommand: function(e) {
-              if (Ne.hasOwnProperty(e)) return Ne[e].call(null, this)
+              if (De.hasOwnProperty(e)) return De[e].call(null, this)
             },
             triggerElectric: methodOp(function(e) {
               triggerElectric(this, e)
@@ -9276,13 +9370,13 @@ webpackJsonp([0], {
                   --r
                 for (; n < t.length && s(t.charAt(n)); ) ++n
               }
-              return new ve(Pos(e.line, r), Pos(e.line, n))
+              return new ye(Pos(e.line, r), Pos(e.line, n))
             },
             toggleOverwrite: function(e) {
               ;(null != e && e == this.state.overwrite) ||
                 ((this.state.overwrite = !this.state.overwrite)
                   ? addClass(this.display.cursorDiv, "CodeMirror-overwrite")
-                  : k(this.display.cursorDiv, "CodeMirror-overwrite"),
+                  : L(this.display.cursorDiv, "CodeMirror-overwrite"),
                 signal(this, "overwriteToggle", this, this.state.overwrite))
             },
             hasFocus: function() {
@@ -9377,6 +9471,10 @@ webpackJsonp([0], {
                 t
               )
             }),
+            phrase: function(e) {
+              var t = this.options.phrases
+              return t && Object.prototype.hasOwnProperty.call(t, e) ? t[e] : e
+            },
             getInputField: function() {
               return this.display.input.getField()
             },
@@ -9398,47 +9496,47 @@ webpackJsonp([0], {
             (e.registerGlobalHelper = function(t, n, o, i) {
               e.registerHelper(t, n, i), r[t]._global.push({ pred: o, val: i })
             })
-        })(CodeMirror$1)
-      var Ue = "iter insert remove copy getEditor constructor".split(" ")
-      for (var Ge in Se.prototype)
-        Se.prototype.hasOwnProperty(Ge) &&
-          indexOf(Ue, Ge) < 0 &&
-          (CodeMirror$1.prototype[Ge] = (function(e) {
+        })(CodeMirror)
+      var Ge = "iter insert remove copy getEditor constructor".split(" ")
+      for (var Ke in ke.prototype)
+        ke.prototype.hasOwnProperty(Ke) &&
+          indexOf(Ge, Ke) < 0 &&
+          (CodeMirror.prototype[Ke] = (function(e) {
             return function() {
               return e.apply(this.doc, arguments)
             }
-          })(Se.prototype[Ge]))
+          })(ke.prototype[Ke]))
       return (
-        eventMixin(Se),
-        (CodeMirror$1.inputStyles = { textarea: _e, contenteditable: Ve }),
-        (CodeMirror$1.defineMode = function(e) {
-          CodeMirror$1.defaults.mode ||
+        eventMixin(ke),
+        (CodeMirror.inputStyles = { textarea: Ue, contenteditable: _e }),
+        (CodeMirror.defineMode = function(e) {
+          CodeMirror.defaults.mode ||
             "null" == e ||
-            (CodeMirror$1.defaults.mode = e),
+            (CodeMirror.defaults.mode = e),
             function defineMode(e, t) {
               arguments.length > 2 &&
                 (t.dependencies = Array.prototype.slice.call(arguments, 2)),
-                (X[e] = t)
+                (Y[e] = t)
             }.apply(this, arguments)
         }),
-        (CodeMirror$1.defineMIME = function defineMIME(e, t) {
-          Y[e] = t
+        (CodeMirror.defineMIME = function defineMIME(e, t) {
+          Z[e] = t
         }),
-        CodeMirror$1.defineMode("null", function() {
+        CodeMirror.defineMode("null", function() {
           return {
             token: function(e) {
               return e.skipToEnd()
             },
           }
         }),
-        CodeMirror$1.defineMIME("text/plain", "null"),
-        (CodeMirror$1.defineExtension = function(e, t) {
-          CodeMirror$1.prototype[e] = t
+        CodeMirror.defineMIME("text/plain", "null"),
+        (CodeMirror.defineExtension = function(e, t) {
+          CodeMirror.prototype[e] = t
         }),
-        (CodeMirror$1.defineDocExtension = function(e, t) {
-          Se.prototype[e] = t
+        (CodeMirror.defineDocExtension = function(e, t) {
+          ke.prototype[e] = t
         }),
-        (CodeMirror$1.fromTextArea = function fromTextArea(e, t) {
+        (CodeMirror.fromTextArea = function fromTextArea(e, t) {
           if (
             (((t = t ? copyObj(t) : {}).value = e.value),
             !t.tabindex && e.tabIndex && (t.tabindex = e.tabIndex),
@@ -9482,7 +9580,7 @@ webpackJsonp([0], {
               })
           }),
             (e.style.display = "none")
-          var s = CodeMirror$1(function(t) {
+          var s = CodeMirror(function(t) {
             return e.parentNode.insertBefore(t, e.nextSibling)
           }, t)
           return s
@@ -9491,63 +9589,64 @@ webpackJsonp([0], {
           ;(e.off = off),
             (e.on = j),
             (e.wheelEventPixels = wheelEventPixels),
-            (e.Doc = Se),
-            (e.splitLines = G),
+            (e.Doc = ke),
+            (e.splitLines = K),
             (e.countColumn = countColumn),
             (e.findColumn = findColumn),
             (e.isWordChar = isWordCharBasic),
             (e.Pass = P),
             (e.signal = signal),
-            (e.Line = re),
+            (e.Line = ne),
             (e.changeEnd = changeEnd),
-            (e.scrollbarModel = de),
+            (e.scrollbarModel = pe),
             (e.Pos = Pos),
             (e.cmpPos = cmp),
-            (e.modes = X),
-            (e.mimeModes = Y),
+            (e.modes = Y),
+            (e.mimeModes = Z),
             (e.resolveMode = resolveMode),
             (e.getMode = getMode),
-            (e.modeExtensions = Z),
+            (e.modeExtensions = Q),
             (e.extendMode = extendMode),
             (e.copyState = copyState),
             (e.startState = startState),
             (e.innerMode = innerMode),
-            (e.commands = Ne),
-            (e.keyMap = Ae),
+            (e.commands = De),
+            (e.keyMap = Ne),
             (e.keyName = keyName),
             (e.isModifierKey = isModifierKey),
             (e.lookupKey = lookupKey),
             (e.normalizeKeyMap = normalizeKeyMap),
-            (e.StringStream = Q),
-            (e.SharedTextMarker = xe),
+            (e.StringStream = J),
+            (e.SharedTextMarker = we),
             (e.TextMarker = Ce),
-            (e.LineWidget = ye),
+            (e.LineWidget = be),
             (e.e_preventDefault = e_preventDefault),
             (e.e_stopPropagation = e_stopPropagation),
             (e.e_stop = e_stop),
             (e.addClass = addClass),
             (e.contains = contains),
-            (e.rmClass = k),
-            (e.keyNames = Me)
-        })(CodeMirror$1),
-        (CodeMirror$1.version = "5.33.0"),
-        CodeMirror$1
+            (e.rmClass = L),
+            (e.keyNames = Te)
+        })(CodeMirror),
+        (CodeMirror.version = "5.42.0"),
+        CodeMirror
       )
     }),
       (e.exports = n())
-    var n
   },
   "./node_modules/codemirror/mode/javascript/javascript.js": function(e, t, r) {
     ;(function(e) {
       "use strict"
       e.defineMode("javascript", function(t, r) {
-        var n = t.indentUnit,
-          o = r.statementIndent,
-          i = r.jsonld,
-          s = r.json || i,
-          a = r.typescript,
-          l = r.wordCharacters || /[\w$\xa1-\uffff]/,
-          c = (function() {
+        var n,
+          o,
+          i = t.indentUnit,
+          s = r.statementIndent,
+          a = r.jsonld,
+          l = r.json || a,
+          c = r.typescript,
+          u = r.wordCharacters || /[\w$\xa1-\uffff]/,
+          d = (function() {
             function kw(e) {
               return { type: e, style: "keyword" }
             }
@@ -9601,11 +9700,10 @@ webpackJsonp([0], {
               await: r,
             }
           })(),
-          u = /[+\-*&%=<>!?|~^@]/,
-          d = /^@(context|id|value|language|type|container|list|set|reverse|index|base|vocab|graph)"/
-        var p, h
+          p = /[+\-*&%=<>!?|~^@]/,
+          h = /^@(context|id|value|language|type|container|list|set|reverse|index|base|vocab|graph)"/
         function ret(e, t, r) {
-          return (p = e), (h = r), t
+          return (n = e), (o = r), t
         }
         function tokenBase(e, t) {
           var r = e.next()
@@ -9615,7 +9713,7 @@ webpackJsonp([0], {
                 return function(t, r) {
                   var n,
                     o = !1
-                  if (i && "@" == t.peek() && t.match(d))
+                  if (a && "@" == t.peek() && t.match(h))
                     return (
                       (r.tokenize = tokenBase), ret("jsonld-keyword", "meta")
                     )
@@ -9631,15 +9729,11 @@ webpackJsonp([0], {
           if ("." == r && e.match("..")) return ret("spread", "meta")
           if (/[\[\]{}\(\),;\:\.]/.test(r)) return ret(r)
           if ("=" == r && e.eat(">")) return ret("=>", "operator")
-          if ("0" == r && e.eat(/x/i))
-            return e.eatWhile(/[\da-f]/i), ret("number", "number")
-          if ("0" == r && e.eat(/o/i))
-            return e.eatWhile(/[0-7]/i), ret("number", "number")
-          if ("0" == r && e.eat(/b/i))
-            return e.eatWhile(/[01]/i), ret("number", "number")
+          if ("0" == r && e.match(/^(?:x[\da-f]+|o[0-7]+|b[01]+)n?/i))
+            return ret("number", "number")
           if (/\d/.test(r))
             return (
-              e.match(/^\d*(?:\.\d*)?(?:[eE][+\-]?\d+)?/),
+              e.match(/^\d*(?:n|(?:\.\d*)?(?:[eE][+\-]?\d+)?)?/),
               ret("number", "number")
             )
           if ("/" == r)
@@ -9657,12 +9751,12 @@ webpackJsonp([0], {
                         r = !r && "\\" == t
                       }
                     })(e),
-                    e.match(/^\b(([gimyu])(?![gimyu]*\2))+\b/),
+                    e.match(/^\b(([gimyus])(?![gimyus]*\2))+\b/),
                     ret("regexp", "string-2"))
                   : (e.eat("="), ret("operator", "operator", e.current()))
           if ("`" == r) return (t.tokenize = tokenQuasi), tokenQuasi(e, t)
           if ("#" == r) return e.skipToEnd(), ret("error", "error")
-          if (u.test(r))
+          if (p.test(r))
             return (
               (">" == r && t.lexical && ">" == t.lexical.type) ||
                 (e.eat("=")
@@ -9670,15 +9764,15 @@ webpackJsonp([0], {
                   : /[<>*+\-]/.test(r) && (e.eat(r), ">" == r && e.eat(r))),
               ret("operator", "operator", e.current())
             )
-          if (l.test(r)) {
-            e.eatWhile(l)
+          if (u.test(r)) {
+            e.eatWhile(u)
             var n = e.current()
             if ("." != t.lastType) {
-              if (c.propertyIsEnumerable(n)) {
-                var o = c[n]
+              if (d.propertyIsEnumerable(n)) {
+                var o = d[n]
                 return ret(o.type, o.style, n)
               }
-              if ("async" == n && e.match(/^(\s|\/\*.*?\*\/)*[\(\w]/, !1))
+              if ("async" == n && e.match(/^(\s|\/\*.*?\*\/)*[\[\(\w]/, !1))
                 return ret("async", "keyword", n)
             }
             return ret("variable", "variable", n)
@@ -9709,28 +9803,28 @@ webpackJsonp([0], {
           t.fatArrowAt && (t.fatArrowAt = null)
           var r = e.string.indexOf("=>", e.start)
           if (!(r < 0)) {
-            if (a) {
+            if (c) {
               var n = /:\s*(?:\w+(?:<[^>]*>|\[\])?|\{[^}]*\})\s*$/.exec(
                 e.string.slice(e.start, r)
               )
               n && (r = n.index)
             }
             for (var o = 0, i = !1, s = r - 1; s >= 0; --s) {
-              var c = e.string.charAt(s),
-                u = f.indexOf(c)
-              if (u >= 0 && u < 3) {
+              var a = e.string.charAt(s),
+                l = f.indexOf(a)
+              if (l >= 0 && l < 3) {
                 if (!o) {
                   ++s
                   break
                 }
                 if (0 == --o) {
-                  "(" == c && (i = !0)
+                  "(" == a && (i = !0)
                   break
                 }
-              } else if (u >= 3 && u < 6) ++o
-              else if (l.test(c)) i = !0
+              } else if (l >= 3 && l < 6) ++o
+              else if (u.test(a)) i = !0
               else {
-                if (/["'\/]/.test(c)) return
+                if (/["'\/]/.test(a)) return
                 if (i && !o) {
                   ++s
                   break
@@ -9770,19 +9864,34 @@ webpackJsonp([0], {
         function cont() {
           return pass.apply(null, arguments), !0
         }
+        function inList(e, t) {
+          for (var r = t; r; r = r.next) if (r.name == e) return !0
+          return !1
+        }
         function register(e) {
-          function inList(t) {
-            for (var r = t; r; r = r.next) if (r.name == e) return !0
-            return !1
-          }
           var t = m.state
-          if (((m.marked = "def"), t.context)) {
-            if (inList(t.localVars)) return
-            t.localVars = { name: e, next: t.localVars }
-          } else {
-            if (inList(t.globalVars)) return
-            r.globalVars && (t.globalVars = { name: e, next: t.globalVars })
-          }
+          if (((m.marked = "def"), t.context))
+            if ("var" == t.lexical.info && t.context && t.context.block) {
+              var n = (function registerVarScoped(e, t) {
+                if (t) {
+                  if (t.block) {
+                    var r = registerVarScoped(e, t.prev)
+                    return r
+                      ? r == t.prev ? t : new Context(r, t.vars, !0)
+                      : null
+                  }
+                  return inList(e, t.vars)
+                    ? t
+                    : new Context(t.prev, new Var(e, t.vars), !1)
+                }
+                return null
+              })(e, t.context)
+              if (null != n) return void (t.context = n)
+            } else if (!inList(e, t.localVars))
+              return void (t.localVars = new Var(e, t.localVars))
+          r.globalVars &&
+            !inList(e, t.globalVars) &&
+            (t.globalVars = new Var(e, t.globalVars))
         }
         function isModifier(e) {
           return (
@@ -9793,13 +9902,28 @@ webpackJsonp([0], {
             "readonly" == e
           )
         }
-        var v = { name: "this", next: { name: "arguments" } }
+        function Context(e, t, r) {
+          ;(this.prev = e), (this.vars = t), (this.block = r)
+        }
+        function Var(e, t) {
+          ;(this.name = e), (this.next = t)
+        }
+        var v = new Var("this", new Var("arguments", null))
         function pushcontext() {
-          ;(m.state.context = {
-            prev: m.state.context,
-            vars: m.state.localVars,
-          }),
+          ;(m.state.context = new Context(
+            m.state.context,
+            m.state.localVars,
+            !1
+          )),
             (m.state.localVars = v)
+        }
+        function pushblockcontext() {
+          ;(m.state.context = new Context(
+            m.state.context,
+            m.state.localVars,
+            !0
+          )),
+            (m.state.localVars = null)
         }
         function popcontext() {
           ;(m.state.localVars = m.state.context.vars),
@@ -9830,15 +9954,18 @@ webpackJsonp([0], {
             (")" == e.lexical.type && (e.indented = e.lexical.indented),
             (e.lexical = e.lexical.prev))
         }
-        poplex.lex = !0
         function expect(e) {
           return function exp(t) {
-            return t == e ? cont() : ";" == e ? pass() : cont(exp)
+            return t == e
+              ? cont()
+              : ";" == e || "}" == t || ")" == t || "]" == t
+                ? pass()
+                : cont(exp)
           }
         }
         function statement(e, t) {
           return "var" == e
-            ? cont(pushlex("vardef", t.length), vardef, expect(";"), poplex)
+            ? cont(pushlex("vardef", t), vardef, expect(";"), poplex)
             : "keyword a" == e
               ? cont(pushlex("form"), parenExpr, statement, poplex)
               : "keyword b" == e
@@ -9855,7 +9982,13 @@ webpackJsonp([0], {
                   : "debugger" == e
                     ? cont(expect(";"))
                     : "{" == e
-                      ? cont(pushlex("}"), block, poplex)
+                      ? cont(
+                          pushlex("}"),
+                          pushblockcontext,
+                          block,
+                          poplex,
+                          popcontext
+                        )
                       : ";" == e
                         ? cont()
                         : "if" == e
@@ -9878,42 +10011,47 @@ webpackJsonp([0], {
                                   statement,
                                   poplex
                                 )
-                              : "class" == e || (a && "interface" == t)
+                              : "class" == e || (c && "interface" == t)
                                 ? ((m.marked = "keyword"),
                                   cont(pushlex("form"), className, poplex))
                                 : "variable" == e
-                                  ? a && "type" == t
-                                    ? ((m.marked = "keyword"),
-                                      cont(
-                                        typeexpr,
-                                        expect("operator"),
-                                        typeexpr,
-                                        expect(";")
-                                      ))
-                                    : a && "declare" == t
+                                  ? c && "declare" == t
+                                    ? ((m.marked = "keyword"), cont(statement))
+                                    : c &&
+                                      ("module" == t ||
+                                        "enum" == t ||
+                                        "type" == t) &&
+                                      m.stream.match(/^\s*\w/, !1)
                                       ? ((m.marked = "keyword"),
-                                        cont(statement))
-                                      : a &&
-                                        ("module" == t || "enum" == t) &&
-                                        m.stream.match(/^\s*\w/, !1)
+                                        "enum" == t
+                                          ? cont(enumdef)
+                                          : "type" == t
+                                            ? cont(
+                                                typeexpr,
+                                                expect("operator"),
+                                                typeexpr,
+                                                expect(";")
+                                              )
+                                            : cont(
+                                                pushlex("form"),
+                                                pattern,
+                                                expect("{"),
+                                                pushlex("}"),
+                                                block,
+                                                poplex,
+                                                poplex
+                                              ))
+                                      : c && "namespace" == t
                                         ? ((m.marked = "keyword"),
                                           cont(
                                             pushlex("form"),
-                                            pattern,
-                                            expect("{"),
-                                            pushlex("}"),
+                                            expression,
                                             block,
-                                            poplex,
                                             poplex
                                           ))
-                                        : a && "namespace" == t
+                                        : c && "abstract" == t
                                           ? ((m.marked = "keyword"),
-                                            cont(
-                                              pushlex("form"),
-                                              expression,
-                                              block,
-                                              poplex
-                                            ))
+                                            cont(statement))
                                           : cont(pushlex("stat"), maybelabel)
                                   : "switch" == e
                                     ? cont(
@@ -9921,9 +10059,11 @@ webpackJsonp([0], {
                                         parenExpr,
                                         expect("{"),
                                         pushlex("}", "switch"),
+                                        pushblockcontext,
                                         block,
                                         poplex,
-                                        poplex
+                                        poplex,
+                                        popcontext
                                       )
                                     : "case" == e
                                       ? cont(expression, expect(":"))
@@ -9933,9 +10073,7 @@ webpackJsonp([0], {
                                           ? cont(
                                               pushlex("form"),
                                               pushcontext,
-                                              expect("("),
-                                              funarg,
-                                              expect(")"),
+                                              maybeCatchBinding,
                                               statement,
                                               poplex,
                                               popcontext
@@ -9962,6 +10100,9 @@ webpackJsonp([0], {
                                                       expect(";"),
                                                       poplex
                                                     )
+        }
+        function maybeCatchBinding(e) {
+          if ("(" == e) return cont(funarg, expect(")"))
         }
         function expression(e, t) {
           return expressionInner(e, t, !1)
@@ -9995,7 +10136,7 @@ webpackJsonp([0], {
             ? cont(o)
             : "function" == e
               ? cont(functiondef, o)
-              : "class" == e || (a && "interface" == t)
+              : "class" == e || (c && "interface" == t)
                 ? ((m.marked = "keyword"),
                   cont(pushlex("form"), classExpression, poplex))
                 : "keyword c" == e || "async" == e
@@ -10022,7 +10163,7 @@ webpackJsonp([0], {
                                     return function(t) {
                                       return "." == t
                                         ? cont(e ? targetNoComma : target)
-                                        : "variable" == t && a
+                                        : "variable" == t && c
                                           ? cont(
                                               maybeTypeArgs,
                                               e
@@ -10035,7 +10176,7 @@ webpackJsonp([0], {
                                     }
                                   })(r)
                                 )
-                              : cont()
+                              : "import" == e ? cont(expression) : cont()
         }
         function maybeexpression(e) {
           return e.match(/[;\}\)\],]/) ? pass() : pass(expression)
@@ -10049,9 +10190,9 @@ webpackJsonp([0], {
           return "=>" == e
             ? cont(pushcontext, r ? arrowBodyNoComma : arrowBody, popcontext)
             : "operator" == e
-              ? /\+\+|--/.test(t) || (a && "!" == t)
+              ? /\+\+|--/.test(t) || (c && "!" == t)
                 ? cont(n)
-                : a && "<" == t && m.stream.match(/^([^>]|<.*?>)*>\s*\(/, !1)
+                : c && "<" == t && m.stream.match(/^([^>]|<.*?>)*>\s*\(/, !1)
                   ? cont(pushlex(">"), commasep(typeexpr, ">"), poplex, n)
                   : "?" == t ? cont(expression, expect(":"), o) : cont(o)
               : "quasi" == e
@@ -10069,7 +10210,7 @@ webpackJsonp([0], {
                             poplex,
                             n
                           )
-                        : a && "as" == t
+                        : c && "as" == t
                           ? ((m.marked = "keyword"), cont(typeexpr, n))
                           : "regexp" == e
                             ? ((m.state.lastType = m.marked = "operator"),
@@ -10126,31 +10267,31 @@ webpackJsonp([0], {
         function objprop(e, t) {
           if ("async" == e) return (m.marked = "property"), cont(objprop)
           if ("variable" == e || "keyword" == m.style) {
-            if (((m.marked = "property"), "get" == t || "set" == t))
-              return cont(getterSetter)
-            var r
             return (
-              a &&
-                m.state.fatArrowAt == m.stream.start &&
-                (r = m.stream.match(/^\s*:\s*/, !1)) &&
-                (m.state.fatArrowAt = m.stream.pos + r[0].length),
-              cont(afterprop)
+              (m.marked = "property"),
+              "get" == t || "set" == t
+                ? cont(getterSetter)
+                : (c &&
+                    m.state.fatArrowAt == m.stream.start &&
+                    (r = m.stream.match(/^\s*:\s*/, !1)) &&
+                    (m.state.fatArrowAt = m.stream.pos + r[0].length),
+                  cont(afterprop))
             )
+            var r
+          } else {
+            if ("number" == e || "string" == e)
+              return (
+                (m.marked = a ? "property" : m.style + " property"),
+                cont(afterprop)
+              )
+            if ("jsonld-keyword" == e) return cont(afterprop)
+            if (c && isModifier(t)) return (m.marked = "keyword"), cont(objprop)
+            if ("[" == e)
+              return cont(expression, maybetype, expect("]"), afterprop)
+            if ("spread" == e) return cont(expressionNoComma, afterprop)
+            if ("*" == t) return (m.marked = "keyword"), cont(objprop)
+            if (":" == e) return pass(afterprop)
           }
-          return "number" == e || "string" == e
-            ? ((m.marked = i ? "property" : m.style + " property"),
-              cont(afterprop))
-            : "jsonld-keyword" == e
-              ? cont(afterprop)
-              : a && isModifier(t)
-                ? ((m.marked = "keyword"), cont(objprop))
-                : "[" == e
-                  ? cont(expression, maybetype, expect("]"), afterprop)
-                  : "spread" == e
-                    ? cont(expressionNoComma, afterprop)
-                    : "*" == t
-                      ? ((m.marked = "keyword"), cont(objprop))
-                      : ":" == e ? pass(afterprop) : void 0
         }
         function getterSetter(e) {
           return "variable" != e
@@ -10187,13 +10328,13 @@ webpackJsonp([0], {
           return "}" == e ? cont() : pass(statement, block)
         }
         function maybetype(e, t) {
-          if (a) {
+          if (c) {
             if (":" == e) return cont(typeexpr)
             if ("?" == t) return cont(maybetype)
           }
         }
         function mayberettype(e) {
-          if (a && ":" == e)
+          if (c && ":" == e)
             return m.stream.match(/^\s*\w+\s+is\b/, !1)
               ? cont(expression, isKW, typeexpr)
               : cont(typeexpr)
@@ -10202,29 +10343,32 @@ webpackJsonp([0], {
           if ("is" == t) return (m.marked = "keyword"), cont()
         }
         function typeexpr(e, t) {
-          return "variable" == e || "void" == t
-            ? "keyof" == t
-              ? ((m.marked = "keyword"), cont(typeexpr))
-              : ((m.marked = "type"), cont(afterType))
-            : "string" == e || "number" == e || "atom" == e
-              ? cont(afterType)
-              : "[" == e
-                ? cont(
-                    pushlex("]"),
-                    commasep(typeexpr, "]", ","),
-                    poplex,
-                    afterType
-                  )
-                : "{" == e
+          return "keyof" == t || "typeof" == t
+            ? ((m.marked = "keyword"),
+              cont("keyof" == t ? typeexpr : expressionNoComma))
+            : "variable" == e || "void" == t
+              ? ((m.marked = "type"), cont(afterType))
+              : "string" == e || "number" == e || "atom" == e
+                ? cont(afterType)
+                : "[" == e
                   ? cont(
-                      pushlex("}"),
-                      commasep(typeprop, "}", ",;"),
+                      pushlex("]"),
+                      commasep(typeexpr, "]", ","),
                       poplex,
                       afterType
                     )
-                  : "(" == e
-                    ? cont(commasep(typearg, ")"), maybeReturnType)
-                    : void 0
+                  : "{" == e
+                    ? cont(
+                        pushlex("}"),
+                        commasep(typeprop, "}", ",;"),
+                        poplex,
+                        afterType
+                      )
+                    : "(" == e
+                      ? cont(commasep(typearg, ")"), maybeReturnType)
+                      : "<" == e
+                        ? cont(commasep(typeexpr, ">"), typeexpr)
+                        : void 0
         }
         function maybeReturnType(e) {
           if ("=>" == e) return cont(typeexpr)
@@ -10240,15 +10384,15 @@ webpackJsonp([0], {
                   ? cont(expression, maybetype, expect("]"), typeprop)
                   : void 0
         }
-        function typearg(e) {
-          return "variable" == e
+        function typearg(e, t) {
+          return ("variable" == e && m.stream.match(/^\s*[?:]/, !1)) || "?" == t
             ? cont(typearg)
-            : ":" == e ? cont(typeexpr) : void 0
+            : ":" == e ? cont(typeexpr) : pass(typeexpr)
         }
         function afterType(e, t) {
           return "<" == t
             ? cont(pushlex(">"), commasep(typeexpr, ">"), poplex, afterType)
-            : "|" == t || "." == e
+            : "|" == t || "." == e || "&" == t
               ? cont(typeexpr)
               : "[" == e
                 ? cont(expect("]"), afterType)
@@ -10271,18 +10415,20 @@ webpackJsonp([0], {
         function maybeTypeDefault(e, t) {
           if ("=" == t) return cont(typeexpr)
         }
-        function vardef() {
-          return pass(pattern, maybetype, maybeAssign, vardefCont)
+        function vardef(e, t) {
+          return "enum" == t
+            ? ((m.marked = "keyword"), cont(enumdef))
+            : pass(pattern, maybetype, maybeAssign, vardefCont)
         }
         function pattern(e, t) {
-          return a && isModifier(t)
+          return c && isModifier(t)
             ? ((m.marked = "keyword"), cont(pattern))
             : "variable" == e
               ? (register(t), cont())
               : "spread" == e
                 ? cont(pattern)
                 : "[" == e
-                  ? contCommasep(pattern, "]")
+                  ? contCommasep(eltpattern, "]")
                   : "{" == e ? contCommasep(proppattern, "}") : void 0
         }
         function proppattern(e, t) {
@@ -10290,8 +10436,15 @@ webpackJsonp([0], {
             ? ("variable" == e && (m.marked = "property"),
               "spread" == e
                 ? cont(pattern)
-                : "}" == e ? pass() : cont(expect(":"), pattern, maybeAssign))
+                : "}" == e
+                  ? pass()
+                  : "[" == e
+                    ? cont(expression, expect("]"), expect(":"), proppattern)
+                    : cont(expect(":"), pattern, maybeAssign))
             : (register(t), cont(maybeAssign))
+        }
+        function eltpattern() {
+          return pass(pattern, maybeAssign)
         }
         function maybeAssign(e, t) {
           if ("=" == t) return cont(expressionNoComma)
@@ -10303,8 +10456,12 @@ webpackJsonp([0], {
           if ("keyword b" == e && "else" == t)
             return cont(pushlex("form", "else"), statement, poplex)
         }
-        function forspec(e) {
-          if ("(" == e) return cont(pushlex(")"), forspec1, expect(")"), poplex)
+        function forspec(e, t) {
+          return "await" == t
+            ? cont(forspec)
+            : "(" == e
+              ? cont(pushlex(")"), forspec1, expect(")"), poplex)
+              : void 0
         }
         function forspec1(e) {
           return "var" == e
@@ -10345,7 +10502,7 @@ webpackJsonp([0], {
                     statement,
                     popcontext
                   )
-                : a && "<" == t
+                : c && "<" == t
                   ? cont(
                       pushlex(">"),
                       commasep(typeparam, ">"),
@@ -10359,7 +10516,7 @@ webpackJsonp([0], {
             "@" == t && cont(expression, funarg),
             "spread" == e
               ? cont(funarg)
-              : a && isModifier(t)
+              : c && isModifier(t)
                 ? ((m.marked = "keyword"), cont(funarg))
                 : pass(pattern, maybetype, maybeAssign)
           )
@@ -10378,8 +10535,9 @@ webpackJsonp([0], {
                 poplex,
                 classNameAfter
               )
-            : "extends" == t || "implements" == t || (a && "," == e)
-              ? cont(a ? typeexpr : expression, classNameAfter)
+            : "extends" == t || "implements" == t || (c && "," == e)
+              ? ("implements" == t && (m.marked = "keyword"),
+                cont(c ? typeexpr : expression, classNameAfter))
               : "{" == e ? cont(pushlex("}"), classBody, poplex) : void 0
         }
         function classBody(e, t) {
@@ -10388,18 +10546,18 @@ webpackJsonp([0], {
               ("static" == t ||
                 "get" == t ||
                 "set" == t ||
-                (a && isModifier(t))) &&
+                (c && isModifier(t))) &&
               m.stream.match(/^\s+[\w$\xa1-\uffff]/, !1))
             ? ((m.marked = "keyword"), cont(classBody))
             : "variable" == e || "keyword" == m.style
               ? ((m.marked = "property"),
-                cont(a ? classfield : functiondef, classBody))
+                cont(c ? classfield : functiondef, classBody))
               : "[" == e
                 ? cont(
                     expression,
                     maybetype,
                     expect("]"),
-                    a ? classfield : functiondef,
+                    c ? classfield : functiondef,
                     classBody
                   )
                 : "*" == t
@@ -10434,7 +10592,9 @@ webpackJsonp([0], {
         function afterImport(e) {
           return "string" == e
             ? cont()
-            : pass(importSpec, maybeMoreImports, maybeFrom)
+            : "(" == e
+              ? pass(expression)
+              : pass(importSpec, maybeMoreImports, maybeFrom)
         }
         function importSpec(e, t) {
           return "{" == e
@@ -10455,6 +10615,20 @@ webpackJsonp([0], {
         function arrayLiteral(e) {
           return "]" == e ? cont() : pass(commasep(expressionNoComma, "]"))
         }
+        function enumdef() {
+          return pass(
+            pushlex("form"),
+            pattern,
+            expect("{"),
+            pushlex("}"),
+            commasep(enummember, "}"),
+            poplex,
+            poplex
+          )
+        }
+        function enummember() {
+          return pass(pattern, maybeAssign)
+        }
         function expressionAllowed(e, t, r) {
           return (
             (t.tokenize == tokenBase &&
@@ -10465,129 +10639,134 @@ webpackJsonp([0], {
               /\{\s*$/.test(e.string.slice(0, e.pos - (r || 0))))
           )
         }
-        return {
-          startState: function(e) {
-            var t = {
-              tokenize: tokenBase,
-              lastType: "sof",
-              cc: [],
-              lexical: new JSLexical((e || 0) - n, 0, "block", !1),
-              localVars: r.localVars,
-              context: r.localVars && { vars: r.localVars },
-              indented: e || 0,
-            }
-            return (
-              r.globalVars &&
-                "object" == typeof r.globalVars &&
-                (t.globalVars = r.globalVars),
-              t
-            )
-          },
-          token: function(e, t) {
-            if (
-              (e.sol() &&
-                (t.lexical.hasOwnProperty("align") || (t.lexical.align = !1),
-                (t.indented = e.indentation()),
-                findFatArrow(e, t)),
-              t.tokenize != tokenComment && e.eatSpace())
-            )
-              return null
-            var r = t.tokenize(e, t)
-            return "comment" == p
-              ? r
-              : ((t.lastType =
-                  "operator" != p || ("++" != h && "--" != h) ? p : "incdec"),
-                (function parseJS(e, t, r, n, o) {
-                  var i = e.cc
-                  for (
-                    m.state = e,
-                      m.stream = o,
-                      m.marked = null,
-                      m.cc = i,
-                      m.style = t,
-                      e.lexical.hasOwnProperty("align") ||
-                        (e.lexical.align = !0);
-                    ;
-
-                  )
-                    if (
-                      (i.length ? i.pop() : s ? expression : statement)(r, n)
-                    ) {
-                      for (; i.length && i[i.length - 1].lex; ) i.pop()()
-                      return m.marked
-                        ? m.marked
-                        : "variable" == r && inScope(e, n) ? "variable-2" : t
-                    }
-                })(t, r, p, h, e))
-          },
-          indent: function(t, i) {
-            if (t.tokenize == tokenComment) return e.Pass
-            if (t.tokenize != tokenBase) return 0
-            var s,
-              a = i && i.charAt(0),
-              l = t.lexical
-            if (!/^\s*else\b/.test(i))
-              for (var c = t.cc.length - 1; c >= 0; --c) {
-                var d = t.cc[c]
-                if (d == poplex) l = l.prev
-                else if (d != maybeelse) break
+        return (
+          (popcontext.lex = !0),
+          (poplex.lex = !0),
+          {
+            startState: function(e) {
+              var t = {
+                tokenize: tokenBase,
+                lastType: "sof",
+                cc: [],
+                lexical: new JSLexical((e || 0) - i, 0, "block", !1),
+                localVars: r.localVars,
+                context: r.localVars && new Context(null, null, !1),
+                indented: e || 0,
               }
-            for (
-              ;
-              ("stat" == l.type || "form" == l.type) &&
-              ("}" == a ||
-                ((s = t.cc[t.cc.length - 1]) &&
-                  (s == maybeoperatorComma || s == maybeoperatorNoComma) &&
-                  !/^[,\.=+\-*:?[\(]/.test(i)));
+              return (
+                r.globalVars &&
+                  "object" == typeof r.globalVars &&
+                  (t.globalVars = r.globalVars),
+                t
+              )
+            },
+            token: function(e, t) {
+              if (
+                (e.sol() &&
+                  (t.lexical.hasOwnProperty("align") || (t.lexical.align = !1),
+                  (t.indented = e.indentation()),
+                  findFatArrow(e, t)),
+                t.tokenize != tokenComment && e.eatSpace())
+              )
+                return null
+              var r = t.tokenize(e, t)
+              return "comment" == n
+                ? r
+                : ((t.lastType =
+                    "operator" != n || ("++" != o && "--" != o) ? n : "incdec"),
+                  (function parseJS(e, t, r, n, o) {
+                    var i = e.cc
+                    for (
+                      m.state = e,
+                        m.stream = o,
+                        m.marked = null,
+                        m.cc = i,
+                        m.style = t,
+                        e.lexical.hasOwnProperty("align") ||
+                          (e.lexical.align = !0);
+                      ;
 
-            )
-              l = l.prev
-            o && ")" == l.type && "stat" == l.prev.type && (l = l.prev)
-            var p = l.type,
-              h = a == p
-            return "vardef" == p
-              ? l.indented +
-                  ("operator" == t.lastType || "," == t.lastType
-                    ? l.info + 1
-                    : 0)
-              : "form" == p && "{" == a
-                ? l.indented
-                : "form" == p
-                  ? l.indented + n
-                  : "stat" == p
-                    ? l.indented +
-                      ((function isContinuedStatement(e, t) {
-                        return (
-                          "operator" == e.lastType ||
-                          "," == e.lastType ||
-                          u.test(t.charAt(0)) ||
-                          /[,.]/.test(t.charAt(0))
-                        )
-                      })(t, i)
-                        ? o || n
-                        : 0)
-                    : "switch" != l.info || h || 0 == r.doubleIndentSwitch
-                      ? l.align
-                        ? l.column + (h ? 0 : 1)
-                        : l.indented + (h ? 0 : n)
-                      : l.indented + (/^(?:case|default)\b/.test(i) ? n : 2 * n)
-          },
-          electricInput: /^\s*(?:case .*?:|default:|\{|\})$/,
-          blockCommentStart: s ? null : "/*",
-          blockCommentEnd: s ? null : "*/",
-          blockCommentContinue: s ? null : " * ",
-          lineComment: s ? null : "//",
-          fold: "brace",
-          closeBrackets: "()[]{}''\"\"``",
-          helperType: s ? "json" : "javascript",
-          jsonldMode: i,
-          jsonMode: s,
-          expressionAllowed: expressionAllowed,
-          skipExpression: function(e) {
-            var t = e.cc[e.cc.length - 1]
-            ;(t != expression && t != expressionNoComma) || e.cc.pop()
-          },
-        }
+                    )
+                      if (
+                        (i.length ? i.pop() : l ? expression : statement)(r, n)
+                      ) {
+                        for (; i.length && i[i.length - 1].lex; ) i.pop()()
+                        return m.marked
+                          ? m.marked
+                          : "variable" == r && inScope(e, n) ? "variable-2" : t
+                      }
+                  })(t, r, n, o, e))
+            },
+            indent: function(t, n) {
+              if (t.tokenize == tokenComment) return e.Pass
+              if (t.tokenize != tokenBase) return 0
+              var o,
+                a = n && n.charAt(0),
+                l = t.lexical
+              if (!/^\s*else\b/.test(n))
+                for (var c = t.cc.length - 1; c >= 0; --c) {
+                  var u = t.cc[c]
+                  if (u == poplex) l = l.prev
+                  else if (u != maybeelse) break
+                }
+              for (
+                ;
+                ("stat" == l.type || "form" == l.type) &&
+                ("}" == a ||
+                  ((o = t.cc[t.cc.length - 1]) &&
+                    (o == maybeoperatorComma || o == maybeoperatorNoComma) &&
+                    !/^[,\.=+\-*:?[\(]/.test(n)));
+
+              )
+                l = l.prev
+              s && ")" == l.type && "stat" == l.prev.type && (l = l.prev)
+              var d = l.type,
+                h = a == d
+              return "vardef" == d
+                ? l.indented +
+                    ("operator" == t.lastType || "," == t.lastType
+                      ? l.info.length + 1
+                      : 0)
+                : "form" == d && "{" == a
+                  ? l.indented
+                  : "form" == d
+                    ? l.indented + i
+                    : "stat" == d
+                      ? l.indented +
+                        ((function isContinuedStatement(e, t) {
+                          return (
+                            "operator" == e.lastType ||
+                            "," == e.lastType ||
+                            p.test(t.charAt(0)) ||
+                            /[,.]/.test(t.charAt(0))
+                          )
+                        })(t, n)
+                          ? s || i
+                          : 0)
+                      : "switch" != l.info || h || 0 == r.doubleIndentSwitch
+                        ? l.align
+                          ? l.column + (h ? 0 : 1)
+                          : l.indented + (h ? 0 : i)
+                        : l.indented +
+                          (/^(?:case|default)\b/.test(n) ? i : 2 * i)
+            },
+            electricInput: /^\s*(?:case .*?:|default:|\{|\})$/,
+            blockCommentStart: l ? null : "/*",
+            blockCommentEnd: l ? null : "*/",
+            blockCommentContinue: l ? null : " * ",
+            lineComment: l ? null : "//",
+            fold: "brace",
+            closeBrackets: "()[]{}''\"\"``",
+            helperType: l ? "json" : "javascript",
+            jsonldMode: a,
+            jsonMode: l,
+            expressionAllowed: expressionAllowed,
+            skipExpression: function(e) {
+              var t = e.cc[e.cc.length - 1]
+              ;(t != expression && t != expressionNoComma) || e.cc.pop()
+            },
+          }
+        )
       }),
         e.registerHelper("wordChars", "javascript", /[\w$]/),
         e.defineMIME("text/javascript", "javascript"),
@@ -10844,19 +11023,20 @@ webpackJsonp([0], {
           caseFold: !1,
         }
       e.defineMode("xml", function(n, o) {
-        var i = n.indentUnit,
-          s = {},
-          a = o.htmlMode ? t : r
-        for (var l in a) s[l] = a[l]
-        for (var l in o) s[l] = o[l]
-        var c, u
+        var i,
+          s,
+          a = n.indentUnit,
+          l = {},
+          c = o.htmlMode ? t : r
+        for (var u in c) l[u] = c[u]
+        for (var u in o) l[u] = o[u]
         function inText(e, t) {
           function chain(r) {
             return (t.tokenize = r), r(e, t)
           }
           var r = e.next()
-          if ("<" == r)
-            return e.eat("!")
+          return "<" == r
+            ? e.eat("!")
               ? e.eat("[")
                 ? e.match("CDATA[") ? chain(inBlock("atom", "]]>")) : null
                 : e.match("--")
@@ -10892,30 +11072,28 @@ webpackJsonp([0], {
                 ? (e.eatWhile(/[\w\._\-]/),
                   (t.tokenize = inBlock("meta", "?>")),
                   "meta")
-                : ((c = e.eat("/") ? "closeTag" : "openTag"),
+                : ((i = e.eat("/") ? "closeTag" : "openTag"),
                   (t.tokenize = inTag),
                   "tag bracket")
-          if ("&" == r) {
-            return (e.eat("#")
-            ? e.eat("x")
-              ? e.eatWhile(/[a-fA-F\d]/) && e.eat(";")
-              : e.eatWhile(/[\d]/) && e.eat(";")
-            : e.eatWhile(/[\w\.\-:]/) && e.eat(";"))
-              ? "atom"
-              : "error"
-          }
-          return e.eatWhile(/[^&<]/), null
+            : "&" == r
+              ? (e.eat("#")
+                ? e.eat("x")
+                  ? e.eatWhile(/[a-fA-F\d]/) && e.eat(";")
+                  : e.eatWhile(/[\d]/) && e.eat(";")
+                : e.eatWhile(/[\w\.\-:]/) && e.eat(";"))
+                ? "atom"
+                : "error"
+              : (e.eatWhile(/[^&<]/), null)
         }
-        inText.isInText = !0
         function inTag(e, t) {
           var r = e.next()
           if (">" == r || ("/" == r && e.eat(">")))
             return (
               (t.tokenize = inText),
-              (c = ">" == r ? "endTag" : "selfcloseTag"),
+              (i = ">" == r ? "endTag" : "selfcloseTag"),
               "tag bracket"
             )
-          if ("=" == r) return (c = "equals"), null
+          if ("=" == r) return (i = "equals"), null
           if ("<" == r) {
             ;(t.tokenize = inText),
               (t.state = baseState),
@@ -10959,8 +11137,8 @@ webpackJsonp([0], {
             if (!e.context) return
             if (
               ((r = e.context.tagName),
-              !s.contextGrabbers.hasOwnProperty(r) ||
-                !s.contextGrabbers[r].hasOwnProperty(t))
+              !l.contextGrabbers.hasOwnProperty(r) ||
+                !l.contextGrabbers[r].hasOwnProperty(t))
             )
               return
             popContext(e)
@@ -10973,10 +11151,10 @@ webpackJsonp([0], {
         }
         function tagNameState(e, t, r) {
           return "word" == e
-            ? ((r.tagName = t.current()), (u = "tag"), attrState)
-            : s.allowMissingTagName && "endTag" == e
-              ? ((u = "tag bracket"), attrState(e, t, r))
-              : ((u = "error"), tagNameState)
+            ? ((r.tagName = t.current()), (s = "tag"), attrState)
+            : l.allowMissingTagName && "endTag" == e
+              ? ((s = "tag bracket"), attrState(e, t, r))
+              : ((s = "error"), tagNameState)
         }
         function closeTagNameState(e, t, r) {
           if ("word" == e) {
@@ -10984,33 +11162,33 @@ webpackJsonp([0], {
             return (
               r.context &&
                 r.context.tagName != n &&
-                s.implicitlyClosed.hasOwnProperty(r.context.tagName) &&
+                l.implicitlyClosed.hasOwnProperty(r.context.tagName) &&
                 popContext(r),
-              (r.context && r.context.tagName == n) || !1 === s.matchClosing
-                ? ((u = "tag"), closeState)
-                : ((u = "tag error"), closeStateErr)
+              (r.context && r.context.tagName == n) || !1 === l.matchClosing
+                ? ((s = "tag"), closeState)
+                : ((s = "tag error"), closeStateErr)
             )
           }
-          return s.allowMissingTagName && "endTag" == e
-            ? ((u = "tag bracket"), closeState(e, t, r))
-            : ((u = "error"), closeStateErr)
+          return l.allowMissingTagName && "endTag" == e
+            ? ((s = "tag bracket"), closeState(e, t, r))
+            : ((s = "error"), closeStateErr)
         }
         function closeState(e, t, r) {
           return "endTag" != e
-            ? ((u = "error"), closeState)
+            ? ((s = "error"), closeState)
             : (popContext(r), baseState)
         }
         function closeStateErr(e, t, r) {
-          return (u = "error"), closeState(e, 0, r)
+          return (s = "error"), closeState(e, 0, r)
         }
         function attrState(e, t, r) {
-          if ("word" == e) return (u = "attribute"), attrEqState
+          if ("word" == e) return (s = "attribute"), attrEqState
           if ("endTag" == e || "selfcloseTag" == e) {
             var n = r.tagName,
               o = r.tagStart
             return (
               (r.tagName = r.tagStart = null),
-              "selfcloseTag" == e || s.autoSelfClosers.hasOwnProperty(n)
+              "selfcloseTag" == e || l.autoSelfClosers.hasOwnProperty(n)
                 ? maybePopContext(r, n)
                 : (maybePopContext(r, n),
                   (r.context = new function Context(e, t, r) {
@@ -11018,101 +11196,104 @@ webpackJsonp([0], {
                       (this.tagName = t),
                       (this.indent = e.indented),
                       (this.startOfLine = r),
-                      (s.doNotIndent.hasOwnProperty(t) ||
+                      (l.doNotIndent.hasOwnProperty(t) ||
                         (e.context && e.context.noIndent)) &&
                         (this.noIndent = !0)
                   }(r, n, o == r.indented))),
               baseState
             )
           }
-          return (u = "error"), attrState
+          return (s = "error"), attrState
         }
         function attrEqState(e, t, r) {
           return "equals" == e
             ? attrValueState
-            : (s.allowMissing || (u = "error"), attrState(e, 0, r))
+            : (l.allowMissing || (s = "error"), attrState(e, 0, r))
         }
         function attrValueState(e, t, r) {
           return "string" == e
             ? attrContinuedState
-            : "word" == e && s.allowUnquoted
-              ? ((u = "string"), attrState)
-              : ((u = "error"), attrState(e, 0, r))
+            : "word" == e && l.allowUnquoted
+              ? ((s = "string"), attrState)
+              : ((s = "error"), attrState(e, 0, r))
         }
         function attrContinuedState(e, t, r) {
           return "string" == e ? attrContinuedState : attrState(e, 0, r)
         }
-        return {
-          startState: function(e) {
-            var t = {
-              tokenize: inText,
-              state: baseState,
-              indented: e || 0,
-              tagName: null,
-              tagStart: null,
-              context: null,
-            }
-            return null != e && (t.baseIndent = e), t
-          },
-          token: function(e, t) {
-            if (
-              (!t.tagName && e.sol() && (t.indented = e.indentation()),
-              e.eatSpace())
-            )
-              return null
-            c = null
-            var r = t.tokenize(e, t)
-            return (
-              (r || c) &&
-                "comment" != r &&
-                ((u = null),
-                (t.state = t.state(c || r, e, t)),
-                u && (r = "error" == u ? r + " error" : u)),
-              r
-            )
-          },
-          indent: function(t, r, n) {
-            var o = t.context
-            if (t.tokenize.isInAttribute)
-              return t.tagStart == t.indented
-                ? t.stringStartCol + 1
-                : t.indented + i
-            if (o && o.noIndent) return e.Pass
-            if (t.tokenize != inTag && t.tokenize != inText)
-              return n ? n.match(/^(\s*)/)[0].length : 0
-            if (t.tagName)
-              return !1 !== s.multilineTagIndentPastTag
-                ? t.tagStart + t.tagName.length + 2
-                : t.tagStart + i * (s.multilineTagIndentFactor || 1)
-            if (s.alignCDATA && /<!\[CDATA\[/.test(r)) return 0
-            var a = r && /^<(\/)?([\w_:\.-]*)/.exec(r)
-            if (a && a[1])
-              for (; o; ) {
-                if (o.tagName == a[2]) {
+        return (
+          (inText.isInText = !0),
+          {
+            startState: function(e) {
+              var t = {
+                tokenize: inText,
+                state: baseState,
+                indented: e || 0,
+                tagName: null,
+                tagStart: null,
+                context: null,
+              }
+              return null != e && (t.baseIndent = e), t
+            },
+            token: function(e, t) {
+              if (
+                (!t.tagName && e.sol() && (t.indented = e.indentation()),
+                e.eatSpace())
+              )
+                return null
+              i = null
+              var r = t.tokenize(e, t)
+              return (
+                (r || i) &&
+                  "comment" != r &&
+                  ((s = null),
+                  (t.state = t.state(i || r, e, t)),
+                  s && (r = "error" == s ? r + " error" : s)),
+                r
+              )
+            },
+            indent: function(t, r, n) {
+              var o = t.context
+              if (t.tokenize.isInAttribute)
+                return t.tagStart == t.indented
+                  ? t.stringStartCol + 1
+                  : t.indented + a
+              if (o && o.noIndent) return e.Pass
+              if (t.tokenize != inTag && t.tokenize != inText)
+                return n ? n.match(/^(\s*)/)[0].length : 0
+              if (t.tagName)
+                return !1 !== l.multilineTagIndentPastTag
+                  ? t.tagStart + t.tagName.length + 2
+                  : t.tagStart + a * (l.multilineTagIndentFactor || 1)
+              if (l.alignCDATA && /<!\[CDATA\[/.test(r)) return 0
+              var i = r && /^<(\/)?([\w_:\.-]*)/.exec(r)
+              if (i && i[1])
+                for (; o; ) {
+                  if (o.tagName == i[2]) {
+                    o = o.prev
+                    break
+                  }
+                  if (!l.implicitlyClosed.hasOwnProperty(o.tagName)) break
                   o = o.prev
-                  break
                 }
-                if (!s.implicitlyClosed.hasOwnProperty(o.tagName)) break
-                o = o.prev
-              }
-            else if (a)
-              for (; o; ) {
-                var l = s.contextGrabbers[o.tagName]
-                if (!l || !l.hasOwnProperty(a[2])) break
-                o = o.prev
-              }
-            for (; o && o.prev && !o.startOfLine; ) o = o.prev
-            return o ? o.indent + i : t.baseIndent || 0
-          },
-          electricInput: /<\/[\s\w:]+>$/,
-          blockCommentStart: "\x3c!--",
-          blockCommentEnd: "--\x3e",
-          configuration: s.htmlMode ? "html" : "xml",
-          helperType: s.htmlMode ? "html" : "xml",
-          skipAttribute: function(e) {
-            e.state == attrValueState && (e.state = attrState)
-          },
-        }
+              else if (i)
+                for (; o; ) {
+                  var s = l.contextGrabbers[o.tagName]
+                  if (!s || !s.hasOwnProperty(i[2])) break
+                  o = o.prev
+                }
+              for (; o && o.prev && !o.startOfLine; ) o = o.prev
+              return o ? o.indent + a : t.baseIndent || 0
+            },
+            electricInput: /<\/[\s\w:]+>$/,
+            blockCommentStart: "\x3c!--",
+            blockCommentEnd: "--\x3e",
+            configuration: l.htmlMode ? "html" : "xml",
+            helperType: l.htmlMode ? "html" : "xml",
+            skipAttribute: function(e) {
+              e.state == attrValueState && (e.state = attrState)
+            },
+          }
+        )
       }),
         e.defineMIME("text/xml", "xml"),
         e.defineMIME("application/xml", "xml"),
@@ -11122,10 +11303,10 @@ webpackJsonp([0], {
   },
   "./node_modules/react-codemirror2/index.js": function(e, t, r) {
     "use strict"
-    var n =
-      (this && this.__extends) ||
-      (function() {
-        var e =
+    var n,
+      o =
+        (this && this.__extends) ||
+        ((n =
           Object.setPrototypeOf ||
           ({ __proto__: [] } instanceof Array &&
             function(e, t) {
@@ -11133,24 +11314,23 @@ webpackJsonp([0], {
             }) ||
           function(e, t) {
             for (var r in t) t.hasOwnProperty(r) && (e[r] = t[r])
-          }
-        return function(t, r) {
-          e(t, r)
+          }),
+        function(e, t) {
           function __() {
-            this.constructor = t
+            this.constructor = e
           }
-          t.prototype =
-            null === r
-              ? Object.create(r)
-              : ((__.prototype = r.prototype), new __())
-        }
-      })()
+          n(e, t),
+            (e.prototype =
+              null === t
+                ? Object.create(t)
+                : ((__.prototype = t.prototype), new __()))
+        })
     Object.defineProperty(t, "__esModule", { value: !0 })
-    var o,
-      i = r("./node_modules/react/index.js"),
-      s = "undefined" == typeof navigator
-    s || (o = r("./node_modules/codemirror/lib/codemirror.js"))
-    var a = (function() {
+    var i,
+      s = r("./node_modules/react/index.js"),
+      a = "undefined" == typeof navigator
+    a || (i = r("./node_modules/codemirror/lib/codemirror.js"))
+    var l = (function() {
         function Shared(e, t) {
           ;(this.editor = e), (this.props = t), this.notifyOfDeprecation()
         }
@@ -11255,11 +11435,10 @@ webpackJsonp([0], {
           Shared
         )
       })(),
-      l = (function(e) {
-        n(Controlled, e)
+      c = (function(e) {
         function Controlled(t) {
           var r = e.call(this, t) || this
-          return s
+          return a
             ? r
             : ((r.deferred = null),
               (r.emulating = !1),
@@ -11272,6 +11451,7 @@ webpackJsonp([0], {
               r)
         }
         return (
+          o(Controlled, e),
           (Controlled.prototype.setCursor = function(e, t, r) {
             var n = this.editor.getDoc()
             r && this.editor.focus(),
@@ -11335,22 +11515,22 @@ webpackJsonp([0], {
             )
           }),
           (Controlled.prototype.componentWillMount = function() {
-            s || (this.props.editorWillMount && this.props.editorWillMount())
+            a || (this.props.editorWillMount && this.props.editorWillMount())
           }),
           (Controlled.prototype.componentDidMount = function() {
             var e = this
-            if (!s) {
+            if (!a) {
               if (
                 (this.props.defineMode &&
                   this.props.defineMode.name &&
                   this.props.defineMode.fn &&
-                  o.defineMode(
+                  i.defineMode(
                     this.props.defineMode.name,
                     this.props.defineMode.fn
                   ),
-                (this.editor = o(this.ref)),
-                (this.shared = new a(this.editor, this.props)),
-                (this.mirror = o(function() {})),
+                (this.editor = i(this.ref)),
+                (this.shared = new l(this.editor, this.props)),
+                (this.mirror = i(function() {})),
                 this.editor.on("electricInput", function() {
                   e.mirror.setHistory(e.editor.getHistory())
                 }),
@@ -11389,9 +11569,8 @@ webpackJsonp([0], {
                   this.shared.wire("onViewportChange"),
                 this.hydrate(this.props),
                 this.props.selection)
-              ) {
+              )
                 this.editor.getDoc().setSelections(this.props.selection)
-              }
               this.props.cursor &&
                 this.setCursor(
                   this.props.cursor,
@@ -11413,32 +11592,31 @@ webpackJsonp([0], {
             }
           }),
           (Controlled.prototype.componentWillReceiveProps = function(e) {
-            if (!s) {
-              var t
-              e.value !== this.props.value && (this.hydrated = !1),
-                this.props.autoCursor ||
-                  void 0 === this.props.autoCursor ||
-                  (t = this.editor.getCursor()),
-                this.hydrate(e),
-                this.props.autoCursor ||
-                  void 0 === this.props.autoCursor ||
-                  this.moveCursor(t, this.props.autoScroll || !1)
-            }
+            var t
+            a ||
+              (e.value !== this.props.value && (this.hydrated = !1),
+              this.props.autoCursor ||
+                void 0 === this.props.autoCursor ||
+                (t = this.editor.getCursor()),
+              this.hydrate(e),
+              this.props.autoCursor ||
+                void 0 === this.props.autoCursor ||
+                this.moveCursor(t, this.props.autoScroll || !1))
           }),
           (Controlled.prototype.componentWillUnmount = function() {
-            s ||
-              (this.props.editorWillUnmount && this.props.editorWillUnmount(o))
+            a ||
+              (this.props.editorWillUnmount && this.props.editorWillUnmount(i))
           }),
           (Controlled.prototype.shouldComponentUpdate = function(e, t) {
-            return !s
+            return !a
           }),
           (Controlled.prototype.render = function() {
             var e = this
-            if (s) return null
+            if (a) return null
             var t = this.props.className
               ? "react-codemirror2 " + this.props.className
               : "react-codemirror2"
-            return i.createElement("div", {
+            return s.createElement("div", {
               className: t,
               ref: function(t) {
                 return (e.ref = t)
@@ -11447,13 +11625,12 @@ webpackJsonp([0], {
           }),
           Controlled
         )
-      })(i.Component)
-    t.Controlled = l
-    var c = (function(e) {
-      n(UnControlled, e)
+      })(s.Component)
+    t.Controlled = c
+    var u = (function(e) {
       function UnControlled(t) {
         var r = e.call(this, t) || this
-        return s
+        return a
           ? r
           : ((r.continueChange = !1),
             (r.hydrated = !1),
@@ -11467,6 +11644,7 @@ webpackJsonp([0], {
             r)
       }
       return (
+        o(UnControlled, e),
         (UnControlled.prototype.setCursor = function(e, t, r) {
           var n = this.editor.getDoc()
           r && this.editor.focus(),
@@ -11495,21 +11673,21 @@ webpackJsonp([0], {
           this.hydrated = !0
         }),
         (UnControlled.prototype.componentWillMount = function() {
-          s || (this.props.editorWillMount && this.props.editorWillMount())
+          a || (this.props.editorWillMount && this.props.editorWillMount())
         }),
         (UnControlled.prototype.componentDidMount = function() {
           var e = this
-          if (!s) {
+          if (!a) {
             if (
               (this.props.defineMode &&
                 this.props.defineMode.name &&
                 this.props.defineMode.fn &&
-                o.defineMode(
+                i.defineMode(
                   this.props.defineMode.name,
                   this.props.defineMode.fn
                 ),
-              (this.editor = o(this.ref)),
-              (this.shared = new a(this.editor, this.props)),
+              (this.editor = i(this.ref)),
+              (this.shared = new l(this.editor, this.props)),
               this.editor.on("beforeChange", function(t, r) {
                 e.props.onBeforeChange &&
                   e.props.onBeforeChange(e.editor, r, null, e.onBeforeChangeCb)
@@ -11540,9 +11718,8 @@ webpackJsonp([0], {
                 this.shared.wire("onViewportChange"),
               this.hydrate(this.props),
               this.props.selection)
-            ) {
+            )
               this.editor.getDoc().setSelections(this.props.selection)
-            }
             this.props.cursor &&
               this.setCursor(
                 this.props.cursor,
@@ -11562,31 +11739,30 @@ webpackJsonp([0], {
           }
         }),
         (UnControlled.prototype.componentWillReceiveProps = function(e) {
-          if (!s) {
-            var t
-            e.value !== this.props.value && (this.hydrated = !1),
-              this.props.autoCursor ||
-                void 0 === this.props.autoCursor ||
-                (t = this.editor.getCursor()),
-              this.hydrate(e),
-              this.props.autoCursor ||
-                void 0 === this.props.autoCursor ||
-                this.moveCursor(t, this.props.autoScroll || !1)
-          }
+          var t
+          a ||
+            (e.value !== this.props.value && (this.hydrated = !1),
+            this.props.autoCursor ||
+              void 0 === this.props.autoCursor ||
+              (t = this.editor.getCursor()),
+            this.hydrate(e),
+            this.props.autoCursor ||
+              void 0 === this.props.autoCursor ||
+              this.moveCursor(t, this.props.autoScroll || !1))
         }),
         (UnControlled.prototype.componentWillUnmount = function() {
-          s || (this.props.editorWillUnmount && this.props.editorWillUnmount(o))
+          a || (this.props.editorWillUnmount && this.props.editorWillUnmount(i))
         }),
         (UnControlled.prototype.shouldComponentUpdate = function(e, t) {
-          return !s
+          return !a
         }),
         (UnControlled.prototype.render = function() {
           var e = this
-          if (s) return null
+          if (a) return null
           var t = this.props.className
             ? "react-codemirror2 " + this.props.className
             : "react-codemirror2"
-          return i.createElement("div", {
+          return s.createElement("div", {
             className: t,
             ref: function(t) {
               return (e.ref = t)
@@ -11595,8 +11771,8 @@ webpackJsonp([0], {
         }),
         UnControlled
       )
-    })(i.Component)
-    t.UnControlled = c
+    })(s.Component)
+    t.UnControlled = u
   },
   "./node_modules/react-styleguidist/lib/rsg-components/Editor/Editor.js": function(
     e,
@@ -11657,25 +11833,6 @@ webpackJsonp([0], {
       },
       f = 10,
       g = (function(e) {
-        !(function _inherits(e, t) {
-          if ("function" != typeof t && null !== t)
-            throw new TypeError(
-              "Super expression must either be null or a function, not " +
-                typeof t
-            )
-          ;(e.prototype = Object.create(t && t.prototype, {
-            constructor: {
-              value: e,
-              enumerable: !1,
-              writable: !0,
-              configurable: !0,
-            },
-          })),
-            t &&
-              (Object.setPrototypeOf
-                ? Object.setPrototypeOf(e, t)
-                : (e.__proto__ = t))
-        })(Editor, n["Component"])
         function Editor() {
           !(function _classCallCheck(e, t) {
             if (!(e instanceof t))
@@ -11696,6 +11853,25 @@ webpackJsonp([0], {
           return (e.handleChange = l()(e.handleChange.bind(e), f)), e
         }
         return (
+          (function _inherits(e, t) {
+            if ("function" != typeof t && null !== t)
+              throw new TypeError(
+                "Super expression must either be null or a function, not " +
+                  typeof t
+              )
+            ;(e.prototype = Object.create(t && t.prototype, {
+              constructor: {
+                value: e,
+                enumerable: !1,
+                writable: !0,
+                configurable: !0,
+              },
+            })),
+              t &&
+                (Object.setPrototypeOf
+                  ? Object.setPrototypeOf(e, t)
+                  : (e.__proto__ = t))
+          })(Editor, n["Component"]),
           p(Editor, [
             {
               key: "shouldComponentUpdate",
@@ -11764,8 +11940,7 @@ webpackJsonp([0], {
       "./node_modules/react-styleguidist/loaders/css-loader.js!./node_modules/codemirror/lib/codemirror.css"
     )
     "string" == typeof n && (n = [[e.i, n, ""]])
-    var o = { hmr: !0 }
-    o.transform = void 0
+    var o = { hmr: !0, transform: void 0 }
     r(
       "./node_modules/react-styleguidist/node_modules/style-loader/lib/addStyles.js"
     )(n, o)
@@ -11780,8 +11955,7 @@ webpackJsonp([0], {
       "./node_modules/react-styleguidist/loaders/css-loader.js!./node_modules/codemirror/theme/base16-light.css"
     )
     "string" == typeof n && (n = [[e.i, n, ""]])
-    var o = { hmr: !0 }
-    o.transform = void 0
+    var o = { hmr: !0, transform: void 0 }
     r(
       "./node_modules/react-styleguidist/node_modules/style-loader/lib/addStyles.js"
     )(n, o)

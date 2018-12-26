@@ -7,7 +7,7 @@ const {
   withGoogleMap,
   GoogleMap,
   DirectionsRenderer,
-} = require("react-google-maps");
+} = require("@syncromatics/react-google-maps");
 
 const MapWithADirectionsRenderer = compose(
   withProps({

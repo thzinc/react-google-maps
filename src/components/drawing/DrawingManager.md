@@ -6,8 +6,8 @@ const {
   withScriptjs,
   withGoogleMap,
   GoogleMap,
-} = require("react-google-maps");
-const { DrawingManager } = require("react-google-maps/lib/components/drawing/DrawingManager");
+} = require("@syncromatics/react-google-maps");
+const { DrawingManager } = require("@syncromatics/react-google-maps/lib/components/drawing/DrawingManager");
 
 const MapWithADrawingManager = compose(
   withProps({

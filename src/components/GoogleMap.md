@@ -9,7 +9,7 @@ const {
   GoogleMap,
   Marker,
   InfoWindow,
-} = require("react-google-maps");
+} = require("@syncromatics/react-google-maps");
 
 const MapWithControlledZoom = compose(
   withProps({

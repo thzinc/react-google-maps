@@ -7,7 +7,7 @@ There're some steps to take to create your custom map components. Follow on:
 And it will be automatically unmounted from the map if you don't render it.
 
 ```js static
-import { GoogleMap, Marker } from "react-google-maps"
+import { GoogleMap, Marker } from "@syncromatics/react-google-maps"
 
 const MyMapComponent = (props) =>
   <GoogleMap
@@ -27,7 +27,7 @@ const MyMapComponent = (props) =>
 In order to initialize the `MyMapComponent` with DOM instances, you'll need to wrap it with [`withGoogleMap`][withGoogleMap] HOC.
 
 ```js static
-import { withGoogleMap, GoogleMap, Marker } from "react-google-maps"
+import { withGoogleMap, GoogleMap, Marker } from "@syncromatics/react-google-maps"
 
 const MyMapComponent = withGoogleMap((props) =>
   <GoogleMap
@@ -48,7 +48,7 @@ const MyMapComponent = withGoogleMap((props) =>
 In order to correctly load [Google Maps JavaScript API v3][gmjsav3], you'll need to wrap it with [`withScriptjs`][withScriptjs] HOC.
 
 ```js static
-import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
+import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "@syncromatics/react-google-maps"
 
 const MyMapComponent = withScriptjs(withGoogleMap((props) =>
   <GoogleMap
@@ -71,7 +71,7 @@ _If you don't use `withScriptjs`, you have to put a `<script/>` tag for [Google 
 Notice there're some required props for [`withGoogleMap`][withGoogleMap] and [`withScriptjs`][withScriptjs] HOC.
 
 ```js static
-import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
+import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "@syncromatics/react-google-maps"
 
 const MyMapComponent = withScriptjs(withGoogleMap((props) =>
   <GoogleMap
@@ -96,7 +96,7 @@ For _simplicity_, in this documentation, I will use [`recompose`][recompose] to 
 
 ```js static
 import { compose, withProps } from "recompose"
-import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
+import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "@syncromatics/react-google-maps"
 
 const MyMapComponent = compose(
   withProps({
@@ -128,7 +128,7 @@ Implement your own state transition logic with `MyMapComponent`!
 ```js static
 import React from "react"
 import { compose, withProps } from "recompose"
-import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
+import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "@syncromatics/react-google-maps"
 
 const MyMapComponent = compose(
   withProps({
@@ -180,7 +180,7 @@ class MyFancyComponent extends React.PureComponent {
 ```
 
 
-[withGoogleMap]: https://tomchentw.github.io/react-google-maps/#withgooglemap
+[withGoogleMap]: https://syncromatics.engineering/react-google-maps/#withgooglemap
 [gmjsav3]: https://developers.google.com/maps/documentation/javascript/
-[withScriptjs]: https://tomchentw.github.io/react-google-maps/#withscriptjs
+[withScriptjs]: https://syncromatics.engineering/react-google-maps/#withscriptjs
 [recompose]: https://github.com/acdlite/recompose/blob/master/docs/API.md

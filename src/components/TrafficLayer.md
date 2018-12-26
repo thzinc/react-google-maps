@@ -7,7 +7,7 @@ const {
   withGoogleMap,
   GoogleMap,
   TrafficLayer,
-} = require("react-google-maps");
+} = require("@syncromatics/react-google-maps");
 
 const MapWithATrafficLayer = compose(
   withProps({

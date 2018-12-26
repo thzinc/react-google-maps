@@ -1,16 +1,16 @@
-# react-google-maps
-> React.js Google Maps integration component
+# @syncromatics/react-google-maps
+> React.js Google Maps integration component forked from [react-google-maps][upstream]
 
-[![Version][npm-image]][npm-url] [![Travis CI][travis-image]][travis-url] [![Quality][codeclimate-image]][codeclimate-url] [![Coverage][codeclimate-coverage-image]][codeclimate-coverage-url] [![Dependencies][gemnasium-image]][gemnasium-url] [![Gitter][gitter-image]][gitter-url]
-
-
-## [Introduction](https://tomchentw.github.io/react-google-maps/#introduction)
+[![Version][npm-image]][npm-url] [![Travis CI][travis-image]][travis-url]
 
 
-## [Installation](https://tomchentw.github.io/react-google-maps/#installation)
+## [Introduction](https://syncromatics.engineering/react-google-maps/#introduction)
 
 
-## [Usage & Configuration](https://tomchentw.github.io/react-google-maps/#usage--configuration)
+## [Installation](https://syncromatics.engineering/react-google-maps/#installation)
+
+
+## [Usage & Configuration](https://syncromatics.engineering/react-google-maps/#usage--configuration)
 
 
 ## [Changelog][changelog-url]
@@ -18,17 +18,12 @@
 The changelog is automatically generated via [standard-version][standard-version] and can be found in project root as well as npm tarball.
 
 
-## [Demo App][demo-app-url]
-
-* [Source code][demo-app-source]
-* [CodeSandbox](https://codesandbox.io/s/2xyw6n4o9y)
-
 ## Getting Help
 
 **Before doing this, did you**:
 
-1. Read the [documentation](https://tomchentw.github.io/react-google-maps)
-2. Read the [source code](https://github.com/tomchentw/react-google-maps)
+1. Read the [documentation](https://syncromatics.engineering/react-google-maps)
+2. Read the [source code](https://github.com/syncromatics/react-google-maps)
 
 
 _You can get someone's help in three ways_:
@@ -56,23 +51,14 @@ Please, be noted, **no one**, I mean, **no one**, is obligated to help you in **
 </details>
 
 
-[npm-image]: https://img.shields.io/npm/v/react-google-maps.svg?style=flat-square
-[npm-url]: https://www.npmjs.org/package/react-google-maps
+[npm-image]: https://img.shields.io/npm/v/@syncromatics/react-google-maps.svg?style=flat-square
+[npm-url]: https://www.npmjs.org/package/@syncromatics/react-google-maps
 
-[travis-image]: https://img.shields.io/travis/tomchentw/react-google-maps.svg?style=flat-square
-[travis-url]: https://travis-ci.org/tomchentw/react-google-maps
-[codeclimate-image]: https://img.shields.io/codeclimate/github/tomchentw/react-google-maps.svg?style=flat-square
-[codeclimate-url]: https://codeclimate.com/github/tomchentw/react-google-maps
-[codeclimate-coverage-image]: https://img.shields.io/codeclimate/coverage/github/tomchentw/react-google-maps.svg?style=flat-square
-[codeclimate-coverage-url]: https://codeclimate.com/github/tomchentw/react-google-maps
-[gemnasium-image]: https://img.shields.io/gemnasium/tomchentw/react-google-maps.svg?style=flat-square
-[gemnasium-url]: https://gemnasium.com/tomchentw/react-google-maps
-[gitter-image]: https://badges.gitter.im/Join%20Chat.svg
-[gitter-url]: https://gitter.im/tomchentw/react-google-maps?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
+[travis-image]: https://img.shields.io/travis/syncromatics/react-google-maps.svg?style=flat-square
+[travis-url]: https://travis-ci.org/syncromatics/react-google-maps
 
-[changelog-url]: https://github.com/tomchentw/react-google-maps/blob/master/CHANGELOG.md
-[demo-app-url]: https://tomchentw.github.io/#/demos/react-google-maps
-[demo-app-source]: https://github.com/tomchentw/tomchentw.github.io/blob/master/src/Pages/Demos/ReactGoogleMaps.jsx
+[changelog-url]: https://github.com/syncromatics/react-google-maps/blob/master/CHANGELOG.md
 
 [standard-version]: https://github.com/conventional-changelog/standard-version
 [conventional-commits-specification]: https://conventionalcommits.org/
+[upstream]: https://github.com/tomchentw/react-google-maps

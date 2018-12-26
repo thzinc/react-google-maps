@@ -7,7 +7,7 @@ const {
   withGoogleMap,
   GoogleMap,
   GroundOverlay,
-} = require("react-google-maps");
+} = require("@syncromatics/react-google-maps");
 
 const MapWithGroundOverlay = compose(
   withScriptjs,

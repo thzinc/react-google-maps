@@ -9,14 +9,18 @@ module.exports = {
     const name = path.basename(componentPath, ".jsx")
     const dirname = path.basename(path.dirname(componentPath))
     if (dirname === "components") {
-      return `import { ${name} } from "react-google-maps";`
+      return `import { ${name} } from "@syncromatics/react-google-maps";`
     }
-    return `import ${name} from "react-google-maps/lib/components/${dirname}/${name}";`
+    return `import ${name} from "@syncromatics/react-google-maps/lib/components/${dirname}/${name}";`
   },
   dangerouslyUpdateWebpackConfig(webpackConfig, env) {
     // WARNING: inspect Styleguidist Webpack config before modifying it, otherwise you may break Styleguidist
-    webpackConfig.resolve.alias["react-google-maps/lib"] = path.resolve("./src")
-    webpackConfig.resolve.alias["react-google-maps"] = path.resolve("./src")
+    webpackConfig.resolve.alias[
+      "@syncromatics/react-google-maps/lib"
+    ] = path.resolve("./src")
+    webpackConfig.resolve.alias[
+      "@syncromatics/react-google-maps"
+    ] = path.resolve("./src")
     return webpackConfig
   },
   styles: {

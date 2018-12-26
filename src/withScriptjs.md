@@ -11,7 +11,7 @@ import {
   withGoogleMap,
   GoogleMap,
   Marker,
-} from "react-google-maps";
+} from "@syncromatics/react-google-maps";
 
 const MapWithAMarker = withScriptjs(withGoogleMap(props =>
   <GoogleMap

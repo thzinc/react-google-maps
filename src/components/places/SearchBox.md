@@ -8,8 +8,8 @@ const {
   withGoogleMap,
   GoogleMap,
   Marker,
-} = require("react-google-maps");
-const { SearchBox } = require("react-google-maps/lib/components/places/SearchBox");
+} = require("@syncromatics/react-google-maps");
+const { SearchBox } = require("@syncromatics/react-google-maps/lib/components/places/SearchBox");
 
 const MapWithASearchBox = compose(
   withProps({

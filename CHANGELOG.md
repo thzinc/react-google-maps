@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="9.5.0"></a>
+# [9.5.0](https://github.com/syncromatics/react-google-maps/compare/v9.4.6...v9.5.0) (2018-12-27)
+
+
+### Bug Fixes
+
+* **build:** Added missing jest-cli dev dependency ([dcde2e6](https://github.com/syncromatics/react-google-maps/commit/dcde2e6))
+* **fork:** Updated docs to point relevant links to forked project ([c2e3a81](https://github.com/syncromatics/react-google-maps/commit/c2e3a81))
+
+
+### Features
+
+* **build:** Added semantic-release ([a364fac](https://github.com/syncromatics/react-google-maps/commit/a364fac))
+* **docs:** Moved Google Maps URL into constant ([91b2616](https://github.com/syncromatics/react-google-maps/commit/91b2616))
+* **fork:** Updated documentation to follow Syncromatics Engineering DX docs ([c0ee9a6](https://github.com/syncromatics/react-google-maps/commit/c0ee9a6))
+
+
+
 <a name="9.4.6"></a>
 ## [9.4.6](https://github.com/syncromatics/react-google-maps/compare/v9.4.5...v9.4.6) (2018-12-26)
 

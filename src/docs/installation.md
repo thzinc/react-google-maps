@@ -1,4 +1,11 @@
-```sh
-npm install --save react-google-maps # or
-yarn add react-google-maps
-```
+> With `yarn`:
+> 
+> ```sh
+> yarn add @syncromatics/react-google-maps
+> ```
+
+> With `npm`:
+> 
+> ```sh
+> npm install --save @syncromatics/react-google-maps
+> ```

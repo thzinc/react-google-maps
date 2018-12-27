@@ -1,14 +1,26 @@
-## Getting Help
+<!-- Remove the sections that do not apply -->
 
-**Before doing this, did you**:
+# Bug Report
 
-1. Read the [documentation](https://syncromatics.engineering/react-google-maps)
-2. Read the [source code](https://github.com/syncromatics/react-google-maps)
+- [ ] I have read the [documentation](https://syncromatics.engineering/react-google-maps)
+- [ ] I have reviewed the [source code](https://github.com/syncromatics/react-google-maps)
+- [ ] I have searched for solutions to this problem on StackOverflow
+    - [react-google-maps keyword](https://stackoverflow.com/search?q=react-google-maps)
+    - Generally [google-maps tag](https://stackoverflow.com/questions/tagged/google-maps?sort=votes&pageSize=50)
+
+## Description
+
+_Please describe the bug_
+
+## Steps to reproduce
+
+_Please include detailed steps to reproduce the bug_
 
 
-_You can get someone's help in three ways_:
+# New or Proposed Feature
 
-1. Ask on StackOverflow [with a google-maps tag](https://stackoverflow.com/questions/tagged/google-maps?sort=votes&pageSize=50) or [use react-google-maps as a keyword](https://stackoverflow.com/search?q=react-google-maps)
-2. Create a Pull Request with your solutions to your problem
+- [ ] I have reviewed the relevant [Google Maps documentation](https://developers.google.com/maps/documentation/javascript/reference/)
 
-Please, be noted, **no one**, I mean, **no one**, is obligated to help you in **ANY** means. Your time is valuable, so does our contributors. Don't waste our time posting questions like “how do I do X with React-Google-Maps” and “my code doesn't work”. This is not the primary purpose of the issue tracker. Don't abuse.
+## Description
+
+_Please describe the new or proposed feature_

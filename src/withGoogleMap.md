@@ -10,7 +10,7 @@ import {
   withGoogleMap,
   GoogleMap,
   Marker,
-} from "react-google-maps";
+} from "@syncromatics/react-google-maps";
 
 const MapWithAMarker = withGoogleMap(props =>
   <GoogleMap

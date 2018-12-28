@@ -1,78 +1,85 @@
-# react-google-maps
-> React.js Google Maps integration component
+# @syncromatics/react-google-maps
 
-[![Version][npm-image]][npm-url] [![Travis CI][travis-image]][travis-url] [![Quality][codeclimate-image]][codeclimate-url] [![Coverage][codeclimate-coverage-image]][codeclimate-coverage-url] [![Dependencies][gemnasium-image]][gemnasium-url] [![Gitter][gitter-image]][gitter-url]
+A fork of [react-google-maps][upstream] for displaying and interacting with Google Maps in React applications
 
+## Quickstart
 
-## [Introduction](https://tomchentw.github.io/react-google-maps/#introduction)
+Add the `@syncromatics/react-google-maps` package to your project:
 
+> With `yarn`:
+> 
+> ```sh
+> yarn add @syncromatics/react-google-maps
+> ```
 
-## [Installation](https://tomchentw.github.io/react-google-maps/#installation)
+> With `npm`:
+> 
+> ```sh
+> npm install --save @syncromatics/react-google-maps
+> ```
 
+Then use it to display maps:
 
-## [Usage & Configuration](https://tomchentw.github.io/react-google-maps/#usage--configuration)
+```js static
+import { GoogleMap, Marker } from "@syncromatics/react-google-maps"
 
+const MyMapComponent = (props) =>
+  <GoogleMap
+    defaultZoom={8}
+    defaultCenter={{ lat: -34.397, lng: 150.644 }}
+  >
+    {props.isMarkerShown && <Marker position={{ lat: -34.397, lng: 150.644 }} />}
+  </GoogleMap>
 
-## [Changelog][changelog-url]
+// Uses of MyMapComponent
+<MyMapComponent isMarkerShown />// Map with a Marker
+<MyMapComponent isMarkerShown={false} />// Just only Map
+```
 
-The changelog is automatically generated via [standard-version][standard-version] and can be found in project root as well as npm tarball.
+Continue [reading the documentation][documentation] for more interactive examples of interactions with Google Maps.
 
+### Getting Help
 
-## [Demo App][demo-app-url]
+The [documentation][documentation] has examples of how to use each component. Many people have asked and answered questions on [StackOverflow](https://stackoverflow.com/search?q=react-google-maps). (Some things may be general Google Maps issues, for which there are [lots of questions and answers](https://stackoverflow.com/questions/tagged/google-maps?sort=votes&pageSize=50) as well.)
 
-* [Source code][demo-app-source]
-* [CodeSandbox](https://codesandbox.io/s/2xyw6n4o9y)
+## Building
 
-## Getting Help
+[![Travis](https://img.shields.io/travis/syncromatics/react-google-maps.svg)](https://travis-ci.org/syncromatics/react-google-maps)
+[![npm](https://img.shields.io/npm/v/@syncromatics/react-google-maps.svg)](https://www.npmjs.com/package/@syncromatics/react-google-maps)
+[![devDependency Status](https://img.shields.io/david/dev/syncromatics/react-google-maps.svg)](https://david-dm.org/syncromatics/react-google-maps#info=devDependencies)
 
-**Before doing this, did you**:
+Install dependencies:
 
-1. Read the [documentation](https://tomchentw.github.io/react-google-maps)
-2. Read the [source code](https://github.com/tomchentw/react-google-maps)
+```bash
+yarn
+```
 
+Run React Styleguidist, a hot-reloading interactive local website:
 
-_You can get someone's help in three ways_:
+```
+yarn styleguide
+```
 
-1. Ask on StackOverflow [with a google-maps tag](https://stackoverflow.com/questions/tagged/google-maps?sort=votes&pageSize=50) or [use react-google-maps as a keyword](https://stackoverflow.com/search?q=react-google-maps)
-2. Ask in [the chat room][gitter-url]
-3. Create a Pull Request with your solutions to your problem
+Once the styleguide is running, visit http://localhost:6060 and start coding! (Note, you should probably get an API key with the Google Maps API enabled, then update [`constants.js`](src/docs/constants.js).)
 
-Please, be noted, **no one**, I mean, **no one**, is obligated to help you in **ANY** means. Your time is valuable, so does our contributors. Don't waste our time posting questions like “how do I do X with React-Google-Maps” and “my code doesn't work”. This is not the primary purpose of the issue tracker. Don't abuse.
+Learn more in our [contributor's guide](CONTRIBUTING.md).
 
+## Code of Conduct
 
-## For contributors
+We are committed to fostering an open and welcoming environment. Please read our [code of conduct](CODE_OF_CONDUCT.md) before participating in or contributing to this project.
 
-<details>
-  <summary>Some simple guidelines</summary>
+## Contributing
 
-* **Don't** manually modify `lib` folder. They're generated during `yarn release` process
-* Follow [conventional-commits-specification][conventional-commits-specification]
-* [standard-version][standard-version]
-* Auto generated: `src/macros` -> `src/components` -> `lib/components`
-* Other components are manually maintained
-* Use `yarn` and keep `yarn.lock` updated in PR
-* Discuss! Discuss! Discuss!
+We welcome contributions and collaboration on this project. Please read our [contributor's guide](CONTRIBUTING.md) to understand how best to work with us.
 
-</details>
+## License and Authors
 
+[![GMV Syncromatics Engineering logo](https://secure.gravatar.com/avatar/645145afc5c0bc24ba24c3d86228ad39?size=16) GMV Syncromatics Engineering](https://github.com/syncromatics)
 
-[npm-image]: https://img.shields.io/npm/v/react-google-maps.svg?style=flat-square
-[npm-url]: https://www.npmjs.org/package/react-google-maps
+[![license](https://img.shields.io/github/license/syncromatics/react-google-maps.svg)](https://github.com/syncromatics/react-google-maps/blob/master/LICENSE)
+[![GitHub contributors](https://img.shields.io/github/contributors/syncromatics/react-google-maps.svg)](https://github.com/syncromatics/react-google-maps/graphs/contributors)
 
-[travis-image]: https://img.shields.io/travis/tomchentw/react-google-maps.svg?style=flat-square
-[travis-url]: https://travis-ci.org/tomchentw/react-google-maps
-[codeclimate-image]: https://img.shields.io/codeclimate/github/tomchentw/react-google-maps.svg?style=flat-square
-[codeclimate-url]: https://codeclimate.com/github/tomchentw/react-google-maps
-[codeclimate-coverage-image]: https://img.shields.io/codeclimate/coverage/github/tomchentw/react-google-maps.svg?style=flat-square
-[codeclimate-coverage-url]: https://codeclimate.com/github/tomchentw/react-google-maps
-[gemnasium-image]: https://img.shields.io/gemnasium/tomchentw/react-google-maps.svg?style=flat-square
-[gemnasium-url]: https://gemnasium.com/tomchentw/react-google-maps
-[gitter-image]: https://badges.gitter.im/Join%20Chat.svg
-[gitter-url]: https://gitter.im/tomchentw/react-google-maps?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
+This software is made available by [Tom Chen][upstream] under the MIT license and this fork is maintained by GMV Syncromatics Engineering.
 
-[changelog-url]: https://github.com/tomchentw/react-google-maps/blob/master/CHANGELOG.md
-[demo-app-url]: https://tomchentw.github.io/#/demos/react-google-maps
-[demo-app-source]: https://github.com/tomchentw/tomchentw.github.io/blob/master/src/Pages/Demos/ReactGoogleMaps.jsx
-
-[standard-version]: https://github.com/conventional-changelog/standard-version
-[conventional-commits-specification]: https://conventionalcommits.org/
+[upstream]: https://github.com/tomchentw/react-google-maps
+[documentation]: https://syncromatics.engineering/react-google-maps/#introduction

@@ -8,12 +8,12 @@ const {
   withGoogleMap,
   GoogleMap,
   Marker,
-} = require("react-google-maps");
-const { MarkerClusterer } = require("react-google-maps/lib/components/addons/MarkerClusterer");
+} = require("@syncromatics/react-google-maps");
+const { MarkerClusterer } = require("@syncromatics/react-google-maps/lib/components/addons/MarkerClusterer");
 
 const MapWithAMarkerClusterer = compose(
   withProps({
-    googleMapURL: "https://maps.googleapis.com/maps/api/js?key=AIzaSyC4R6AN7SmujjPUIGKdyao2Kqitzr1kiRg&v=3.exp&libraries=geometry,drawing,places",
+    googleMapURL: GOOGLE_MAP_URL,
     loadingElement: <div style={{ height: `100%` }} />,
     containerElement: <div style={{ height: `400px` }} />,
     mapElement: <div style={{ height: `100%` }} />,

@@ -1,6 +1,8 @@
 # Change Log
 
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+~~All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.~~
+
+Future releases will be documented in this project's [GitHub releases](https://github.com/syncromatics/react-google-maps/releases).
 
 <a name="9.5.0"></a>
 # [9.5.0](https://github.com/syncromatics/react-google-maps/compare/v9.4.6...v9.5.0) (2018-12-27)

@@ -2,12 +2,14 @@
 import _ from "lodash"
 
 export function getOffsetOverride(containerElement, props) {
-  const { getPixelPositionOffset } = props
+  const { getPixelPositionOffset, pixelPositionOffset } = props
   //
   // Allows the component to control the visual position of the OverlayView
   // relative to the LatLng pixel position.
   //
-  if (_.isFunction(getPixelPositionOffset)) {
+  if (pixelPositionOffset) {
+    return pixelPositionOffset
+  } else if (_.isFunction(getPixelPositionOffset)) {
     return getPixelPositionOffset(
       containerElement.offsetWidth,
       containerElement.offsetHeight

@@ -55,6 +55,13 @@ export class OverlayView extends React.PureComponent {
      * @see https://developers.google.com/maps/documentation/javascript/3.exp/reference#OverlayView
      */
     getPixelPositionOffset: PropTypes.func,
+    /**
+     * @see https://developers.google.com/maps/documentation/javascript/3.exp/reference#OverlayView
+     */
+    pixelPositionOffset: PropTypes.shape({
+      x: PropTypes.number,
+      y: PropTypes.number,
+    }),
   }
 
   static contextTypes = {
@@ -81,22 +88,26 @@ export class OverlayView extends React.PureComponent {
     }
   }
 
-  onAdd() {
-    this.containerElement = document.createElement(`div`)
-    this.containerElement.style.position = `absolute`
-  }
-
-  draw() {
+  addContainerToPane = () => {
     const { mapPaneName } = this.props
     invariant(
       !!mapPaneName,
-      `OverlayView requires either props.mapPaneName or props.defaultMapPaneName but got %s`,
+      `OverlayView requires props.mapPaneName but got %s`,
       mapPaneName
     )
+
     // https://developers.google.com/maps/documentation/javascript/3.exp/reference#MapPanes
     const mapPanes = this.state[OVERLAY_VIEW].getPanes()
     mapPanes[mapPaneName].appendChild(this.containerElement)
+  }
 
+  onAdd() {
+    this.containerElement = document.createElement(`div`)
+    this.containerElement.style.position = `absolute`
+    this.addContainerToPane()
+  }
+
+  draw() {
     ReactDOM.unstable_renderSubtreeIntoContainer(
       this,
       React.Children.only(this.props.children),
@@ -140,6 +151,9 @@ export class OverlayView extends React.PureComponent {
       updaterMap,
       prevProps
     )
+    if (prevProps.mapPaneName !== this.props.mapPaneName) {
+      this.addContainerToPane()
+    }
     _.delay(this.state[OVERLAY_VIEW].draw)
   }
 

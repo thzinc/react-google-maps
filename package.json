@@ -1,6 +1,6 @@
 {
   "name": "@syncromatics/react-google-maps",
-  "version": "9.5.0",
+  "version": "9.4.6",
   "description": "React.js Google Maps integration component",
   "license": "MIT",
   "author": {
@@ -69,8 +69,15 @@
     "prerelease":
       "npm run commit:src && npm run commit:lib && npm run commit:docs",
     "release":
-      "standard-version -m 'chore(release): %s \n\n* CHANGELOG: https://github.com/syncromatics/react-google-maps/blob/v%s/CHANGELOG.md'",
-    "semantic-release": "release && semantic-release"
+      "standard-version --prerelease `git rev-parse --abbrev-ref HEAD | sed -e 's/[^[:alnum:]_]/-/g'`",
+    "publish-prerelease":
+      "npm run release && git push --follow-tags origin && npm publish --tag prerelease",
+    "semantic-release": "semantic-release"
+  },
+  "standard-version": {
+    "skip": {
+      "changelog": true
+    }
   },
   "lint-staged": {
     "*.{js,jsx,json,css}": ["prettier --write", "git add"]

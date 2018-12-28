@@ -71,7 +71,7 @@
     "release":
       "standard-version --prerelease `git rev-parse --abbrev-ref HEAD | sed -e 's/[^[:alnum:]_]/-/g'`",
     "publish-prerelease":
-      "npm run release && git push --follow-tags origin && npm publish --tag `git rev-parse --abbrev-ref HEAD | sed -e 's/[^[:alnum:]_]/-/g'`",
+      "npm run release && git push --follow-tags origin && npm publish",
     "semantic-release": "semantic-release"
   },
   "standard-version": {

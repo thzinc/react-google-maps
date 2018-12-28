@@ -1,6 +1,6 @@
 {
   "name": "@syncromatics/react-google-maps",
-  "version": "9.5.0",
+  "version": "9.6.0-master.0",
   "description": "React.js Google Maps integration component",
   "license": "MIT",
   "author": {

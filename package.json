@@ -1,6 +1,6 @@
 {
   "name": "@syncromatics/react-google-maps",
-  "version": "9.8.0-feature-EN-3984-do-not-cause-reflow-unnecessarily.0",
+  "version": "9.8.0-feature-EN-3984-do-not-cause-reflow-unnecessarily.1",
   "description": "React.js Google Maps integration component",
   "license": "MIT",
   "author": {

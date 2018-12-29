@@ -49,7 +49,11 @@ const MapWithAnOverlayView = compose(
       mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
       /*
        * 2. Tweak the OverlayView's pixel position. In this case, we're
-       *    centering the content.
+       *    centering the content. Warning, this ultimately causes the browser
+       *    to render/reflow. If you can use a fixed pixel position offset, use
+       *    the pixelPositionOffset prop instead:
+       * 
+       *    pixelPositionOffset={{ x: 10, y: 20 }}
        */
       getPixelPositionOffset={getPixelPositionOffset}
       /*

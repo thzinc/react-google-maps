@@ -37525,7 +37525,7 @@
       {
         type: "code",
         content:
-          'const { compose, withProps, withStateHandlers } = require("recompose");\nconst FaAnchor = require("react-icons/lib/fa/anchor");\nconst {\n  withScriptjs,\n  withGoogleMap,\n  GoogleMap,\n  OverlayView,\n} = require("@syncromatics/react-google-maps");\n\nconst getPixelPositionOffset = (width, height) => ({\n  x: -(width / 2),\n  y: -(height / 2),\n})\n\nconst MapWithAnOverlayView = compose(\n  withStateHandlers(() => ({\n    count: 0,\n  }), {\n    onClick: ({ count }) => () => ({\n      count: count + 1,\n    })\n  }),\n  withScriptjs,\n  withGoogleMap\n)(props =>\n  <GoogleMap\n    defaultZoom={8}\n    defaultCenter={{ lat: -34.397, lng: 150.644 }}\n  >\n    <OverlayView\n      position={{ lat: -34.397, lng: 150.644 }}\n      /*\n       * An alternative to specifying position is specifying bounds.\n       * bounds can either be an instance of google.maps.LatLngBounds\n       * or an object in the following format:\n       * bounds={{\n       *    ne: { lat: 62.400471, lng: -150.005608 },\n       *    sw: { lat: 62.281819, lng: -150.287132 }\n       * }}\n       */\n      /*\n       * 1. Specify the pane the OverlayView will be rendered to. For\n       *    mouse interactivity, use `OverlayView.OVERLAY_MOUSE_TARGET`.\n       *    Defaults to `OverlayView.OVERLAY_LAYER`.\n       */\n      mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}\n      /*\n       * 2. Tweak the OverlayView\'s pixel position. In this case, we\'re\n       *    centering the content.\n       */\n      getPixelPositionOffset={getPixelPositionOffset}\n      /*\n       * 3. Create OverlayView content using standard React components.\n       */\n    >\n      <div style={{ background: `white`, border: `1px solid #ccc`, padding: 15 }}>\n        <h1>OverlayView</h1>\n        <button onClick={props.onClick} style={{ height: 60 }}>\n          I have been clicked {props.count} time{props.count > 1 ? `s` : ``}\n        </button>\n      </div>\n    </OverlayView>\n  </GoogleMap>\n);\n\n<MapWithAnOverlayView\n  googleMapURL={GOOGLE_MAP_URL}\n  loadingElement={<div style={{ height: `100%` }} />}\n  containerElement={<div style={{ height: `400px` }} />}\n  mapElement={<div style={{ height: `100%` }} />}\n/>',
+          'const { compose, withProps, withStateHandlers } = require("recompose");\nconst FaAnchor = require("react-icons/lib/fa/anchor");\nconst {\n  withScriptjs,\n  withGoogleMap,\n  GoogleMap,\n  OverlayView,\n} = require("@syncromatics/react-google-maps");\n\nconst getPixelPositionOffset = (width, height) => ({\n  x: -(width / 2),\n  y: -(height / 2),\n})\n\nconst MapWithAnOverlayView = compose(\n  withStateHandlers(() => ({\n    count: 0,\n  }), {\n    onClick: ({ count }) => () => ({\n      count: count + 1,\n    })\n  }),\n  withScriptjs,\n  withGoogleMap\n)(props =>\n  <GoogleMap\n    defaultZoom={8}\n    defaultCenter={{ lat: -34.397, lng: 150.644 }}\n  >\n    <OverlayView\n      position={{ lat: -34.397, lng: 150.644 }}\n      /*\n       * An alternative to specifying position is specifying bounds.\n       * bounds can either be an instance of google.maps.LatLngBounds\n       * or an object in the following format:\n       * bounds={{\n       *    ne: { lat: 62.400471, lng: -150.005608 },\n       *    sw: { lat: 62.281819, lng: -150.287132 }\n       * }}\n       */\n      /*\n       * 1. Specify the pane the OverlayView will be rendered to. For\n       *    mouse interactivity, use `OverlayView.OVERLAY_MOUSE_TARGET`.\n       *    Defaults to `OverlayView.OVERLAY_LAYER`.\n       */\n      mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}\n      /*\n       * 2. Tweak the OverlayView\'s pixel position. In this case, we\'re\n       *    centering the content. Warning, this ultimately causes the browser\n       *    to render/reflow. If you can use a fixed pixel position offset, use\n       *    the pixelPositionOffset prop instead:\n       * \n       *    pixelPositionOffset={{ x: 10, y: 20 }}\n       */\n      getPixelPositionOffset={getPixelPositionOffset}\n      /*\n       * 3. Create OverlayView content using standard React components.\n       */\n    >\n      <div style={{ background: `white`, border: `1px solid #ccc`, padding: 15 }}>\n        <h1>OverlayView</h1>\n        <button onClick={props.onClick} style={{ height: 60 }}>\n          I have been clicked {props.count} time{props.count > 1 ? `s` : ``}\n        </button>\n      </div>\n    </OverlayView>\n  </GoogleMap>\n);\n\n<MapWithAnOverlayView\n  googleMapURL={GOOGLE_MAP_URL}\n  loadingElement={<div style={{ height: `100%` }} />}\n  containerElement={<div style={{ height: `400px` }} />}\n  mapElement={<div style={{ height: `100%` }} />}\n/>',
         settings: {},
         evalInContext: s,
       },
@@ -39741,6 +39741,26 @@
         },
         getPixelPositionOffset: {
           type: { name: "func" },
+          required: !1,
+          description: "",
+          tags: {
+            see: [
+              {
+                title: "see",
+                description:
+                  "https://developers.google.com/maps/documentation/javascript/3.exp/reference#OverlayView",
+              },
+            ],
+          },
+        },
+        pixelPositionOffset: {
+          type: {
+            name: "shape",
+            value: {
+              x: { name: "number", required: !1 },
+              y: { name: "number", required: !1 },
+            },
+          },
           required: !1,
           description: "",
           tags: {
@@ -46283,22 +46303,25 @@
             throw new TypeError("Cannot call a class as a function")
         })(this, OverlayView)
         var n = (function _possibleConstructorReturn(e, t) {
-            if (!e)
-              throw new ReferenceError(
-                "this hasn't been initialised - super() hasn't been called"
-              )
-            return !t || ("object" != typeof t && "function" != typeof t)
-              ? e
-              : t
-          })(
-            this,
-            (OverlayView.__proto__ || Object.getPrototypeOf(OverlayView)).call(
-              this,
-              e,
-              t
+          if (!e)
+            throw new ReferenceError(
+              "this hasn't been initialised - super() hasn't been called"
             )
-          ),
-          r = new google.maps.OverlayView()
+          return !t || ("object" != typeof t && "function" != typeof t) ? e : t
+        })(
+          this,
+          (OverlayView.__proto__ || Object.getPrototypeOf(OverlayView)).call(
+            this,
+            e,
+            t
+          )
+        )
+        n.addContainerToPane = function() {
+          var e = n.props.mapPaneName
+          a()(!!e, "OverlayView requires props.mapPaneName but got %s", e)
+          n.state[g.p].getPanes()[e].appendChild(n.containerElement)
+        }
+        var r = new google.maps.OverlayView()
         return (
           (r.onAdd = s.a.bind(n.onAdd, n)),
           (r.draw = s.a.bind(n.draw, n)),
@@ -46315,25 +46338,19 @@
             key: "onAdd",
             value: function onAdd() {
               ;(this.containerElement = document.createElement("div")),
-                (this.containerElement.style.position = "absolute")
+                (this.containerElement.style.position = "absolute"),
+                this.addContainerToPane()
             },
           },
           {
             key: "draw",
             value: function draw() {
-              var e = this.props.mapPaneName
-              a()(
-                !!e,
-                "OverlayView requires either props.mapPaneName or props.defaultMapPaneName but got %s",
-                e
+              d.a.unstable_renderSubtreeIntoContainer(
+                this,
+                u.a.Children.only(this.props.children),
+                this.containerElement,
+                this.onPositionElement
               )
-              this.state[g.p].getPanes()[e].appendChild(this.containerElement),
-                d.a.unstable_renderSubtreeIntoContainer(
-                  this,
-                  u.a.Children.only(this.props.children),
-                  this.containerElement,
-                  this.onPositionElement
-                )
             },
           },
           {
@@ -46368,6 +46385,8 @@
             key: "componentDidUpdate",
             value: function componentDidUpdate(e) {
               Object(f.b)(this, this.state[g.p], _, v, e),
+                e.mapPaneName !== this.props.mapPaneName &&
+                  this.addContainerToPane(),
                 s.a.delay(this.state[g.p].draw)
             },
           },
@@ -46416,6 +46435,7 @@
         bounds: h.a.object,
         children: h.a.node.isRequired,
         getPixelPositionOffset: h.a.func,
+        pixelPositionOffset: h.a.shape({ x: h.a.number, y: h.a.number }),
       }),
       (b.contextTypes = ((r = {}),
       _defineProperty(r, g.l, h.a.object),
@@ -49282,8 +49302,9 @@
   "./src/utils/OverlayViewHelper.js": function(e, t, n) {
     "use strict"
     ;(t.b = function getOffsetOverride(e, t) {
-      var n = t.getPixelPositionOffset
-      return o.a.isFunction(n) ? n(e.offsetWidth, e.offsetHeight) : {}
+      var n = t.getPixelPositionOffset,
+        r = t.pixelPositionOffset
+      return r || (o.a.isFunction(n) ? n(e.offsetWidth, e.offsetHeight) : {})
     }),
       (t.a = function getLayoutStyles(e, t, n) {
         if (n.bounds) {
